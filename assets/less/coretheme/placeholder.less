@@ -1,0 +1,16 @@
+.placeholder {
+    display: inline-block;
+    transform-origin: 0% 50% 0px;
+    animation: blink 0.3s linear infinite alternate;
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+        transform: scale(2,2);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1,1);
+    }
+}

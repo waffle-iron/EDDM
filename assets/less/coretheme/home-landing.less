@@ -1,0 +1,133 @@
+﻿.mobileSplashWrapper
+{ 
+
+    padding:                                                                    0px; 
+    background-image:                                                           url(@landing-row-mobile-background-img); 
+    background-size:                                                            cover;
+
+    #mobileSplash 
+    { 
+        padding-bottom:                                                         40px;
+        padding-top:                                                            40px;
+        padding-left:                                                           40px;
+        padding-right:                                                          40px;
+        background-color:                                                       rgba(0, 0, 0, 0.50);
+
+        h1
+        {
+            color:                                                              @landing-cta-p-text-color;
+            font-weight:                                                        600;
+            font-size:                                                          36px;
+        }
+
+        p
+        {
+            color:                                                              @landing-cta-p-text-color;
+            font-size:                                                          24px;
+        }
+
+    }
+
+
+}
+
+
+
+.lrgLandingWrapper 
+{
+    //NO PADDED Landing Row / Home Page. Extends full width of page.
+    border-width:                                                           @landing-row-wrapper-border-width; 
+    border-top-style:                                                       solid;
+    border-bottom-style:                                                    solid;
+    border-color:                                                           @landing-row-wrapper-border-color;
+    background-color:                                                       @landing-row-wrapper-background-color;
+    background-size:                                                        cover;
+    min-height:                                                             @landing-row-wrapper-min-height;
+    background-image:                                                       url(@landing-row-background-img);
+
+}
+
+
+
+.ctaLandingWrapper 
+{
+    //Wraps leader text and buttons on home page.
+    border:                                                                 @landing-ctaLandingWrapper-border-width solid @landing-ctaLandingWrapper-border-color; 
+    padding:                                                                @landing-ctaLandingWrapper-padding;
+    border-top-left-radius:                                                 @landing-ctaLandingWrapper-radius;
+    border-top-right-radius:                                                @landing-ctaLandingWrapper-radius;
+    border-bottom-left-radius:                                              @landing-ctaLandingWrapper-radius;
+    border-bottom-right-radius:                                             @landing-ctaLandingWrapper-radius;
+    margin-bottom:                                                          @landing-ctaLandingWrapper-margin;
+    margin-top:                                                             @landing-ctaLandingWrapper-margin;
+    margin-right:                                                           @landing-ctaLandingWrapper-margin;
+    margin-left:                                                            @landing-ctaLandingWrapper-margin;
+    background-color:                                                       @landing-ctaLandingWrapper-background-color;
+
+    small
+    {
+        color:                                                              @landing-cta-h1-text-color;
+    }
+
+    h1
+    {
+        color:                                                              @landing-cta-h1-text-color;
+        font-size:                                                          42px;
+    }
+
+    p
+    {
+        color:                                                              @landing-cta-p-text-color;
+        font-size:                                                          20px;
+    }
+
+}
+
+
+
+.transparentBarWrapper
+{
+    //used on Staples EDDDM
+    margin-bottom:                                                          40px;
+    margin-top:                                                             40px;
+    margin-right:                                                           0px;
+    margin-left:                                                            0px;
+    background-color:                                                       @landing-ctaLandingWrapper-background-color;
+    padding:                                                                20px;
+
+    small
+    {
+        color:                                                              @landing-cta-h1-text-color;
+        font-weight:                                                        normal;
+        font-size:                                                          0.5em;
+    }
+
+
+    h1
+    {
+        color:                                                              @landing-cta-h1-text-color;
+        font-size:                                                          42px;
+        font-weight:                                                        600;
+    }
+
+
+    p
+    {
+        color:                                                              @landing-cta-p-text-color;
+        font-size:                                                          22px;
+        font-weight:                                                        normal;
+    }
+
+
+    .btn-lg
+    {
+
+        small
+        {
+            font-size:                                                      0.6em;
+        }
+
+    }
+
+
+}

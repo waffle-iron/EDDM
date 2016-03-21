@@ -1,0 +1,48 @@
+﻿//For all things Templates
+
+.templateWrapper
+{
+    width: 300px;
+    padding: 5px;
+    margin: 5px;
+    display: table-cell;
+    vertical-align: bottom;
+    background-color: @well-background-color;
+    border: 1px solid @well-border-color;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+
+    .img-wrapper {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: flex;
+        height: 125px;
+
+        a {
+            margin: auto;
+        }
+        img {
+            max-height: 125px;
+        }
+    }
+}
+
+
+.templateImgWrapper
+{ padding-bottom: 10px; }
+
+
+.templatePreviewImg
+{max-height: 525px; }
+
+
+.templatePreviewRow
+{ background-color: @light-gray-color;}
+
+
+.templateThumbnail
+{
+    max-height: 150px;
+    max-width: 200px;
+}

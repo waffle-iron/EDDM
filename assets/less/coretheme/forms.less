@@ -1,0 +1,93 @@
+﻿//Forms
+.form-control 
+{
+    color:                                                                          @dark-gray-color;
+    background-color:                                                               @form-control-background-color;
+    border-color:                                                                   @med-light-gray-color;
+    border-width:                                                                   @form-control-border-width;
+    border-style:                                                                   @form-control-border-style;
+}
+
+
+.form-control:focus 
+{ 
+    border-color:                                                                   @form-control-glow-color;
+    -webkit-box-shadow: 1px 1px 1.5px 1px                                           @form-control-glow-color;
+    box-shadow: 1px 1px 1.5px 1px                                                   @form-control-glow-color;
+}
+
+
+#radPaymentOptions input[type="radio"], 
+#radPaymentType input[type="radio"], 
+#radMailListOptOut input[type="radio"], 
+#radCCPayNow input[type="radio"], 
+#radCCFinance input[type="radio"], 
+#rdlSaveMyCreditCardIndo input[type="radio"], 
+#rblProducts input[type="radio"], 
+#radiusDriveTime input[type="radio"], 
+#chkDemographics input[type="checkbox"], 
+#HomeOwnership input[type="radio"], 
+#KidsPresent input[type="radio"],
+#chkIncome input[type="checkbox"], 
+#chkAge input[type="checkbox"], 
+#BudgetQuestion input[type="radio"],
+#Gender input[type="radio"]
+{ margin: 4px 8px 4px 4px; }
+
+
+.paddedRadioButtonList input[type="radio"]
+{ 
+    margin: 4px 8px 4px 4px; 
+}
+
+
+.paddedCheckboxList input[type="checkbox"]
+{ 
+    margin: 4px 8px 4px 4px; 
+}
+
+
+#radMailListOptOut label, #rdlSaveMyCreditCardIndo label
+{
+    font-size: 12px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+
+.noTopMargin
+{ margin-top: 0px !important; }
+
+
+.formLabel
+{
+    background-color: @form-label-background-color;
+    color: @form-label-font-color;
+}
+
+
+.formLabelRequired
+{
+    background-color: @form-label-required-background-color;
+    color: @form-label-font-color;
+}
+
+
+#couponBlock
+{ 
+    //found in Step3-Checkout2
+    margin-bottom: 25px; 
+}
+
+
+#marketAreaBlock, #peopleInMindBlock, #homeOwnershipBlock, #kidsBlock, #incomeBlock, #ageBlock, #genderBlock,
+#homeValueBlock, #lengthofResidenceBlock, #investorTypeBlock, #buildingTypeBlock, #maritalStatusBlock, #religionBlock,
+#ethnicityGroupBlock, #ageOfChildrenBlock, #hobbiesBlock, #politicalAffiliationBlock
+{
+    table
+    {margin-top: 10px;}
+
+}
+
+
+

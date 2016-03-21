@@ -1,0 +1,132 @@
+﻿#carouselWrapper
+{
+
+    border-bottom-width:                                                            @carousel-border-width;
+    border-top-width:                                                               @carousel-border-width;
+    border-color:                                                                   @carousel-border-color;
+    border-style:                                                                   solid;
+    z-index:                                                                        1;
+    position:                                                                       relative;
+
+
+    .carousel-inner
+    {
+
+        h1
+        {
+            font-size:                                                              @carousel-header-font-size;
+            color:                                                                  @carousel-header-font-color;
+            font-weight:                                                            @carousel-header-font-weight;
+            font-family:                                                            @carousel-header-font-family;
+            text-shadow:                                                            @carousel-header-font-shadow;
+            text-transform:                                                         @carousel-header-text-transform;
+
+        }
+
+        p
+        {
+            font-size:                                                              @carousel-caption-font-size;
+            color:                                                                  @carousel-caption-font-color;
+            font-weight:                                                            @carousel-caption-font-weight;
+            font-family:                                                            @carousel-caption-font-family;
+            text-shadow:                                                            @carousel-caption-font-shadow;
+            text-transform:                                                         @carousel-caption-text-transform;
+        }
+
+
+
+    }
+
+
+
+}
+
+
+//MEDIA ADJUSTMENTS
+//Xtra Small
+@media (max-width: 767px) 
+{
+
+    #carouselWrapper
+    {
+
+        border:                                                                         0px;
+
+        .carousel-inner h1
+        {
+            font-size:                                                                  30px;
+        }
+
+        p.lead
+        {
+            font-size:                                                                  18px;
+        }
+
+    }
+
+
+    .mobileSplashWrapper
+    {
+        margin-left:                                                                    0px;
+        margin-right:                                                                   0px;
+    }
+
+}
+
+
+//Small
+@media (min-width: 768px) and (max-width: 991px) 
+{
+    #carouselWrapper
+    {
+    
+        .carousel-inner h1
+        {
+            font-size:                                                                  32px;
+        }
+
+        p.lead
+        {
+            font-size:                                                                  20px;
+        }
+
+    }
+
+}
+
+
+//Medium
+@media (min-width: 992px) and (max-width: 1199px) 
+{
+
+    #carouselWrapper 
+    {
+
+        h1
+        {
+            font-size:                                                                  44px;
+            color:green;
+        }
+
+        p.lead
+        {
+            font-size:                                                                  24px;
+        }
+
+        min-height:                                                                     380px;
+
+
+    }
+
+}
+
+
+//Large
+@media (min-width: 1200px) 
+{
+
+}
+
+
+
+

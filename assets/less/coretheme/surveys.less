@@ -1,0 +1,129 @@
+﻿//Surveys / Quote Requests
+
+.surveyNavBar
+{ 
+    height:                                                                                         5px;
+    background-color:                                                                               @survey-navbar-background-color;
+}
+
+
+
+.surveyLabel
+{
+    color:                                                                                          @survey-cms-form-label;
+    font-size:                                                                                      12px;
+    font-weight:                                                                                    bold;
+}
+
+
+
+.surveyBodyWrapper
+{
+    background-image:                                                                               url(@survey-background-image); 
+    background-size:                                                                                cover;
+}
+
+
+
+.fullRibbonSurvey 
+{
+    //Gradients not wanted
+     background:                                                                                    @survey-ribbon-background-color;
+     padding:                                                                                       10px 20px;
+     margin-left:                                                                                   -15px;
+     margin-right:                                                                                  -15px;
+     margin-top:                                                                                    20px;
+     position:                                                                                      relative;
+    -moz-box-shadow:                                                                                1px 1px 3px @ribbon-shadow-color;
+    -webkit-box-shadow:                                                                             1px 1px 3px @ribbon-shadow-color;
+    box-shadow:                                                                                     1px 1px 3px @ribbon-shadow-color;
+    color:                                                                                          @ribbon-font-color;
+    font-style:                                                                                     normal;
+    font-weight:                                                                                    bold;
+    font-size:                                                                                      @ribbon-full-font-size;
+    text-shadow:                                                                                    @ribbon-text-shadow-depth @ribbon-text-shadow-depth @ribbon-text-shadow-depth @ribbon-text-shadow-color;
+    text-align:                                                                                     center;
+    text-transform:                                                                                 uppercase;
+}
+
+
+
+.fullRibbonSmallSurvey 
+{
+     background:                                                                                    @survey-ribbon-background-color;
+     position:                                                                                      relative;
+    -moz-box-shadow:                                                                                1px 1px 3px @ribbon-shadow-color;
+    -webkit-box-shadow:                                                                             1px 1px 3px @ribbon-shadow-color;
+    box-shadow:                                                                                     1px 1px 3px @ribbon-shadow-color;
+    color:                                                                                          @ribbon-font-color;
+    font-style:                                                                                     normal;
+    font-weight:                                                                                    bold;
+    font-size:                                                                                      @ribbon-small-font-size;
+    text-shadow:                                                                                    @ribbon-text-shadow-depth @ribbon-text-shadow-depth @ribbon-text-shadow-depth @ribbon-text-shadow-color;
+    text-align:                                                                                     center;
+    text-transform:                                                                                 uppercase;
+    margin-left:                                                                                    0px;
+    margin-right:                                                                                   0px;
+    margin-top:                                                                                     10px;
+}
+
+
+
+
+#surveyFormBlock .well
+{
+    //Border not wanted on Survey / Quote wells.
+    border: 0px;
+
+}
+
+
+
+//Labels for CMS Survey Forms
+.question
+{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+
+
+
+
+//Sidebar
+#quoteSiteBarWrapper
+{
+
+    background-image:                                                                                   url(@survey-sidebar-image);
+    min-height:                                                                                         400px;
+    background-repeat:                                                                                  no-repeat;
+    background-position:                                                                                top;
+    background-position-y:                                                                              top; 
+
+
+    .quoteSideBarHeader
+    {
+        font-style:                                                                                     @h2-font-style;
+        font-size:                                                                                      16px;
+        font-weight:                                                                                    bold;
+        color:                                                                                          @survey-sidebar-header-font-color;
+        text-align:                                                                                     center;
+        text-transform:                                                                                 uppercase;
+        background-color:                                                                               @survey-ribbon-background-color;
+        margin-bottom:                                                                                  5px;
+        margin-top:                                                                                     25px;
+        padding:                                                                                        5px;
+    }
+
+
+    #quoteCredentials
+    {
+        margin-top:                                                                                     300px;
+    }
+
+}
+
+
+

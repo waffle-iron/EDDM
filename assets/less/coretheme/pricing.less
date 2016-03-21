@@ -1,0 +1,360 @@
+#ractive-pricing {
+    @media (max-width: 767px) {
+        margin-left: -15px;
+        margin-right: 15px;
+    }
+
+    .pricing-table {
+        margin: 10px;
+        margin-left: 5%;
+
+        > :first-child {
+            background-color: rgb(143, 154, 62);
+            color: white;
+            border-radius: 6px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .quantity div, .card div {
+            padding-bottom: 5px;
+        }
+        .quantity {
+            z-index: 3;
+            padding: 5px 15px;
+            max-width: 200px;
+            float: left;
+            position: relative;
+            width: 25%;
+            min-width: 100px;
+
+            >:first-child {
+                height: 47px;
+                font-size: 18px;
+                padding-top: 16px;
+                text-align: center;
+            }
+
+            >:not(:first-child) {
+                text-align: right;
+            }
+
+            @media (min-width: 768px) {
+                width: 200px;
+            }
+        }
+        .product {
+            margin-left: -15px;
+
+            >div >:first-child {
+                height: 47px;
+                margin: 0px;
+                padding: 10px 0px;
+                color: @franchise-accent-brand-color;
+                font-size: 24px;
+                font-weight: bold;
+
+                .small {
+                    font-size: 60%;
+                }
+            }
+
+            .card {
+                display: inline-block;
+                transform-origin: 0% 50%;
+                background-color: white;
+                z-index: 2;
+                padding-left: 15px;
+                margin: 5px -5px;
+                transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+                cursor: pointer;
+
+
+                div:not(.button) {
+                    transition: opacity 0.5s ease-in-out;
+                }
+
+                .super {
+                    font-size: 75%;
+                    vertical-align: super;
+                }
+
+                // mobile
+                @media (max-width: 767px) {
+                    width: 110px;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+                    position: absolute;
+
+                    .button {
+                        display: none;
+                    }
+
+                    &.background {
+                        z-index: 0;
+                        opacity: 0.4;
+                        transform: translateX(110px) scale(0.90);
+                        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+                    }
+
+                    &.next {
+                        transform: translateX(100px) scale(0.95);
+                        z-index: 1;
+                        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+
+                        div:not(.button) {
+                            opacity: 0.6;
+                        }
+
+                        .button {
+                            position: absolute;
+                            left: 0px;
+                            top: 0px;
+                            width: 100%;
+                            height: 100%;
+                            color: @franchise-accent-brand-color;
+                            display:flex;
+                            display:-webkit-flex;
+                            display:-ms-flexbox;
+
+                            .fa-stack {
+                                margin: auto;
+                                margin-right: -20px;
+                            }
+                            .fa-circle {
+                                text-shadow: 1px 1px 2px rgb(0, 0, 0);
+
+                            }
+                            .fa-angle-double-right {
+                                margin-top: -2px;
+                                margin-left: 1px;
+                                font-weight: bold;
+                            }
+
+                            &:hover .fa-circle {
+                                color: saturate(@franchise-accent-brand-color, 25%);
+                            }
+                            &:active .fa-circle {
+                                text-shadow: none;
+                            }
+                        }
+                    }
+                }
+
+                // desktop
+                @media (min-width: 768px) {
+                    width: 150px;
+                    position: relative;
+                    transform: none;
+                    margin-right: 8px;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+
+                    .button {
+                        display: none;
+                    }
+
+                    &.next, &.background {
+                        transform:scale(0.98);
+                        z-index: 1;
+                        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+
+                        div:not(.button) {
+                            opacity: 0.6;
+                        }
+
+                        .button {
+                            position: absolute;
+                            left: 0px;
+                            top: 0px;
+                            width: 100%;
+                            height: 100%;
+                            color: @franchise-accent-brand-color;
+                            display:flex;
+                            display:-webkit-flex;
+                            display:-ms-flexbox;
+
+                            .details {
+                                margin: auto auto -17px;
+                                height: 22px;
+                                font-size: 16px;
+                                color: white;
+                                background-color: @franchise-accent-brand-color;
+                                // animation: 1s ease-in-out alternate infinite pulse;
+                                box-shadow: 1px 1px 2px rgb(0, 0, 0);
+
+                                &:hover {
+                                    background-color: saturate(@franchise-accent-brand-color, 25%);
+                                }
+                                &:active {
+                                    background-color: @franchise-accent-brand-color;
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #descriptions {
+        width: 100%;
+        height: 300px;
+        margin-left: 40px;
+        margin-right: 100px;
+        margin-top: 40px;
+        float: left;
+        display:flex;
+        display:-webkit-flex;
+        display:-ms-flexbox;
+        overflow: hidden;
+
+        @media (max-width: 767px) {
+            margin-top: 20px;
+            margin-right: 0px;
+            width: auto;
+        }
+
+        h5 {
+            width: 250px;
+
+            @media (max-width: 767px) {
+                margin: 0px;
+                z-index: 10;
+                display: table;
+                background: transparent linear-gradient(to left, #FFF 0%, rgba(256,256,256,0.9) 85%, rgba(255, 255, 255, 0) 100%) repeat scroll 0% 0%;
+                font-size: 14px;
+                width: 60%;
+                margin-left: 40%;
+                margin-top: 0px;
+                padding-left: 10px;
+                padding-right: 15px;
+                text-align: right;
+            }
+        }
+    }
+
+    .img-row {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+
+        @media (max-width: 767px) {
+            margin-left: 20px;
+        }
+
+        &.visible {
+            opacity: 1;
+        }
+
+        &:nth-of-type(3) {
+            z-index: 3;
+        }
+        &:nth-of-type(4) {
+            z-index: 2;
+        }
+        &:nth-of-type(5) {
+            z-index: 1;
+        }
+    }
+    .img-3d-wrapper {
+        perspective: 1000px;
+        position: absolute;
+        bottom: 25px;
+        left: 325px;
+
+        @media (max-width: 767px) {
+            bottom: -475px;
+            left: 0px;
+        }
+
+        &::before {
+            position: absolute;
+            content: "";
+            z-index: -1;
+            left: 0px;
+            bottom: 0px;
+            transform-origin: 0px 100% 0px;
+            top: 0px;
+            right: 0px;
+            transform: rotateX(90deg) rotatez(50deg);
+            background-color: rgba(0,0,0,0.5);
+            filter: blur(20px);
+            transition: opacity 1s ease-out;
+            opacity: 1;
+        }
+
+        &.hide-shadow::before {
+            opacity: 0;
+        }
+    }
+    .img-3d {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transform-origin: 0px 100% 0px;
+        transform: rotateY(-50deg);
+        box-shadow: 0px 0px 0.5px rgba(0,0,0,0.3);
+        border: 1px solid transparent; // antialiasing hack for Firefox
+        -webkit-backface-visibility: hidden; // antialiasing hack for Chrome
+        backface-visibility: hidden; // keep appeaance consistent across browsers
+        transition: opacity 1s ease-in-out;
+
+
+        &.img-11x17 {
+            height: 200px;
+            width: 309px;
+        }
+        &.img-8_5x11 {
+            height: 200px;
+            width: 154px
+        }
+        &.img-6_25x9 {
+            height: 113px;
+            width: 164px;
+        }
+    }
+}
+
+#pricing {
+    .flex-panel-column {
+        display: -webkit-flex;
+        display: -moz-flexbox;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        > :last-child {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: flex;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            max-width: 100%;
+        }
+        .img-3d-wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+
+            .img-3d {
+                max-height: 250px;
+            }
+        }
+        @media (max-width: 991px) {
+            height: auto !important;
+        }
+
+        @media (min-width: 992px) {
+            height: 960px !important;
+
+            > :nth-child(4) {
+                margin-top: auto;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            height: 860px !important;
+        }
+    }
+}

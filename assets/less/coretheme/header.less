@@ -1,0 +1,163 @@
+﻿header
+{
+
+    background-image:                                                           url(@header-background-img);
+    background-color:                                                           @header-bg-color;
+    color:                                                                      @header-text-color;
+    padding-top:                                                                @header-padding-top;
+    padding-bottom:                                                             @header-padding-bottom;
+
+
+    h1, h3, h4, h3 a, h3 a:link
+    {
+        margin:                                                                 6px;
+        color:                                                                  @header-text-color;
+        font-family:                                                            @header-font-family;
+    }
+
+
+    h2, h2 a, h2 a:link
+    {
+        margin:                                                                 6px;
+        color:                                                                  @h2-color;
+        font-family:                                                            @header-font-family;
+        font-size:                                                              @h2-font-size;
+        font-weight:                                                            @h2-font-weight !important;
+    }
+
+
+    img
+    {
+        max-height:                                                             100px;
+    }
+
+
+    #loginWrapper
+    {
+        background-color:                                                       @menu-background-color;
+    }
+
+
+    #userMenu
+    {
+
+        background-color:                                                       @menu-background-color;
+        color:                                                                  @menu-text-color !important;
+        padding-top:                                                            @menu-padding-top;
+        padding-bottom:                                                         @menu-padding-bottom;
+        margin-top:                                                             @menu-margin-top;
+        white-space:                                                            nowrap;
+        font-size:                                                              @menu-font-size;
+        text-align:                                                             left;
+
+        a, a:link, a:hover, a:active
+        {
+            color:                                                              @menu-text-color;
+        }
+
+
+        a.loginButton, button.loginButton
+        {
+            color:                                                              @menu-login-button-text-color !important;
+            background-color:                                                   @menu-login-button-color !important;
+            border-color:                                                       @menu-login-menu-border-color !important;
+        }
+
+
+        a.loginButton:hover, button.loginButton:hover
+        {
+            color:                                                              @button-primary-font-color !important;
+            background-color:                                                   @menu-login-button-hover-color !important;
+            border-color:                                                       @menu-login-menu-border-color !important;
+        }
+
+
+        #loginDropDownMenu
+        {
+
+            border:                                                             1px solid @menu-login-menu-border-color;
+            background:                                                         @menu-login-menu-background-color;
+            padding:                                                            15px;
+            min-width:                                                          350px;
+            z-index:                                                            5000;
+            -webkit-box-shadow:                                                 2px 2px 10px 0px @menu-login-dropshadow-color;
+            box-shadow:                                                         2px 2px 10px 0px @menu-login-dropshadow-color;
+
+
+            .form-group
+            {
+                margin-bottom:                                                  15px;
+            }
+
+
+            .margin-clear
+            {
+                margin-top:                                                     0!important;
+                margin-bottom:                                                  0!important;
+            }
+
+            p, .control-label, .label, label, a, a:link
+            {
+                font-size:                                                      14px;
+                color:                                                          @menu-login-menu-text-color;
+            }
+
+            .form-control-feedback
+            {
+                color:                                                          @gray-color;
+            }
+
+
+        }
+
+
+        #authorizedBlock, #authorizedBlock a, #authorizedBlock a:link
+        {
+            color:                                                              @menu-text-color !important;
+        }
+    }
+
+
+
+
+    .specialMessage
+    {
+        //adds a little extra padding for messages up in header
+        margin-top:                                                             -5px;
+        padding-bottom:                                                         5px;
+    }
+
+
+    #chatPhoneBlock, #headerTextBlock
+    {
+
+
+        margin-top:                                                                 5px;
+        color:                                                                      @phone-chat-text-color;
+
+        a, a:hover
+        {
+            color:                                                                  @phone-chat-text-color;
+        }
+
+    }
+
+
+    #devBannerWrapper
+    {
+
+        background-color:                                                           #ff0000;
+        margin-bottom:                                                              15px;
+
+
+        #devBannerText
+        {
+            color:                                                                  #ffffff;
+            font-size:                                                              36px;
+            text-align:                                                             center;
+            font-weight:                                                            800;
+        }
+
+    }
+
+}

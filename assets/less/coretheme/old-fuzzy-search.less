@@ -1,0 +1,148 @@
+.fuzzy-search {
+    width: 100%;
+    position: relative;
+
+    h3 {
+        margin-top: -5px;
+        margin-left: -5px;
+        font-weight: bold;
+    }
+
+    #search {
+        width: 100%;
+        padding: 2px 5px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) inset;
+        border: 2px solid @well-background-color;
+
+        &:focus {
+            outline: none;
+            border: 2px solid mix( @primary-color, @well-background-color, 40%);
+        }
+    }
+
+    .fa.fa-circle-o-notch.fa-pulse{
+        display: inline-block;
+        float: right;
+        position: absolute;
+        right: 30px;
+        top: 27px;
+    }
+
+    #results {
+        width: ~"calc(100% - 40px)";
+        position: absolute;
+        z-index: 100;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-top: 5px;
+        overflow: hidden;
+    }
+
+    #selections {
+        height: 300px;
+        padding: 10px;
+        overflow-y: scroll;
+
+        &.flash {
+            animation: 0.5s ease-in 2 alternate shadow-pulse;
+        }
+    }
+
+    .select-item {
+        width: 100%;
+        padding: 2.5px 5px;
+        cursor: pointer;
+        -moz-user-select: none;
+
+        &.category {
+             font-weight: bold;
+        }
+
+        &.cursor {
+            color: white;
+            background-color: @primary-color;
+        }
+    }
+
+    .deselect-item, .deselect-category {
+        padding: 2px;
+        padding-left: 5px;
+        border-radius: 4px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        .fa-times-circle {
+            cursor: pointer;
+            margin-top: 3px;
+            margin-right: 3px;
+            font-size: large;
+            color: grey;
+            transition: opacity 0.4s linear;
+
+            &.hide {
+                display: block !important;
+                opacity: 0.2;
+            }
+        }
+
+        &:cursor {
+            color: white;
+            background-color: @primary-color;
+            .fa-times-circle {
+                color:white;
+            }
+        }
+
+        &.delete-hover {
+            color: white;
+            background-color: @button-danger-background-color;
+
+            .fa-times-circle:not(:active) {
+                color: white;
+
+            }
+            .fa-times-circle:active {
+                text-shadow: 0px 0px 5px rgba(255,255,255,0.75);
+            }
+        }
+    }
+    .deselect-category {
+        font-weight: bold;
+
+        .btn {
+            font-size: 10px;
+            padding: 0px 4px;
+            margin-top: -1px;
+        }
+
+        &.flash {
+            animation: 0.25s ease-out 1s 2 alternate both background-pulse;
+        }
+    }
+    .deselect-item {
+        font-weight: normal;
+        padding-left: 15px;
+        margin-right: -2px;
+    }
+
+
+    @keyframes shadow-pulse {
+        from {
+            box-shadow: none;
+        }
+        to {
+            box-shadow: 0px 0px 10px @primary-color;
+        }
+    }
+
+    @keyframes background-pulse {
+        from {
+            background-color: none;
+        }
+        to {
+            background-color: @primary-color;
+        }
+    }
+}

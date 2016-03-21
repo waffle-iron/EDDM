@@ -1,0 +1,55 @@
+﻿//Pagers
+.pagination > li > a,
+.pagination > li > span
+{
+    color:                                                                      @pager-non-active-text-color;
+    border-width:                                                               @pager-border-width;
+    border-style:                                                               @pager-border-style;
+    border-color:                                                               @pager-border-color;
+}
+
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus
+{
+  color:                                                                        @pager-non-active-text-color;
+  background-color:                                                             @light-gray-color;
+  border-color:                                                                 @light-gray-color;
+}
+
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus
+{
+    color:                                                                      @pager-active-text-color;
+    background-color:                                                           @pager-active-background-color;
+    border-color:                                                               @pager-active-background-color;
+}
+
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus
+{
+    color:                                                                      @pager-non-active-text-color;
+    border-color:                                                               @light-gray-color;
+}
+
+
+.pagination
+{
+    margin-bottom:                                                              10px;
+    margin-top:                                                                 0px;
+    margin-right:                                                               0px;
+    margin-left:                                                                0px;
+}
+

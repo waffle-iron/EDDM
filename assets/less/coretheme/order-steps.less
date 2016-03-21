@@ -1,0 +1,328 @@
+﻿//ORDER STEPS
+//http://codyhouse.co/gem/css-breadcrumbs-and-multi-step-indicator/
+
+.orderStepsWrapperNew 
+{
+    border-bottom-right-radius:                                                                     6px;
+    border-bottom-left-radius:                                                                      6px;
+    border-top-right-radius:                                                                        6px;
+    border-top-left-radius:                                                                         6px;
+    border:                                                                                         1px solid @order-steps-wrapper-border-color; 
+    padding-left:                                                                                   10px;
+    padding-right:                                                                                  10px;
+    padding-top:                                                                                    10px;
+    padding-bottom:                                                                                 10px;
+    background-color:                                                                               @order-steps-wrapper-background-color !important;
+    margin-bottom:                                                                                  20px;     
+}
+
+
+
+
+//Basic Style
+.cd-multi-steps 
+{
+    width:                                                                                              100%;
+    padding:                                                                                            10px;
+    margin:                                                                                             5px;
+}
+
+
+
+.cd-multi-steps:after 
+{
+    content:                                                                                        "";
+    display:                                                                                        table;
+    clear:                                                                                          both;
+}
+
+
+
+.cd-multi-steps li 
+{
+    display:                                                                                          inline-block;
+    float:                                                                                            left;
+    margin:                                                                                           3px;
+}
+
+
+
+.cd-multi-steps li::after 
+{
+    //this is the separator between items
+    display:                                                                                          inline-block;
+    content:                                                                                          '\00bb';
+    margin:                                                                                           5px;
+    color:                                                                                            @order-steps-default-small-text-color;
+}
+
+
+
+.cd-multi-steps li:last-of-type::after 
+{
+    //hide separator after the last item
+    display:                                                                                        none;
+}
+
+
+
+.cd-multi-steps li > * 
+{
+    //default txt color
+    display:                                                                                        inline-block;
+    font-size:                                                                                      13px;
+    color:                                                                                          @order-steps-default-small-text-color;
+}
+
+
+
+.cd-multi-steps li.current > * 
+{
+    //selected current step
+    color:                                                                                          @order-steps-current-small-step-text-color;
+}
+
+
+
+.no-touch .cd-multi-steps a:hover 
+{
+    //visited step
+    color:                                                                                          @order-steps-visited-small-step-text-color;
+}
+
+
+
+
+@media only screen and (min-width: 1000px) 
+{
+
+    //Only show fully skinned steps with screens > 1000px wide
+    .cd-multi-steps 
+    {
+        //reset style
+        background-color:                                                                                   transparent;
+        padding:                                                                                            0 1.2em;
+        text-align:                                                                                         center;
+    }
+
+
+    .cd-multi-steps li 
+    {
+        position:                                                                                           relative;
+        float:                                                                                              none;
+        margin:                                                                                             0 12px;
+    }
+
+
+    .cd-multi-steps li:last-of-type 
+    {
+        margin-right:                                                                                       0;
+    }
+  
+
+    //this is the line connecting 2 adjacent items
+    .cd-multi-steps li::after 
+    {
+        position:                                                                                           absolute;
+        content:                                                                                            '';
+        height:                                                                                             4px;
+        background-color:                                                                                   @order-steps-default-step-background-color !important;
+        //reset style
+        margin:                                                                                             0;
+    }
+
+
+    //separator bar color for completed steps
+    .cd-multi-steps li.visited::after 
+    {
+        background-color:                                                                                   @franchise-brand-color !important;
+    }
+
+
+    .cd-multi-steps li > *, .cd-multi-steps li.current > * 
+    {
+        position:                                                                                           relative;
+        color:                                                                                              #ffffff !important;
+    }
+
+
+    .cd-multi-steps.custom-separator li::after 
+    {
+        //reset style
+        height:                                                                                             4px;
+        background:                                                                                         @franchise-brand-color;
+    }
+
+
+    .cd-multi-steps.text-center li::after 
+    {
+        width:                                                                                              100%;
+        top:                                                                                                50%;
+        left:                                                                                               100%;
+        -webkit-transform:                                                                                  translateY(-50%) translateX(-1px);
+        -moz-transform:                                                                                     translateY(-50%) translateX(-1px);
+        -ms-transform:                                                                                      translateY(-50%) translateX(-1px);
+        -o-transform:                                                                                       translateY(-50%) translateX(-1px);
+        transform:                                                                                          translateY(-50%) translateX(-1px);
+    }
+
+
+    //default background color of steps
+    .cd-multi-steps.text-center li > * 
+    {
+        z-index:                                                                                            1;
+        padding:                                                                                            .6em 1em;
+        border-radius:                                                                                      4px;
+        background-color:                                                                                   @order-steps-default-step-background-color !important;
+        border-color:                                                                                       @order-steps-default-border-color !important;
+        border-width:                                                                                       1px;
+        color:                                                                                              @order-steps-default-text-color !important;
+    }
+
+
+    .no-touch .cd-multi-steps.text-center a:hover 
+    {
+        background-color:                                                                                   @order-steps-hover-background-color !important;
+    }
+
+
+    //current step colors
+    .cd-multi-steps.text-center li.current > *
+    {
+        color:                                                                                              @order-steps-current-step-text-color !important;
+        background-color:                                                                                   @order-steps-current-background-color !important;
+        border-color:                                                                                       @order-steps-current-border-color !important;
+        border-width:                                                                                       1px;
+        border-style:                                                                                       solid;
+    }
+
+
+    //visited step colors
+    .cd-multi-steps.text-center li.visited > * 
+    {
+        color:                                                                                              @order-steps-visited-step-text-color !important;
+        background-color:                                                                                   @order-steps-visited-background-color !important;
+        border-color:                                                                                       @order-steps-visited-border-color !important;
+        border-width:                                                                                       1px;
+        border-style:                                                                                       solid;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+//Order Steps - OLD
+//.orderStepsWrapper 
+//{
+//    border-bottom-right-radius: 6px;
+//    border-bottom-left-radius: 6px;
+//    border-top-right-radius: 6px;
+//    border-top-left-radius: 6px;
+//}
+
+
+//.orderSteps 
+//{ 
+//    border: 1px solid @order-steps-border-color; 
+//    background: #cccccc url(/assets/images/step-bg.png) repeat-x 50% 50%; 
+//    padding-left: 30px; 
+//}
+
+
+//.orderSteps ol 
+//{ 
+//    margin: 0; 
+//    padding: 0; 
+//    height: 70px; 
+//}
+
+
+//.orderSteps li 
+//{ 
+//    list-style:                                                                 none; 
+//    float:                                                                      left; 
+//    width:                                                                      25%; 
+//    position:                                                                   relative; 
+//    background:                                                                 url(/assets/images/step-separator.png) no-repeat right 0; 
+//    position:                                                                   relative; 
+//}
+
+
+//.orderSteps li.last 
+//{ 
+//    background:                                                                 none;
+//    width:                                                                      20%; 
+//}
+
+
+//.orderSteps .stepNumber 
+//{ 
+//    float:                                                                      left; 
+//    font-size:                                                                  40px; 
+//    color:                                                                      @order-step-number-color; 
+//    font-weight:                                                                bold; 
+//    line-height:                                                                70px; 
+//    padding:                                                                    0 10px 0 0; 
+//    text-shadow:                                                                1px 0px 1px #ffffff; 
+//}
+
+
+//.orderSteps .stepName 
+//{ 
+//    text-transform:                                                             uppercase; 
+//    color:                                                                      @order-step-number-color; 
+//    font-weight:                                                                700; 
+//    font-size:                                                                  16px; 
+//    line-height:                                                                20px; 
+//    padding-top:                                                                12px; 
+//}
+
+
+//.orderSteps .subLine 
+//{ 
+//    color:                                                                      @order-step-number-color; 
+//    font-size:                                                                  11px; 
+//    padding-top:                                                                3px; 
+//}
+
+
+//.orderSteps .activeStep 
+//{ 
+//    background:                                                                 url(/assets/images/step-activeseparator.png) no-repeat right 0; 
+//    width:                                                                      30%; 
+//}
+
+
+//.orderSteps .activeStep .stepNumber 
+//{ 
+//    color:                                                                      @dark-gray-color; 
+//    text-shadow:                                                                1px 0 1px @dark-gray-color; 
+//}
+
+
+//.orderSteps .activeStep .stepName 
+//{ 
+//    color:                                                                      @order-active-step-color; 
+//}
+
+
+//.orderSteps .activeStep .subLine
+//{ 
+//    color:                                                                      @order-active-step-color; 
+//}
+
+
+//.completeCheck 
+//{ 
+//    display:                                                                    block !important; 
+//    position:                                                                   absolute; 
+//    top:                                                                        18px; 
+//    left:                                                                       -10px; 
+//}
+

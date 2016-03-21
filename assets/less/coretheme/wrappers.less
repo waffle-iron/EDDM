@@ -1,0 +1,124 @@
+﻿.roundedWrapper
+{
+    //Used on _quickQuote.aspx, and the OLB Home Page.
+    background-color: #ffffff;
+    border: 1px solid @med-light-gray-color;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    -webkit-box-shadow: 2px 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px 2px #cccccc;
+    margin-top: 20px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+
+
+.contentWrapper
+{
+    //Container for content on just about every page.
+    background-color:                                                               @content-wrapper-background-color;
+    border:                                                                         @content-wrapper-border-width solid @content-wrapper-border-color;
+    padding:                                                                        @content-wrapper-padding;
+    border-top-left-radius:                                                         @content-wrapper-border-radius;
+    border-top-right-radius:                                                        @content-wrapper-border-radius;
+    border-bottom-left-radius:                                                      @content-wrapper-border-radius;
+    border-bottom-right-radius:                                                     @content-wrapper-border-radius;
+    -webkit-box-shadow:                                                             @content-wrapper-shadow-hoz-length @content-wrapper-shadow-vert-length @content-wrapper-shadow-blur @content-wrapper-shadow-spread @content-wrapper-shadow-color;
+    box-shadow:                                                                     @content-wrapper-shadow-hoz-length @content-wrapper-shadow-vert-length @content-wrapper-shadow-blur @content-wrapper-shadow-spread @content-wrapper-shadow-color;
+    margin-top:                                                                     @content-wrapper-margin-top;
+    margin-right:                                                                   0px;
+    margin-left:                                                                    0px;
+    margin-bottom:                                                                  @content-wrapper-margin-bottom;
+
+    @media (max-width: 767px) {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
+
+
+
+#mapWrapper
+{ margin-top: 10px;}
+
+
+
+#termsWrapper, #privacyWrapper
+{
+    background-color: #ffffff;
+    border: 1px solid @med-light-gray-color;
+    padding: 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    -webkit-box-shadow: 2px 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px 2px #cccccc;
+    margin-top: 20px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+
+
+.whitePaddedWrapper
+{
+    background-color: #ffffff;
+    border: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin: 0px;
+}
+
+
+
+.grayPaddedRow
+{
+    padding:                                                                                            40px;
+    background-color:                                                                                   @light-gray-color;
+}
+
+
+
+.insetShadowWrapper
+{
+    -webkit-box-shadow:                                                                                 inset 0 0 100px 20px @inset-shadow-wrapper-shadow-color;
+    box-shadow:                                                                                         inset 0 0 100px 20px @inset-shadow-wrapper-shadow-color;
+    background-color:                                                                                   @inset-shadow-wrapper-background;
+    padding:                                                                                            40px;
+
+    h1
+    {
+        color:                                                                                          @inset-shadow-wrapper-header-text-color;
+        font-size:                                                                                      @inset-shadow-wrapper-header-font-size;
+        text-shadow:                                                                                    1px 0px 1px @inset-shadow-wrapper-header-shadow-color;
+    }
+
+    h3
+    {
+        color:                                                                                          @inset-shadow-wrapper-subheader-text-color;
+        font-size:                                                                                      @inset-shadow-wrapper-subheader-font-size;
+    }
+
+    p
+    {
+        color:                                                                                          @inset-shadow-wrapper-caption-text-color;
+        font-size:                                                                                      @inset-shadow-wrapper-caption-font-size;
+    }
+}
+
+
+
+.simpleHeaderWrapper
+{
+    padding-top:25px;
+    padding-left:10px;
+}

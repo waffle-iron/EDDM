@@ -1,0 +1,361 @@
+﻿//Nav
+nav
+{
+
+    background-color:                                                                               @navbar-bg-color;
+
+
+  //Nav Bar Classes
+    .navbar-default
+    {
+
+        background-color:                                                                           @navbar-bg-color;
+        border-top:                                                                                 @navbar-border-width @navbar-border-style @navbar-border-color;
+        border-bottom:                                                                              @navbar-border-width @navbar-border-style @navbar-border-color;
+        border-radius:                                                                              0;
+        border-left:                                                                                0;
+        border-right:                                                                               0;
+        margin-bottom:                                                                              0px;
+        font-family:                                                                                @navbar-font-family;
+        text-transform:                                                                             @navbar-link-text-transform;
+        font-size:                                                                                  @navbar-font-size;
+        font-weight:                                                                                @navbar-font-weight;
+
+        //This centers the nav menu options if navbar-default class in used. 
+        //'navbar-right' overrides this rule.
+        //Defined in CMS:
+        //<div class="collapse navbar-collapse navbar-default" id="MenuMain">
+        .navbar-nav
+        {
+            
+            float:                                                                                  none;
+            margin:                                                                                 0 auto;
+            display:                                                                                table;
+            table-layout:                                                                           fixed;
+
+        }
+
+
+
+
+        //Standard NAV item classes
+        .navbar-nav > li > a
+        {
+            background-color:                                                                       @navbar-bg-color;
+            color:                                                                                  @navbar-link-color;
+            border-left:                                                                            @navbar-link-left-border-width solid @navbar-link-border-left;
+            border-right:                                                                           @navbar-link-right-border-width solid @navbar-link-border-right;
+        }
+
+        .navbar-nav > li > a:hover
+        {
+            background-color:                                                                       @navbar-hover-bg;
+            color:                                                                                  @navbar-hover-text-color;
+            border-left:                                                                            @navbar-link-left-border-width solid @navbar-hover-border-left;
+            border-right:                                                                           @navbar-link-right-border-width solid @navbar-hover-border-right;
+        }
+
+
+
+
+        //Active State
+        .navbar-nav > .active > a
+        {
+            background-color:                                                                       @navbar-active-bg-color;
+            color:                                                                                  @navbar-link-active;
+            font-weight:                                                                            @navbar-link-active-weight;
+        }
+
+        .navbar-nav > .active a:hover
+        {
+            background-color:                                                                       @navbar-active-bg-color;
+            color:                                                                                  @navbar-link-active;
+            font-weight:                                                                            @navbar-link-active-weight;
+        }
+
+
+        //Link color of items within drop down in MOBILE MENU
+        .navbar-nav .open .dropdown-menu > li > a
+        {
+            color:                                                                                  @navbar-link-color;
+        }
+
+
+        //HOVER link colors of items within drop down in MOBILE MENU
+        .navbar-nav .open .dropdown-menu > li > a:hover
+        {
+            color:                                                                                  @navbar-link-color;
+            background-color:                                                                       @navbar-hover-bg;
+        }
+
+
+
+
+        //This defines the nav link which triggers the drop down, not the drop down itself.
+        .navbar-nav > .open > a, 
+        .navbar-nav > .open > a:hover, 
+        .navbar-nav > .open > a:link, 
+        .navbar-nav > .open > a:active
+        {
+            background-color:                                                                       @navbar-hover-bg;
+            color:                                                                                  @navbar-hover-text-color;
+        }
+
+
+        //DropDown contents
+        .dropdown-menu
+        {
+
+            //background color of entire drop down
+            background-color:                                                                       @nav-dropdown-background-color;
+            
+            //plain text color
+            color:                                                                                  @navbar-link-color;
+
+        }
+
+
+        //Formatting of the <a> tags within the drop down in nav.
+        //This was the only way I could get it to work.
+        .navbar-nav .open .dropdown-menu > li > a,
+        .navbar-nav .open .dropdown-menu > li > a:link,
+        .navbar-nav .open .dropdown-menu > li > a :active 
+        {
+            color:                                                                                  @nav-dropdown-link-text-color;
+            background:                                                                             @nav-dropdown-link-background-color;
+        }
+
+        .navbar-nav .open .dropdown-menu > li > a:hover
+        {
+            color:                                                                                  @nav-dropdown-link-hover-text-color !important;
+            background:                                                                             @nav-dropdown-link-hover-background-color !important; 
+        }
+
+
+        //mobile menu classess
+        .navbar-toggle 
+        {
+            border-color:                                                                           @navbar-toggle-button-border-color;
+
+            .icon-bar
+            {
+                background-color:                                                                   @navbar-icon-bar-background-color;
+            }
+
+        }
+
+
+        //hover class of mobile menu 'button'
+        .navbar-toggle:hover, .navbar-toggle:focus 
+        {
+            background-color:                                                                       @navbar-hover-bg;
+        }
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+//Nav-Tabs
+.nav-tabs
+{
+    border-bottom-width:                                                                            @nav-tabs-border-bottom-width;
+    border-bottom-style:                                                                            @nav-tabs-border-type;
+    border-bottom-color:                                                                            @nav-tabs-border-color;
+}
+
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus
+{
+    color:                                                                                          @nav-tabs-text-color;
+    border-bottom-width:                                                                            @nav-tabs-border-bottom-width;
+    border-bottom-style:                                                                            @nav-tabs-border-type;
+    border-bottom-color:                                                                            transparent;
+    font-weight:                                                                                    bold;
+}
+
+
+.nav-tabs > li > a:hover
+{
+  border-left-color:                                                                                @light-gray-color;
+  border-right-color:                                                                               @light-gray-color;
+  border-top-color:                                                                                 @light-gray-color;
+}
+
+
+
+//Pills
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus
+{
+    background-color:                                                                               @nav-pill-active-background-color;
+}
+
+
+
+
+//Left Nav (default, gray)
+.leftNav > ul
+{
+    list-style-type:                                                                                none;
+    padding:                                                                                        0;
+    margin:                                                                                         0;
+}
+
+
+.leftNav > ul > li
+{
+    border-bottom:                                                                                  1px solid @light-gray-color;
+}
+
+
+.leftNav > ul > li > a
+{
+    display:                                                                                        block;
+    padding:                                                                                        7px 0;
+    font-weight:                                                                                    normal;
+    font-size:                                                                                      12px;
+    color:                                                                                          @gray-color;
+    text-transform:                                                                                 uppercase;
+    text-decoration:                                                                                none;
+}
+
+
+.leftNav > ul > li:last-child
+{
+    border-bottom:                                                                                  0;
+}
+
+
+.leftNav > ul > li > a:hover
+{
+    color:                                                                                          @attention-strong-color;
+}
+
+
+
+//Left Nav (Primary)
+.leftNavPrimary > ul
+{
+    list-style-type:                                                                                none;
+    padding:                                                                                        0;
+    margin:                                                                                         0;
+}
+
+
+.leftNavPrimary > ul > li
+{
+    border-bottom:                                                                                  1px solid @primary-color;
+}
+
+
+.leftNavPrimary > ul > li > a
+{
+    display:                                                                                        block;
+    padding:                                                                                        7px 0;
+    font-weight:                                                                                    normal;
+    font-size:                                                                                      12px;
+    color:                                                                                          @primary-color;
+    text-transform:                                                                                 uppercase;
+    text-decoration:                                                                                none;
+}
+
+
+.leftNavPrimary > ul > li:last-child
+{
+    border-bottom:                                                                                  0;
+}
+
+
+.leftNavPrimary > ul > li > a:hover
+{
+    color:                                                                                          @primary-strong-color;
+}
+
+
+
+
+
+
+
+
+//MEDIA QUERIES
+//XS Size
+@media (max-width: 767px)
+{
+
+    //Reset for mobile.
+    nav .navbar-default .navbar-nav 
+    {
+        //float: none;
+        margin-left: -15px;
+        margin-right: -15px;
+        display: block;
+        //table-layout:auto;
+    }
+
+    .navbar-default
+    {
+
+        .navbar-collapse
+        {
+            
+            .navbar-nav li a, 
+            .navbar-nav li a:hover, 
+            .navbar-nav li a:link 
+            {
+                font-size:                                                                          16px;
+            }
+
+            
+        }
+
+
+    }
+
+}
+
+
+//SMALL SIZE
+@media (min-width: 768px) and (max-width: 991px)
+{
+
+    .navbar-default .navbar-nav > li > a
+    { font-size: 12px;}
+
+
+    .navbar-nav > li > a
+    {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        padding-right: 6px;
+        padding-left: 6px;
+    }
+
+}
+
+
+//MEDIUM SIZE
+@media (min-width: 992px) and (max-width: 1199px)
+{
+
+
+}
+
+
+//LARGE SiZE
+@media (min-width: 1200px)
+{
+
+
+}

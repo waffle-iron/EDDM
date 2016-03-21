@@ -1,0 +1,83 @@
+﻿.testimonialWrapper 
+{
+    background-color:                                                       @testimonial-background-color;
+    border:                                                                 0px; 
+    padding-top:                                                            20px;
+    padding-bottom:                                                         50px;
+    padding-right:                                                          20px;
+    padding-left:                                                           20px;
+    margin:                                                                 0px;
+
+
+    .iconColor
+    {
+        color:                                                              @testimonial-icon-color;
+    }
+
+}
+
+
+
+.testimonialsH1Wrapper
+{
+    background-color:                                                       @testimonial-background-color;
+    height:                                                                 1px;
+    text-align:                                                             center;
+    margin-top:                                                             20px;
+    margin-bottom:                                                          50px;
+}
+
+
+
+.testimonialsH1Wrapper h1
+{
+    display:                                                                inline-block;
+    margin-top:                                                             -20px;
+    background-color:                                                       @testimonial-background-color;
+    padding-left:                                                           20px;
+    padding-right:                                                          20px;
+    padding-bottom:                                                         40px;
+    color:                                                                  @testimonial-header-font-color;
+}
+
+
+
+.testimonial blockquote:before, .testimonial div.quote:before
+{
+    /* big quote */
+    content:                                                                "";
+    position:                                                               absolute;
+    width:                                                                  40px;
+    height:                                                                 28px;
+    top:                                                                    0;
+    left:                                                                   -40px;
+    background:                                                             url(/assets/images/openquote_icon.png) no-repeat;
+    color:                                                                  @testimonial-text-font-color;
+}
+
+
+
+.testimonial blockquote:after, 
+.testimonial div.quote:after 
+{
+    /* close big quote */
+    content:                                                                "";
+    position:                                                               absolute;
+    width:                                                                  40px;
+    height:                                                                 28px;
+    bottom:                                                                 25px;
+    right:                                                                  -40px;
+    background:                                                             url(/assets/images/closequote_icon.png) no-repeat;
+}
+
+
+.testimonial blockquote 
+{
+    margin:                                                                 10px;
+    padding:                                                                10px;
+    color:                                                                  @testimonial-text-font-color;
+}
+
+
+
+

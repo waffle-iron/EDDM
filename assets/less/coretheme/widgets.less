@@ -1,0 +1,87 @@
+﻿//Progress Bars
+.progress-bar
+{
+  font-size: @progress-bar-font-size;
+  color: @progress-bar-font-color;
+  text-align: @progress-bar-text-align;
+  background-color: @primary-color;
+}
+
+
+.progress-bar-success
+{ background-color: @progress-bar-success-color;}
+
+
+.progress-bar-info
+{ background-color: @progress-bar-info-color;}
+
+
+.progress-bar-warning
+{ background-color: @progress-bar-warning-color;}
+
+
+.progress-bar-danger
+{ background-color: @progress-attention-info-color;}
+
+
+
+
+
+
+
+
+
+
+//Jumbotron
+.jumbotron
+{
+  padding: 15px;
+  background-color: @light-gray-color;
+}
+
+
+
+
+//GoogleMap
+#map_canvas
+{ height: 350px;}
+
+
+
+// Range (noUiSlider)
+.noUiSlider {
+    transition: background-color 0.2s linear;
+
+    .noUi-connect {
+        background-color: @franchise-secondary-brand-color;
+
+        &.full {
+            background-color: #FAFAFA;
+        }
+    }
+
+    &.noUi-vertical {
+        height: 250px;
+        margin: 20px auto;
+
+        .noUi-handle-upper .noUi-tooltip {
+            left: 120%;
+            right: auto;
+        }
+        .noUi-handle-lower .noUi-tooltip {
+            right: 120%;
+            left: auto;
+        }
+    }
+
+    &.noUi-horizontal {
+        margin: 30px 10px;
+
+        .noUi-handle-upper .noUi-tooltip {
+            bottom: -36px
+        }
+        .noUi-handle-lower .noUi-tooltip {
+            top: -36px
+        }
+    }
+}

@@ -1,0 +1,96 @@
+#template-page {
+    textarea {
+        font-size: 13px;
+        font-family: "Ubuntu Mono", "Menlo", "Consolas", monospace;
+    }
+}
+
+#template-tool {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    left: 5vw;
+    top: 5vh;
+    z-index: 1000;
+    width: 90vw;
+    max-height: 90vh;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.9);
+
+    .label {
+        color: white;
+    }
+
+    > div:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .template-row {
+        display: flex;
+        flex-direction: row;
+        max-width: 95%;
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+
+        > :not(.btn) {
+            display: flex;
+            flex-grow: 3;
+            margin-right: 10px;
+
+            &:nth-child(1) {
+                max-width: 200px;
+                @media (max-width: 767px) {
+                    max-width: none;
+                    margin-bottom: 5px
+                }
+            }
+
+            &:nth-child(2) {
+                max-width: 300px;
+                @media (max-width: 767px) {
+                    max-width: none;
+                    margin-bottom: 5px
+                }
+            }
+
+            > * {
+                width: 100%;
+            }
+        }
+
+        .btn {
+            color: white;
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+
+        a {
+            font-size: 18px;
+        }
+    }
+
+    textarea {
+        margin-left: 20px;
+        margin-right: 20px;
+        height: 500px;
+        margin-top: 10px;
+    }
+}
+
+#template-open {
+    position: fixed;
+    left: 0px;
+    top: 5vh;
+    border-radius: 0px 6px 6px 0px;
+    padding: 15px;
+    color: white;
+    background-color: rgba(0,0,0,0.75);
+    z-index: 1000;
+}

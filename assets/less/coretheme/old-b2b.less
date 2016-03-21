@@ -1,0 +1,130 @@
+#b2b {
+    .panel-heading {
+        background-color: @franchise-brand-color;
+        color: white;
+
+        h3 {
+            color: white;
+        }
+        #region-select {
+            display: inline-block;
+            margin-top: 15px;
+            padding-left: 30px;
+            padding-right: 30px;
+            width: 100%;
+
+            #all {
+                float: right;
+                padding: 6px 25px;
+                border-radius: 16px;
+                margin-left: 15px;
+            }
+        }
+        h3, .btn {
+            text-transform: none;
+        }
+    }
+
+    .fuzzy-wrapper {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: flex;
+        width: 100%;
+
+        .fuzzy-container {
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+        }
+
+        #zipcodes {
+            >:first-child {
+                display: inline-block;
+            }
+        }
+    }
+
+    textarea {
+        width: 100%;
+        max-width: 500px;
+        resize: none;
+        height: 12em;
+    }
+
+    .form-container {
+        margin-left: 50px;
+        margin-bottom: 30px;
+
+        h3 {
+            margin-left: -25px;
+        }
+
+
+        .filtered-input {
+            margin-left: 30px;
+            max-width: 500px;
+
+            input[type="range"] {
+                width: 200px;
+                display: inline;
+            }
+        }
+
+        //
+        // TODO: TEMPORARY
+        //
+        .input-temp {
+            width: 100%;
+            max-width: 500px;
+        }
+    }
+
+    .center-button {
+        display: flex;
+
+        .btn {
+            width: 50%;
+            min-width: 134px;
+            margin: auto;
+        }
+    }
+
+    #introBlock {
+        margin-top: 50px;
+
+        p {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        ul {
+            line-height: 2;
+            font-size: 16px;
+            font-weight: bold;
+            list-style: none;
+            color: @franchise-brand-color;
+        }
+    }
+
+    #sticky {
+        h1,h4 {
+            text-align: center;
+        }
+
+        table {
+            th:nth-child(1), td:nth-child(1) {
+                text-align: right;
+                width: 5em;
+            }
+            th:nth-child(2), td:nth-child(2) {
+                text-align: right;
+
+                span {
+                    float: left;
+                    padding-left: 35%;
+                }
+            }
+        }
+    }
+}
