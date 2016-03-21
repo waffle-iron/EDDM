@@ -1,0 +1,40 @@
+﻿<%@ Master Language="VB" CodeFile="PDFv2.master.vb" Inherits="App_MasterPages_PDF" %>
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <title>Success! Your order has been received</title>
+</head>
+
+<body id="masterBody" runat="server">
+
+    <form id="form1" runat="server">
+
+
+    <asp:ContentPlaceHolder ID="phBody" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    
+    <asp:ContentPlaceHolder ID="phForm" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+    <!-- Priority Javascript Files -->
+    <script type="text/javascript" src="/assets/javascripts/modernizr.min.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/scrolltopcontrol.js"></script>
+
+    
+    <asp:ContentPlaceHolder ID="phScripts" runat="server">
+    </asp:ContentPlaceHolder>
+
+    
+    </form>
+
+</body>
+</html>

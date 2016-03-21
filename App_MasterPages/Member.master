@@ -1,0 +1,54 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/App_MasterPages/Site.master" AutoEventWireup="false"
+    CodeFile="Member.master.vb" Inherits="App_MasterPages_Member" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="phHead" runat="Server">
+    <asp:ContentPlaceHolder ID="phHead" runat="server" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="phNav" runat="Server">
+    <asp:ContentPlaceHolder ID="phNav" runat="server" />
+</asp:Content>
+<%--<asp:Content ID="Content4" ContentPlaceHolderID="phBody" runat="Server">
+    <asp:ContentPlaceHolder ID="phBody" runat="server" />
+</asp:Content>
+--%>
+<asp:Content ID="Content5" ContentPlaceHolderID="phForm" runat="Server">
+    <div class="ui-helper-clearfix">
+        <div class="thirty fleft">
+            <div class="padright2">
+                <div class="contentBlock">
+                    <div class="contentHeader">
+                        <b>Account</b> Options</div>
+                    <ul class="arrowList">
+                        <li><asp:HyperLink ID="hplAccountSettings" runat="server" Text="Account Settings" NavigateUrl="~/MyAccount/account_manage.aspx" /></li>
+                        <li><asp:HyperLink ID="hplOrders" runat="server" Text="Orders" NavigateUrl="~/MyAccount/account_orders.aspx" /></li>
+                        <%--<li><asp:HyperLink ID="hplQuotes" runat="server" Text="Quotes" NavigateUrl="~/MyAccount/account_quotes.aspx" /></li>
+                        <li><asp:HyperLink ID="hplDesigns" runat="server" Text="Design Projects" NavigateUrl="~/MyAccount/account_designs.aspx" /></li>--%>
+                        <li><asp:HyperLink ID="hplUSelect" runat="server" Text="U-Select Projects" NavigateUrl="~/MyAccount/account_selects.aspx" /></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="seventy fleft">
+            <div class="contentBlock">
+                <div class="banner-flag ui-helper-clearfix">
+                    <ul>
+                        <li class="first"><h1>My Account</h1></li>
+                        <li class="last"><h2>Welcome Back,
+                            <asp:Literal ID="lFirstName" runat="server" /></h2></li></ul>
+                    <div class="shd-left">
+                        &nbsp;</div>
+                    <div class="shd-right">
+                        &nbsp;</div>
+                </div>
+                <asp:ContentPlaceHolder ID="phBody" runat="server" />
+                <asp:ContentPlaceHolder ID="phForm" runat="server" />
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="phFoot" runat="Server">
+    <asp:ContentPlaceHolder ID="phFoot" runat="server" />
+</asp:Content>

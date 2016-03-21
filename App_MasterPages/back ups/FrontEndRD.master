@@ -1,0 +1,157 @@
+﻿<%@ Master Language="VB" CodeFile="FrontEndRD.master.vb" Inherits="App_MasterPages_FrontEndRD" %>
+<%@ Register Src="~/CLibrary/AccountHeaderMenuRD.ascx" TagPrefix="eddm" TagName="AccountHeaderMenuRD" %>
+<%@ Register Src="~/CLibrary/FrontEndFooterRD.ascx" TagPrefix="eddm" TagName="FrontEndFooterRD" %>
+
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Every Door Direct Mail® | 1-888-297-9605</title>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="et started with Every Door Direct Mail® today. Mail postcards and flyers in 10 minutes or less. Official affiliate of the United States Postal Service®." />
+    <meta name="keywords" content="every, door, direct, mail, usps, eddm, postage, post, office, printing" />
+    <meta name="author" content="" />
+    
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../assets/css/eddmv2.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="cpHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+
+<body id="masterBody" runat="server">
+<form id="form1" runat="server">
+
+<asp:ScriptManager ID="eddmScriptManager" runat="server">
+    <Scripts>
+        <asp:ScriptReference Path="~/assets/javascript/jquery-2.1.1.js" />
+        <asp:ScriptReference Path="~/assets/javascript/jquery-ui.js" />
+        <asp:ScriptReference Path="~/assets/javascript/bootstrap.js" />
+        <asp:ScriptReference Path="~/assets/javascript/scrolltopcontrol.js" />
+    </Scripts>
+</asp:ScriptManager>
+
+<section id="PageHeader">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <asp:HyperLink ID="hypBrand" runat="server" CssClass="navbar-brand" NavigateUrl="~/default.aspx">
+                    <asp:Image ID="imgLogo" runat="server" ImageUrl="~/assets/images/EDDM-Brand-White.png" CssClass="img-responsive" ClientIDMode="Static" />
+                    <div id="headerPhoneNumber" class="text-center"><asp:Literal ID="litPhoneNumber" runat="server" /></div>
+                </asp:HyperLink>
+            </div>          
+
+            <%--User Submenu.  My Account, Log In/Log Out, etc...--%>
+            <%--Hide from header when in Mobile mode.--%>
+            <div class="collapse navbar-collapse hidden-xs" id="userNavBarStd">
+                <eddm:AccountHeaderMenuRD runat="server" id="AccountHeaderMenu" />
+            </div>
+        </div>
+    </div>
+
+    <%--To do.  Place this in separate control.--%>
+    <div class="NavRowWrapper">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar-inverse navbar-right">
+                <ul class="nav navbar-nav" id="mainNavBar">
+                    <li><asp:HyperLink ID="hypTarget" runat="server" NavigateUrl="~/Step1-Target.aspx" ToolTip="Target your customers" ClientIDMode="Static">Target</asp:HyperLink></li>
+                    <li><a href="#">Design</a></li>
+                    <li><a href="#">Print/Mail</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li id="liBlog" runat="server"><asp:HyperLink ID="hypBlog" runat="server" Text="Blog" NavigateUrl="~/Blog/default.aspx" ToolTip="Blog" /></li>
+                    <li id="liPartnerships" runat="server"><asp:HyperLink ID="hypPartnerships" runat="server" Text="Partnerships" NavigateUrl="~/Partnerships/default.aspx" ClientIDMode="Static" ToolTip="Partnerships" /></li>
+                    
+                    
+                    <%--Show only when in xs mode.--%>
+                    <li class="visible-xs"><a href="#">Chat</a></li>
+                    
+                    <%--Show ONLY when logged in--%>
+                    <asp:Placeholder ID="phLoggedInMobile" runat="server" Visible="true">
+                    <li class="dropdown visible-xs" id="ddlMyProfile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu"><span class="glyphicon glyphicon-user"></span>&nbsp;My Profile<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;My Settings</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;My Orders</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;My Saved Maps</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;My Cart</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-off"></span>&nbsp;Log Out</a></li>
+                        </ul>
+                    </li>
+                    </asp:Placeholder>
+
+                    <%--Show when NOT logged in--%>
+                    <asp:Placeholder ID="phLoggedOutMobile" runat="server" Visible="true">
+                    <li class="dropdown visible-xs" id="ddlUserMenu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="dropdown-menu"><span class="glyphicon glyphicon-user"></span>&nbsp;User Menu<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;Create Account</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Log In</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Forgot Password</a></li>
+                        </ul>
+                    </li>
+                    </asp:Placeholder>
+
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<asp:ContentPlaceHolder id="cpContent" runat="server">
+</asp:ContentPlaceHolder>
+
+
+<section id="PageFooter">
+    <eddm:FrontEndFooterRD runat="server" ID="FrontEndFooterRD" />
+</section>
+
+
+<%--testing panel--%>
+
+<div class="container">
+    <div class="ContentWrapper">
+        <asp:Panel ID="pnlDebug" runat="server" Visible="true">
+            <div id="tester">
+                Responsive Testing
+            </div>
+            <div class="alert alert-danger">
+                <asp:Label ID="lblDebug" runat="server" Text="" />
+            </div>
+        </asp:Panel>
+    </div>
+</div>
+
+<%--End of testing--%>
+
+
+<asp:ContentPlaceHolder ID="cpScripts" runat="server">
+</asp:ContentPlaceHolder>
+
+
+</form>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+﻿<%@ Master Language="VB" CodeFile="ArtApproval.master.vb" Inherits="App_MasterPages_ArtApproval" %>
+<%@ Register Src="~/Controls/QuoteCredentials.ascx" TagPrefix="appx" TagName="QuoteCredentials" %>
+<%@ Register Src="~/CCustom/GoogleAnalytics.ascx" TagPrefix="appx" TagName="GoogleAnalytics" %>
+<%@ Register Src="~/Controls/QuoteOver60MillionMailed.ascx" TagPrefix="appx" TagName="QuoteOver60MillionMailed" %>
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title>Every Door Direct Mail® | 1-888-297-9605</title>
+
+    <meta name="google-site-verification" content="iGII1KdGuMRz9yfxni0Tt3fH-A17gdNN1-aeaQmDBLs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script type="text/javascript" src="/assets/javascripts/modernizr.min.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.1.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+
+<body id="masterBody" runat="server">
+
+    <!--[if lte IE 8]>
+	    <script src="/assets/scripts/html5shiv.js"></script>
+        <script src="/assets/scripts/respond.js"></script>
+	<![endif]-->
+
+    <form id="form1" runat="server">
+
+        <header>
+            <div class="container">
+                <div class="row">
+
+                    <%--Override. Do NOT show. --%>
+                    <asp:ContentPlaceHolder ID="phHead" runat="server" Visible="false">
+                    </asp:ContentPlaceHolder>
+                    
+                    <%--Header Logo--%>
+                    <asp:ContentPlaceHolder ID="phHeaderLogo" runat="server" Visible="true">
+                    </asp:ContentPlaceHolder>
+
+                </div>  
+            </div>
+        </header>
+
+        <%--Colored bar--%>
+        <div class="surveyNavBar">&nbsp;</div>
+
+        <div class="surveyBodyWrapper">
+
+            <div class="container">
+
+                <div class="fullRibbonSurvey hidden-sm hidden-xs">
+                    <span class="arrowLeft"></span>
+                    <asp:ContentPlaceHolder ID="phHeaderLg" runat="server" Visible="true" />
+                    <span class="arrowRight"></span>
+                </div>        
+
+                <div class="fullRibbonSmallSurvey visible-sm visible-xs">
+                    <asp:ContentPlaceHolder ID="phHeaderSm" runat="server" Visible="true" />
+                </div>        
+
+                <div class="contentWrapper">
+           
+                    <div class="row">
+
+                        <div class="col-sm-9 col-xs-12" id="surveyFormBlock">
+                            <div class="well">
+
+                                <%--Start of form--%>
+                                <asp:ContentPlaceHolder ID="phBody" runat="server">
+                                </asp:ContentPlaceHolder>
+                                <%--End of Form--%>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 hidden-xs">
+
+                            <div id="quoteSiteBarWrapper">
+
+                                <appx:QuoteOver60MillionMailed runat="server" id="QuoteOver60MillionMailed" />
+
+                                <div>&nbsp;</div>
+
+                                <appx:QuoteCredentials runat="server" id="QuoteCredentials" />
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <%--Override. Do NOT show. --%>
+        <asp:ContentPlaceHolder ID="phFoot" runat="server" Visible="false" />
+
+        <appx:GoogleAnalytics runat="server" id="GoogleAnalytics" />
+
+
+        <footer>
+
+            <div>&nbsp;</div>
+
+            <div class="container"> 
+           
+                <div class="row">
+                                    
+                    <div class="col-sm-5">                
+                        
+                        <%--Footer logo--%>
+                        <asp:ContentPlaceHolder ID="phFooterLogo" runat="server" Visible="true">
+                        </asp:ContentPlaceHolder>
+
+                        <%--Footer Company--%>
+                        <asp:ContentPlaceHolder ID="phFooterCompany" runat="server" Visible="true">
+                        </asp:ContentPlaceHolder>
+
+                    </div>
+                      
+                    <div class="col-sm-7"> 
+                        
+                        <%--Footer Trademarks--%>
+                        <asp:ContentPlaceHolder ID="phFooterTrademarks" runat="server" Visible="true">
+                        </asp:ContentPlaceHolder>
+               
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div>&nbsp;</div>
+
+        </footer>
+        
+        <script type="text/javascript" src="/assets/javascripts/jquery-ui.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/bootstrap.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/common.js"></script>
+	
+        <asp:ContentPlaceHolder ID="phScripts" runat="server">
+        </asp:ContentPlaceHolder>
+
+    </form>
+
+</body>
+</html>

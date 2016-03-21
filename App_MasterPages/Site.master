@@ -1,0 +1,89 @@
+﻿<%@ Master Language="VB" CodeFile="Site.master.vb" Inherits="App_MasterPages_Site" %>
+<%@ Register Src="~/Controls/SupportBanner.ascx" TagPrefix="appx" TagName="SupportBanner" %>
+<%@ Register Src="~/CCustom/BoldChatVisitorMonitor.ascx" TagPrefix="appx" TagName="BoldChatVisitorMonitor" %>
+<%@ Register Src="~/CCustom/GoogleAnalytics.ascx" TagPrefix="appx" TagName="GoogleAnalytics" %>
+<%@ Register Src="~/Controls/DevWarningBanner.ascx" TagPrefix="appx" TagName="DevWarningBanner" %>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title>Every Door Direct Mail® | 1-888-297-9605</title>
+
+    <meta name="google-site-verification" content="iGII1KdGuMRz9yfxni0Tt3fH-A17gdNN1-aeaQmDBLs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <!-- Handle early emit jQuery
+    <script type="text/javascript">
+        (function (w, d, u) { w.readyQ = []; w.bindReadyQ = []; function p(x, y) { if (x == "ready") { w.bindReadyQ.push(y); } else { w.readyQ.push(x); } }; var a = { ready: p, bind: p }; w.$ = w.jQuery = function (f) { if (f === d || f === u) { return a } else { p(f) } } })(window, document)
+    </script>
+    -->
+
+    <script type="text/javascript" src="/assets/javascripts/modernizr.min.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery.prettyPhoto.min.js?ver=1.0.0"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <%--<script type="text/javascript" src="/assets/scripts/modernizr.min.js"></script>--%>
+    <%--The shiv and respond.js go at the beginning of the body to ensure they are loaded AFTER the stylesheets--%>
+</head>
+
+<body id="masterBody" runat="server">
+    <!--[if lte IE 8]>
+	    <script src="/assets/scripts/html5shiv.js"></script>
+        <script src="/assets/scripts/respond.js"></script>
+	<![endif]-->
+
+    <form id="form1" runat="server">
+
+        <header>
+
+            <appx:DevWarningBanner runat="server" id="DevWarningBanner" />
+
+            <asp:ContentPlaceHolder ID="phHead" runat="server">
+            </asp:ContentPlaceHolder>
+
+        </header>
+
+        <nav>
+            <asp:ContentPlaceHolder ID="phNav" runat="server" />
+        </nav>
+
+        <asp:ContentPlaceHolder ID="phBody" runat="server" />
+
+        <asp:ContentPlaceHolder ID="phForm" runat="server" />
+
+        <appx:SupportBanner runat="server" id="SupportBanner" />
+
+        <asp:ContentPlaceHolder ID="phFoot" runat="server" />
+
+        <cms:pagemanager id="PageManager1" runat="server" />
+
+        <appx:BoldChatVisitorMonitor runat="server" id="BoldChatVisitorMonitor" />
+
+        <appx:GoogleAnalytics runat="server" id="GoogleAnalytics" />
+
+        <!-- Priority Javascript Files -->
+        <script type="text/javascript" src="/assets/javascripts/jquery-ui.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/bootstrap.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/common.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/TaradelTools.min.js?ver=1.2.0"></script>
+        
+        <asp:ContentPlaceHolder ID="cpScripts" runat="server" />
+
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<%@ Master Language="VB" CodeFile="old PDF.master.vb" Inherits="App_MasterPages_PDF" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700|Yanone+Kaffeesatz:400,700|Ubuntu:700' rel='stylesheet' type='text/css' />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="Stylesheet" type="text/css" href="/app_styles/pdf.css" />
+</head>
+<body id="pdf">
+    <form id="form1" runat="server">
+    <div id="pageLayout">
+<%--        <div id="pageHead">
+            <div class="pageContainer ui-helper-clearfix">
+                <asp:ContentPlaceHolder ID="phHead" runat="server" />
+            </div>
+        </div>
+        <div id="pageNav" class="ui-helper-clearfix">
+            <div class="pageContainer ui-helper-clearfix">
+                <asp:ContentPlaceHolder ID="phNav" runat="server" />
+            </div>
+        </div>
+--%>
+        <div id="pageBody" class="ui-helper-clearfix">
+            <div class="pageBorder ui-helper-clearfix">
+                <div class="bodyWrapper">
+                    <div class="pageContainer">
+                        <asp:ContentPlaceHolder ID="phBody" runat="server" />
+                        <asp:ContentPlaceHolder ID="phForm" runat="server" />
+                    </div>
+                </div>
+            </div>
+        </div>
+<%--        <div id="pageFoot" class="ui-helper-clearfix">
+            <div class="pageBorder ui-helper-clearfix">
+                <div class="pageContainer">
+                    <asp:ContentPlaceHolder ID="phFoot" runat="server" />
+                </div>
+            </div>
+        </div>--%>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿<%@ Master Language="VB" CodeFile="QuoteRequest.master.vb" Inherits="App_MasterPages_QuoteRequest" %>
+<%@ Register Src="~/Controls/QuoteFooter.ascx" TagPrefix="appx" TagName="QuoteFooter" %>
+<%@ Register Src="~/Controls/QuoteHeaderLogo.ascx" TagPrefix="appx" TagName="QuoteHeaderLogo" %>
+<%@ Register Src="~/Controls/QuoteCredentials.ascx" TagPrefix="appx" TagName="QuoteCredentials" %>
+<%@ Register src="~/CCustom/BoldChatConversion.ascx" tagPrefix="boldchat" tagName="Conversion" %>
+<%@ Register Src="~/CCustom/GoogleAnalytics.ascx" TagPrefix="appx" TagName="GoogleAnalytics" %>
+<%@ Register Src="~/Controls/QuoteOver60MillionMailed.ascx" TagPrefix="appx" TagName="QuoteOver60MillionMailed" %>
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title>Every Door Direct Mail® | 1-888-297-9605</title>
+
+    <meta name="google-site-verification" content="iGII1KdGuMRz9yfxni0Tt3fH-A17gdNN1-aeaQmDBLs" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Handle early emit jQuery 
+    <script type="text/javascript">
+        (function (w, d, u) { w.readyQ = []; w.bindReadyQ = []; function p(x, y) { if (x == "ready") { w.bindReadyQ.push(y); } else { w.readyQ.push(x); } }; var a = { ready: p, bind: p }; w.$ = w.jQuery = function (f) { if (f === d || f === u) { return a } else { p(f) } } })(window, document)
+    </script>
+    -->
+
+    <script type="text/javascript" src="/assets/javascripts/modernizr.min.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery-2.1.1.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+
+<body id="masterBody" runat="server">
+
+    <!--[if lte IE 8]>
+	    <script src="/assets/scripts/html5shiv.js"></script>
+        <script src="/assets/scripts/respond.js"></script>
+	<![endif]-->
+
+    <form id="form1" runat="server">
+
+        <header>
+            <div class="container">
+                <div class="row">
+
+                    <%--Override. Do not show. --%>
+                    <asp:ContentPlaceHolder ID="phHead" runat="server" Visible="false">
+                    </asp:ContentPlaceHolder>
+                    
+                    <%--Header Logo--%>
+                    <appx:QuoteHeaderLogo runat="server" id="QuoteHeaderLogo" />
+
+                </div>  
+            </div>
+        </header>
+
+        <div class="surveyNavBar">&nbsp;</div>
+
+
+        <div class="surveyBodyWrapper">
+
+            <div class="container">
+
+                <div class="fullRibbonSurvey hidden-sm hidden-xs">
+                    <span class="arrowLeft"></span>
+                    <asp:ContentPlaceHolder ID="phHeaderLg" runat="server" Visible="true" />
+                    <span class="arrowRight"></span>
+                </div>        
+
+                <div class="fullRibbonSmallSurvey visible-sm visible-xs">
+                    <asp:ContentPlaceHolder ID="phHeaderSm" runat="server" Visible="true" />
+                </div>        
+
+                <div class="contentWrapper">
+           
+                    <div class="row">
+
+                        <div class="col-sm-9 col-xs-12" id="surveyFormBlock">
+                            <div class="well">
+
+                                <%--Start of form--%>
+                                <asp:ContentPlaceHolder ID="phBody" runat="server">
+                                </asp:ContentPlaceHolder>
+                                <%--End of Form--%>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 hidden-xs">
+
+                            <div id="quoteSiteBarWrapper">
+
+                                <appx:QuoteOver60MillionMailed runat="server" id="QuoteOver60MillionMailed" />
+
+                                <div>&nbsp;</div>
+
+                                <appx:QuoteCredentials runat="server" id="QuoteCredentials" />
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <%--Override. Do not show. --%>
+        <asp:ContentPlaceHolder ID="phFoot" runat="server" Visible="false" />
+
+        <appx:QuoteFooter runat="server" id="QuoteFooter" />
+        
+        <boldchat:Conversion runat="server" ID="bcConversion"/>
+
+        <appx:GoogleAnalytics runat="server" id="GoogleAnalytics" />
+
+
+        <script type="text/javascript" src="/assets/javascripts/jquery-ui.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/bootstrap.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="/assets/javascripts/common.js"></script>
+	
+        <asp:ContentPlaceHolder ID="cpScripts" runat="server" />
+
+    </form>
+
+</body>
+</html>
