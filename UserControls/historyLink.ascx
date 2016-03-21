@@ -1,0 +1,2 @@
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="historyLink.ascx.vb" Inherits="usercontrols_historyLink" %>
+<asp:LinkButton ID="lnkHistory" runat="server" ToolTip="Audit History"><asp:Image ID="imgHistory" runat="server" ImageUrl="~/admin/images/timeline_marker.png" AlternateText="Audit Log" /><asp:Literal ID="lLinkText" runat="server" /></asp:LinkButton>
