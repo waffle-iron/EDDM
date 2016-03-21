@@ -1,0 +1,23 @@
+﻿<!-- BoldChat Live Chat Button HTML v5.00 (Type=HTML,ChatWindow=Staples,Department=- None -,Website=http://www.stapleseddm.com/) -->
+<!-- Staples Act Mgr -->
+
+<script type="text/javascript">
+  var bccbId = Math.random(); document.write(unescape('%3Cspan id=' + bccbId + '%3E%3C/span%3E'));
+  window._bcvma = window._bcvma || [];
+  _bcvma.push(["setAccountID", "4508312422156215194"]);
+  _bcvma.push(["setParameter", "WebsiteID", "878826959155206464"]);
+  _bcvma.push(["addText", {type: "chat", window: "3083411454888645976", available: "<span class=\"fa fa-wechat\"></span>&nbsp;Click to Chat Live", unavailable: "<span class=\"fa fa-wechat\"></span>&nbsp;Chat Not Available", id: bccbId}]);
+  var bcLoad = function(){
+    if(window.bcLoaded) return; window.bcLoaded = true;
+    var vms = document.createElement("script"); vms.type = "text/javascript"; vms.async = true;
+    vms.src = ('https:'==document.location.protocol?'https://':'http://') + "vmss.boldchat.com/aid/4508312422156215194/bc.vms4/vms.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vms, s);
+  };
+  if(window.pageViewer && pageViewer.load) pageViewer.load();
+  else if(document.readyState=="complete") bcLoad();
+  else if(window.addEventListener) window.addEventListener('load', bcLoad, false);
+  else window.attachEvent('onload', bcLoad);
+</script>
+
+<!-- Staples Act Mgr -->
+<!-- /BoldChat Live Chat Button HTML v5.00 -->

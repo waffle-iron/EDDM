@@ -1,0 +1,10 @@
+﻿<!-- BoldChat Live Chat Button HTML v3.00 (Type=Web,ChatButton=EveryDoorDirectMail.com, ChatWindow=www.everydoordirectmail.com, Website=- None -,Department=- None -) -->
+<!-- Primrose -->
+
+<a href="https://livechat.boldchat.com/aid/4508312422156215194/bc.chat?resize=true&amp;cbdid=2448837140957533226&amp;wdid=3571380572082624780" target="_blank" 
+onclick="window.open((window.pageViewer &amp;&amp; pageViewer.link || function(link){return link;})(this.href + (this.href.indexOf('?')>=0 ? '&amp;' : '?') + 
+'url=' + escape(document.location.href)), 'Chat1081050786201172630', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=640, height=480');
+return false;"><span class="fa fa-wechat"></span>&nbsp;Chat with Us</a>
+
+<!-- /BoldChat Live Chat Button HTML v3.00 -->
+
