@@ -1,0 +1,1365 @@
+﻿/*====================================================================================*/
+/* FONTS */
+@import url(//fonts.googleapis.com/css?family=Droid+Sans:400,700|Yanone+Kaffeesatz:400,700|Ubuntu:700);
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* DOM ELEMENTS/HTML TAGS                                                             */
+body 
+{
+    margin-top: 65px;
+    background-image: url('/assets/images/bg-body.png');
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+}
+
+
+h1
+{
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 30px;
+    color: #0088cc;
+    font-weight: bold;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #dddddd;
+    letter-spacing: 0.05em;
+}
+
+
+h2 
+{
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    font-style: normal;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333333;
+    text-shadow: 2px 2px 2px #999999;
+    text-transform: uppercase;
+}
+
+
+h2 small 
+{color: #333333; }
+
+
+hr 
+{ 
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 0;
+    border-top: 1px solid #999999;
+}
+
+/*====================================================================================*/
+
+
+
+/*====================================================================================*/
+/* COLORS                                                                             */
+.GrayBlue 
+{ background-color: #275972; }
+
+
+.DarkBlue 
+{ background-color: #005580; }
+
+
+.Blue 
+{ background-color: #0088cc; }
+
+
+.BlueFade 
+{ background-color: #bbd8e7; }
+
+
+.Red 
+{ background-color: #bd171d; }
+
+
+.RedFade 
+{ background-color: #ebccd1;}
+
+
+.Highlight 
+{ background-color: #fcf8e3; }
+
+
+.Gray1 
+{ background-color: #333333; }
+
+
+.Gray2 
+{ background-color: #505050; }
+
+
+.Gray3
+{ background-color: #555555; }
+
+
+.Gray4
+{ background-color: #777777; }
+
+
+.Gray5
+{ background-color: #999999; }
+
+
+.Gray6
+{ background-color: #dddddd; }
+
+
+.Brown
+{ background-color: #6c542c;}
+
+
+.Orange 
+{ background-color: #f78900; }
+
+
+.Green 
+{ background-color: #3c763d; }
+
+
+.GreenFade 
+{ background-color: #dff0d8; }
+
+
+.OffWhite 
+{ background-color: #f5f5f5;}
+/*====================================================================================*/
+
+
+
+
+
+
+/*====================================================================================*/
+/* NAV ELEMENTS                                                                      */
+.NavRowWrapper 
+{
+    -webkit-box-shadow: 0 3px 5px 0 #999999;
+    box-shadow: 0 3px 5px 0 #999999;
+    background-color: #0088cc;
+}
+
+
+.navbar 
+{
+    min-height: 0px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+
+
+.navbar-default 
+{
+    background-color: #ffffff;
+    border-color: #ffffff;
+    background-image:none;
+}
+
+
+.navbar-brand 
+{
+    float: left;
+    height: 62px;
+    width: auto;
+    padding-bottom:0px;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-left: 4px;
+    line-height: normal;
+}
+
+
+.navbar-header > a 
+{ float: left; }
+
+
+.navbar-inverse 
+{
+    background-color: #0088cc;
+    border-color: #0088cc;
+    border-radius: 0px;
+    text-transform: uppercase;
+}
+
+
+.navbar-inverse li 
+{
+    border-right: 1px solid #0088cc;
+    border-left: 1px solid #4DB7E9;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .active > a, 
+ .navbar-inverse .navbar-nav > .active > a:hover 
+{ background-color: #005580;}
+
+
+.navbar-inverse .navbar-nav > li > a 
+{ color: #ffffff;}
+
+
+.navbar-inverse .navbar-nav > li > a:hover
+{ background-color: #005580;}
+
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover
+{
+    color: #ffffff; 
+    background-color: #005580
+}
+
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a
+{
+    color: #ffffff; 
+    background-color: #0088cc
+}
+
+
+
+/*User Sub Nav Bar */
+#userNavBarStd, #userNavBarStd li, #userNavBarStd a:not(#btnSignIn)
+{
+    background-color: #ffffff;
+    color: #0088cc;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+
+#userNavBarStd:not(#btnSignIn) a:hover:not(#btnSignIn), #userNavBarStd:not(#btnSignIn) a:active:not(#btnSignIn) 
+{ text-decoration: underline; }
+
+
+.logInControls
+{
+    margin-bottom: 4px; 
+    margin-top:4px;
+}
+
+
+#btnSignIn 
+{ margin-top: 8px; }
+
+
+#loggedInMenu a
+{ padding: 5px; }
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* PAGE CONTENT, PANELS, AND WRAPPERS                                                 */
+#PageContent 
+{border-top: 1px solid #0088cc;}
+
+
+.contentWrapper
+{
+    background-color: #ffffff;
+    border: 1px solid #dddddd; 
+    padding: 15px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-box-shadow: 2px 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px 2px #cccccc;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+}
+
+
+.CredentialsWrapper
+{
+    background-color: #ffffff;
+    border: 1px solid #dddddd; 
+    padding: 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-box-shadow: 2px 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px 2px #cccccc;
+    margin: 15px;
+}
+
+
+.BannerAdWrapper 
+{
+    width:95%;
+    background-color: #dddddd;
+    margin: 15px 30px;
+    min-height: 104px;
+    border-color: #0088cc;
+    border-width: 3px;
+    border-style: solid;
+    padding: 15px;
+}
+
+
+.LandingRowWrapper 
+{
+    border-width: 1px; 
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #bbd8e7;
+    background-color: #ffffff;
+    background-size: cover;
+}
+
+
+.info-board 
+{
+    margin-bottom: 20px;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #0088cc;
+}
+
+
+.info-board-theme-primary 
+{
+    background-color: #bbd8e7;
+    border-color: #0099e6;
+}
+
+
+.info-board-price-sticky 
+{
+    background-color: #dff0d8;
+    border: 1px solid #3c763d; 
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    -webkit-box-shadow: 2px 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px 2px #cccccc;
+    color: #505050;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+
+.info-board-theme-secondary 
+{
+    background-color: #fcf8e3;
+    border-color: #0099e6;
+}
+
+
+.addOnWrapper 
+{
+    background-color: #dddddd;
+    padding: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+}
+
+
+.templateWrapper 
+{
+    height: 240px;
+    width: 280px;
+    padding: 6px;
+    margin-bottom: 10px;
+    display: table-cell;
+    vertical-align: bottom;
+    background-color: #dddddd;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+
+}
+
+
+.FacebookWrapper 
+{
+    padding-top: 20px;
+    margin: 0 auto;
+    float: none;
+}
+
+
+.orderStepsWrapper 
+{
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+
+.confidenceWrapper 
+{
+    margin-top: 20px;
+    padding: 15px;
+    border: solid 5px #3c763d;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+
+#pProductConfig 
+{ margin-top: 15px;}
+/*====================================================================================*/
+
+
+
+
+
+/*====================================================================================*/
+/* EDDM CUSTOM ELEMENTS                                                               */
+.FullPageBanner 
+{
+     background: #005580;
+     background: -moz-linear-gradient(top, #005580, #005580);
+     background: -webkit-gradient(linear, left top, left bottom, from(#0088cc), to(#275972));
+     padding: 10px 20px;
+     margin-left: -15px;
+     margin-right: -15px;
+     margin-top: 20px;
+     position: relative;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+    color: #ffffff;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    text-shadow: 1px 1px 1px #333333;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.FullPageBannerSmall 
+{
+     background: #005580;
+     background: -moz-linear-gradient(top, #005580, #005580);
+     background: -webkit-gradient(linear, left top, left bottom, from(#0088cc), to(#275972));
+     position: relative;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+    color: #ffffff;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow: 1px 1px 1px #333333;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 20px;
+}
+
+
+.PartialBanner 
+{
+    display: inline-block;
+    position: relative;
+    clear: both;
+    padding: 10px 20px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    text-shadow: 1px 1px 1px #333333;
+}
+
+
+.PartialBannerSmall 
+{
+    margin-left: -15px;
+    margin-right: -15px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    text-shadow: 1px 1px 1px #333333;
+}
+
+
+.subBannerPop 
+{
+    font-style: normal;
+    font-size: 26px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: -20px;
+    margin-top: -15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+    background-color: #0088cc;
+}
+
+
+.subBannerPopSmall 
+{
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+    background-color: #0088cc;
+}
+
+
+.subBanner 
+{
+    background: #005580;
+    background: -moz-linear-gradient(top, #005580, #005580);
+    background: -webkit-gradient(linear, left top, left bottom, from(#0088cc), to(#275972));
+    font-size: 20px;
+    text-align: left;
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    padding-right: 100px;
+    padding-left: 20px;
+    margin-left: -2px;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+
+.subBannerSmall 
+{
+    background: #005580;
+    background: -moz-linear-gradient(top, #005580, #005580);
+    background: -webkit-gradient(linear, left top, left bottom, from(#0088cc), to(#275972));
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 50px;
+    padding-left: 15px;
+    margin-left: -2px;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+
+.arrowLeft 
+{
+     width: 0; 
+     height: 0;
+     line-height: 0;
+     border-left: 15px solid transparent;
+     border-top: 10px solid #bbd8e7;
+     top: 104%;
+     left: 0;
+     position: absolute;
+}
+
+
+.arrowRight 
+{
+     width: 0; 
+     height: 0;
+     line-height: 0;
+     border-right: 15px solid transparent;
+     border-top: 10px solid #bbd8e7;
+     top: 104%;
+     right: 0;
+     position: absolute;
+}
+
+
+.ActionButton 
+{
+    text-transform:uppercase;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.PriceHeader 
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    background-color: #bd171d;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+.LandingRowPanel 
+{
+    border: 1px solid #dddddd; 
+    padding: 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+
+.BlueHeadline 
+{
+    font-weight: 700;
+    color: #0088cc;
+    font-size: 30px;
+    background-color: #cccccc;
+    padding-left: 20px;
+}
+
+
+.ProductTitle 
+{
+    font-weight: 600;
+    color: #0088cc;
+    font-size: 20px;
+}
+
+
+.backtotop 
+{
+    background: #999999;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #ffffff;
+    border-radius: 3px;
+    -webkit-transition: background 300ms;
+    -o-transition: background 300ms;
+    transition: background 300ms;
+}
+
+
+.backtotop:hover 
+{ background: #777777;}
+
+
+.CheckboxTight 
+{ margin: 0px;}
+
+
+#mobileSplash 
+{ 
+    background-image: url('/assets/images/mobile-splash-background.png'); 
+    background-size: cover;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
+
+
+#headerPhoneNumber 
+{
+    color: #0088cc;
+    font-size: 18px;
+    font-weight: bold;
+    text-align:center;
+    width: 300px;
+    margin-top: -2px;
+}
+
+
+.BlogPost 
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border: 1px dotted #222;
+    border-left: 0;
+    border-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 0px;
+    padding-left: 0px;
+    font-size: 12px;
+}
+
+
+#logInErrorMsg 
+{ text-transform:none;}
+
+
+.featureOrange 
+{
+    color: #f78900;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+
+.inYourOrder
+{
+    color: #3c763d;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.selectToAdd
+{
+    color: #f78900;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.icon30 
+{ 
+    height: 30px;
+    display:inline;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+/* Dimensions are 15% of actual size. 1px = 1/100th of inch.*/
+/* Ex: (6.25 = 625 px) *.15 */
+
+.templateThumbnail625x9 
+{ 
+    width: 135px; 
+    max-height: 94px;
+}
+
+
+.templateThumbnail85x11 
+{ 
+    width: 165px; 
+    max-height: 127px;
+}
+
+
+.greenGlyph 
+{ color: #3c763d; }
+
+
+.ReceiptCatRow 
+{
+    font-weight: 700;
+    color: #0088cc;
+    font-size: 16px;
+    background-color: #cccccc;
+    padding-left: 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+
+.grandTotal 
+{
+    text-decoration: underline;
+    color: #3c763d;
+    font-style: italic;
+}
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* ORDER STEPS                                                                        */
+.text-info 
+{ color: #0088cc;}
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* ORDER STEPS                                                                        */
+.orderSteps 
+{ 
+    border: 1px solid #cccccc; 
+    background: #cccccc url(/assets/images/step-bg.png) repeat-x 50% 50%; 
+    padding-left: 30px; 
+}
+
+
+.orderSteps ol 
+{ 
+    margin: 0; 
+    padding: 0; 
+    height: 70px; 
+}
+
+
+.orderSteps li 
+{ 
+    list-style: none; 
+    float: left; 
+    width: 25%; 
+    position: relative; 
+    background: url(/assets/images/step-separator.png) no-repeat right 0; 
+    position: relative; 
+}
+
+
+.orderSteps li.last 
+{ 
+    background: none;
+    width: 20%; 
+}
+
+
+.orderSteps .stepNumber 
+{ 
+    float: left; 
+    font-size: 40px; 
+    color: #999999; 
+    font-weight: bold; 
+    line-height: 70px; 
+    padding: 0 10px 0 0; 
+    text-shadow: 1px 0px 1px #ffffff; 
+}
+
+
+.orderSteps .stepName 
+{ 
+    text-transform: uppercase; 
+    color: #999999; 
+    font-weight: 700; 
+    font-size: 16px; 
+    line-height: 20px; 
+    padding-top: 12px; 
+}
+
+
+.orderSteps .subLine 
+{ 
+    color: #999999; 
+    font-size: 11px; 
+    padding-top: 3px; 
+}
+
+
+.orderSteps .activeStep 
+{ 
+    background: url(/assets/images/step-activeseparator.png) no-repeat right 0; 
+    width: 30%; 
+
+}
+
+
+.orderSteps .activeStep .stepNumber 
+{ 
+    color: #333333; 
+    text-shadow: 1px 0 1px #333333; 
+}
+
+
+.orderSteps .activeStep .stepName 
+{ color: #0088cc; }
+
+
+.orderSteps .activeStep .subLine
+{ color: #0088cc; }
+
+
+.completeCheck 
+{ 
+    display: block !important; 
+    position: absolute; 
+    top: 18px; 
+    left: -10px; 
+}
+
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* BUY WITH CONFIDENCE                                                                */
+#confidenceImg 
+{
+    width: 150px;
+    height: 150px;
+}
+
+
+.confidenceWrapper h1 
+{
+    font-size: 18px;
+    color: #3c763d;
+    text-transform: none;
+}
+
+/*====================================================================================*/
+
+
+
+
+
+/*====================================================================================*/
+/* HELPER CLASSES                                                                     */
+.ExtraRightMargin 
+{ margin-right: 10px;}
+
+
+.ExtraLeftMargin 
+{ margin-left: 10px;}
+
+
+.Inline 
+{ display: inline;}
+
+
+.noDisplay 
+{ display: none; }
+
+
+.noTopMargin
+{ margin-top: 0px !important; }
+
+/*====================================================================================*/
+
+
+
+
+
+/*====================================================================================*/
+/* FORMS                                                                              */
+#radPaymentOptions input[type="radio"], #radPaymentType input[type="radio"], #radMailListOptOut input[type="radio"]
+{ 
+    margin-left: 20px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline;
+}
+
+
+#radMailListOptOut label 
+{
+    margin-left: 20px;
+    margin-right: 5px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+/*====================================================================================*/
+
+
+
+/*====================================================================================*/
+/* PAGE FOOTER                                                                        */
+#PageFooter 
+{
+    background-color: #005580;
+    -webkit-box-shadow:inset 0 6px 6px 0 #1A3C4D;
+    box-shadow:inset 0 6px 6px 0 #1A3C4D;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    color: #bbd8e7;
+}
+
+
+#PageFooter h3
+{
+    font-size: 24px;
+    text-transform:uppercase;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+
+#PageFooter .list-unstyled li, #PageFooter p, #PageFooter a, #PageFooter .list-unstyled a
+{
+    font-size: 14px;
+    padding-bottom: 14px;
+    line-height: 20px;
+    color: #bbd8e7;
+    font-family: DroidSans, 'Droid Sans', Arial, sans-serif;
+}
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* UI ELEMENTS & WIDGETS                                                                       */
+.tooltip-test button,
+.popover-test button 
+{ margin-bottom: 10px; }
+
+
+.panel-default 
+{
+    border-color: #dddddd;
+    border-width: 2px;
+}
+
+
+.panel-body > ul 
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+panel-body > ul > li 
+{ border-bottom: 1px solid #e9e9e9; }
+
+
+.panel-body > ul > li > a 
+{
+    display: block;
+    padding: 7px 0;
+    font-weight: normal;
+    font-size: 12px;
+    color: #777777;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+
+.panel-body > ul > li > a:hover 
+{ text-decoration: underline; }
+
+
+#pAnon 
+{ margin-top:5px;}
+
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus 
+{
+  color: #ffffff;
+  background-color: #0088cc;
+  border: 1px solid #999999;
+}
+
+
+.nav-tabs > li > a 
+{
+  background-color: #dddddd;
+  color: #333333;
+}
+
+
+.nav-tabs > li > a:hover 
+{
+  background-color: #999999;
+  color: #333333;
+}
+
+
+.tab-content > .tab-pane 
+{
+    padding: 5px;
+    margin: 5px;
+}
+
+/*====================================================================================*/
+
+
+
+
+/*====================================================================================*/
+/* TABLE CLASSES                                                                      */
+
+.width50 
+{ width: 50%;}
+
+
+.width25 
+{ width: 25%;}
+
+
+.width20 
+{ width: 20%;}
+
+
+.width40 
+{ width: 40%;}
+
+
+.table-bordered 
+{ border: 1px solid #bbd8e7;}
+
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td 
+{ border: 1px solid #bbd8e7;}
+
+
+.table-striped > tbody > tr:nth-child(odd) 
+{  background-color: #fcf8e3;}
+
+
+.table-hover > tbody > tr:hover 
+{ background-color: #bbd8e7;}
+
+
+.table-striped > tbody > tr:nth-child(odd) 
+{ background-color: #fcf8e3;}
+
+
+.tableHeaderRow, thead
+{
+    background-color: #dddddd;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #275972;
+}
+
+
+#tblDrops td 
+{font-size: 12px;}
+
+
+/*====================================================================================*/
+
+
+
+/*====================================================================================*/
+/* CUSTOM MEDIA QUERIES                                                               */
+@media (max-width: 767px) 
+{
+    /*Triggers on xs sizes.*/
+    #tester 
+    {
+        font-size: 30px;
+        color: #ff0000;
+    }
+
+
+    #imgLogo, #headerPhoneNumber
+    { width: 225px; }
+
+
+    h1 
+    {font-size: 32px; }
+
+
+    h2 
+    {font-size: 28px; }
+
+
+    .lead 
+    { font-size: 21px;}
+
+
+    .orderSteps 
+    { 
+        background: #cccccc; 
+        padding-left: 5px; 
+    }
+
+
+    .orderSteps .stepNumber 
+    { 
+        font-size: 24px; 
+        color: #999999; 
+        font-weight: bold; 
+        line-height: 70px; 
+    }
+
+
+    .orderSteps .stepName 
+    { 
+        text-transform: uppercase; 
+        color: #999999; 
+        font-weight: 700; 
+        font-size: 14px; 
+        line-height: 18px; 
+        padding-top: 12px; 
+    }
+
+
+    .orderSteps li 
+    { background-image:none; }
+
+
+    .orderSteps .activeStep 
+    { background-image: none; }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) 
+{
+    
+    /*Triggers on sm sizes.*/
+    #tester 
+    {
+        font-size: 40px;
+        color: yellow;
+    }
+
+
+    #imgLogo 
+    { width: 225px; }
+
+
+    #headerPhoneNumber 
+    {  width: 225px; }
+
+
+    .ActionButton
+    { font-size: 14px; }
+
+
+    h1 
+    {font-size: 26px; }
+
+
+    h2 
+    {font-size: 22px; }
+
+
+    .lead 
+    { font-size: 18px;}
+
+
+    .navbar-nav > li > a 
+    {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+
+    .navbar-inverse li 
+    { font-size: 14px; }
+
+
+    #PageFooter h3
+    { font-size: 18px;}
+
+
+    .orderSteps 
+    { 
+        background: #cccccc; 
+        padding-left: 5px; 
+    }
+
+
+    .orderSteps .stepNumber 
+    { 
+        font-size: 24px; 
+        color: #999999; 
+        font-weight: bold; 
+        line-height: 70px; 
+    }
+
+
+    .orderSteps .stepName 
+    { 
+        text-transform: uppercase; 
+        color: #999999; 
+        font-weight: 700; 
+        font-size: 14px; 
+        line-height: 18px; 
+        padding-top: 12px; 
+    }
+
+
+    .orderSteps li 
+    { 
+        background-image:none; 
+    }
+
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) 
+{
+
+    /*Triggers on md sizes.*/
+    #tester 
+    {
+        font-size: 50px;
+        color: #85be0a;
+    }
+
+    h1 
+    {font-size: 30px; }
+
+}
+
+
+
+@media (min-width: 1200px) 
+{
+
+    /*Triggers on md sizes.*/
+    #tester 
+    {
+        font-size: 60px;
+        color: green;
+    }
+
+
+    h1 
+    {font-size: 32px; }
+
+
+    h2 
+    {font-size: 28px; }
+
+
+    .lead 
+    { font-size: 21px;}
+
+}
+
+/*====================================================================================*/
+
+
