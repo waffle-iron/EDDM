@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="VB" Debug="true" Service="TaradelUtility" CodeBehind="~/App_Code/WebServuces/TaradelUtility.vb" %>

@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="VB" Debug="true" Service="appxSitemapWS" CodeBehind="~/App_Code/WebServices/appxSitemapWS.vb" %>
