@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="appxCMSEvent" targetNamespace="http://tempuri.org/appxCMSEvent.xsd" xmlns:mstns="http://tempuri.org/appxCMSEvent.xsd" xmlns="http://tempuri.org/appxCMSEvent.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="appx" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="appx (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.appx.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EventTableAdapter" GeneratorDataComponentClassName="EventTableAdapter" Name="Event" UserDataComponentName="EventTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="njvvmf.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT * FROM appxCMS_Event
+WHERE Enabled=1
+ORDER BY EventStartDate, EventEndDate
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EventId" DataSetColumn="EventId" />
+              <Mapping SourceColumn="EventType" DataSetColumn="EventType" />
+              <Mapping SourceColumn="EventSubType" DataSetColumn="EventSubType" />
+              <Mapping SourceColumn="EventStartMonth" DataSetColumn="EventStartMonth" />
+              <Mapping SourceColumn="EventStartDay" DataSetColumn="EventStartDay" />
+              <Mapping SourceColumn="EventStartYear" DataSetColumn="EventStartYear" />
+              <Mapping SourceColumn="EventStartDate" DataSetColumn="EventStartDate" />
+              <Mapping SourceColumn="EventEndMonth" DataSetColumn="EventEndMonth" />
+              <Mapping SourceColumn="EventEndDay" DataSetColumn="EventEndDay" />
+              <Mapping SourceColumn="EventEndYear" DataSetColumn="EventEndYear" />
+              <Mapping SourceColumn="EventEndDate" DataSetColumn="EventEndDate" />
+              <Mapping SourceColumn="Enabled" DataSetColumn="Enabled" />
+              <Mapping SourceColumn="EventTitle" DataSetColumn="EventTitle" />
+              <Mapping SourceColumn="EventDesc" DataSetColumn="EventDesc" />
+              <Mapping SourceColumn="EventStartHour" DataSetColumn="EventStartHour" />
+              <Mapping SourceColumn="EventStartMin" DataSetColumn="EventStartMin" />
+              <Mapping SourceColumn="EventEndHour" DataSetColumn="EventEndHour" />
+              <Mapping SourceColumn="EventEndMin" DataSetColumn="EventEndMin" />
+              <Mapping SourceColumn="EventSummary" DataSetColumn="EventSummary" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="njvvmf.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetOnThisDayEvents" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetOnThisDayEvents" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetOnThisDayEvents" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Enabled, EventDesc, EventEndDate, EventEndDay, EventEndHour, EventEndMin, EventEndMonth, EventEndYear, EventId, EventStartDate, EventStartDay, EventStartHour, EventStartMin, EventStartMonth, EventStartYear, EventSubType, EventSummary, EventTitle, EventType FROM appxcms_Event WHERE (Enabled = 1) AND (@EventType = @EventType) AND (@EventSubType = @EventSubType) AND (ISNULL(EventType, '') = CASE @EventType WHEN '' THEN IsNull(EventType , '') ELSE @EventType END) AND (ISNULL(EventSubType, '') = CASE @EventSubType WHEN '' THEN IsNull(EventSubType , '') ELSE @EventSubType END) AND (MONTH(EventStartDate) = MONTH(@EventDate)) AND (DAY(EventStartDate) = DAY(@EventDate)) AND (YEAR(EventStartDate) = @Year) ORDER BY YEAR(EventStartDate)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventType" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@EventType" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventSubType" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@EventSubType" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventDate" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="DateTime" Direction="Input" ParameterName="@EventDate" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Year" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@Year" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="njvvmf.dbo.appxCMS_GetNextEvents" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="FillBy1" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetNextEvents" GeneratorSourceName="FillBy1" GetMethodModifier="Public" GetMethodName="GetNextEvents" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetNextEvents" UserSourceName="FillBy1">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.appxCMS_GetNextEvents</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NumberOfEvents" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="varchar" DbType="AnsiString" Direction="Input" ParameterName="@EventType" Precision="0" ProviderType="VarChar" Scale="0" Size="100" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="varchar" DbType="AnsiString" Direction="Input" ParameterName="@EventSubType" Precision="0" ProviderType="VarChar" Scale="0" Size="100" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="njvvmf.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy2" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetEvent" GeneratorSourceName="FillBy2" GetMethodModifier="Public" GetMethodName="GetEvent" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetEvent" UserSourceName="FillBy2">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Enabled, EventDesc, EventEndDate, EventEndDay, EventEndHour, EventEndMin, EventEndMonth, EventEndYear, EventId, EventStartDate, EventStartDay, EventStartHour, EventStartMin, EventStartMonth, EventStartYear, EventSubType, EventSummary, EventTitle, EventType FROM appxcms_Event WHERE (Enabled = 1) AND (EventId = @EventID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventID" ColumnName="EventId" DataSourceName="njvvmf.dbo.appxcms_Event" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@EventID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="EventId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="njvvmf.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy3" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetOTDOtherEvents" GeneratorSourceName="FillBy3" GetMethodModifier="Public" GetMethodName="GetOTDOtherEvents" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetOTDOtherEvents" UserSourceName="FillBy3">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Enabled, EventDesc, EventEndDate, EventEndDay, EventEndHour, EventEndMin, EventEndMonth, EventEndYear, EventId, EventStartDate, EventStartDay, EventStartHour, EventStartMin, EventStartMonth, EventStartYear, EventSubType, EventSummary, EventTitle, EventType FROM appxcms_Event WHERE (Enabled = 1) AND (EventType = (SELECT EventType FROM appxcms_Event AS appxcms_Event_3 WHERE (EventId = @EventID))) AND (EventStartDay = (SELECT EventStartDay FROM appxcms_Event AS appxcms_Event_2 WHERE (EventId = @EventID))) AND (EventStartMonth = (SELECT EventStartMonth FROM appxcms_Event AS appxcms_Event_1 WHERE (EventId = @EventID))) AND (EventId &lt;&gt; @EventID) ORDER BY EventStartDate, EventEndDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventID" ColumnName="EventId" DataSourceName="njvvmf.dbo.appxcms_Event" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@EventID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="EventId" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="appxCMSDev.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy4" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetUpcoming" GeneratorSourceName="FillBy4" GetMethodModifier="Public" GetMethodName="GetUpcoming" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetUpcoming" UserSourceName="FillBy4">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Enabled, EventDesc, EventEndDate, EventEndDay, EventEndHour, EventEndMin, EventEndMonth, EventEndYear, EventId, EventStartDate, EventStartDay, EventStartHour, EventStartMin, EventStartMonth, EventStartYear, EventSubType, EventSummary, EventTitle, EventType 
+FROM appxcms_Event WHERE (Enabled = 1) 
+AND (EventStartDate &gt;= @CalendarDate) 
+AND (EventStartDate &lt;= DATEADD(d, @Days, @CalendarDate)) 
+AND (IsNull(@EventType, '')=IsNull(@EventType, ''))
+AND (IsNull(EventType, '')=CASE @EventType WHEN '' THEN EventType ELSE IsNull(EventType, '') END)
+ORDER BY EventStartDate, EventEndDate</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="CalendarDate" ColumnName="EventStartDate" DataSourceName="appxCMSDev.dbo.appxcms_Event" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@CalendarDate" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Days" ColumnName="EventStartDate" DataSourceName="appxCMSDev.dbo.appxcms_Event" DataTypeServer="datetime" DbType="Int32" Direction="Input" ParameterName="@Days" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventType" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@EventType" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectName="appxCMSDev.dbo.appxcms_Event" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy5" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetCalendarEventsAllTypes" GeneratorSourceName="FillBy5" GetMethodModifier="Public" GetMethodName="GetCalendarEventsAllTypes" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCalendarEventsAllTypes" UserSourceName="FillBy5">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT * FROM appxCMS_Event
+WHERE Enabled=1
+AND EventStartDate &gt;= @StartDate
+AND EventStartDate &lt;= DateAdd(d, 1, @EndDate)
+ORDER BY EventStartDate, EventEndDate
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="StartDate" ColumnName="EventStartDate" DataSourceName="appxCMSDev.dbo.appxcms_Event" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@StartDate" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="EventStartDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="EndDate" ColumnName="EventStartDate" DataSourceName="appxCMSDev.dbo.appxcms_Event" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@EndDate" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="EventStartDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EventYearsTableAdapter" GeneratorDataComponentClassName="EventYearsTableAdapter" Name="EventYears" UserDataComponentName="EventYearsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="appx (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT DISTINCT Year(EventStartDate) As EventYear
+FROM appxCMS_Event
+WHERE EventType=@EventType
+AND EventSubType=@EventSubType
+AND Month(EventStartDate)=Month(@EventDate)
+AND Day(EventStartDate)=Day(@EventDate)
+ORDER BY Year(EventStartDate) ASC
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventType" ColumnName="EventType" DataSourceName="njvvmf.dbo.appxcms_Event" DataTypeServer="varchar(100)" DbType="AnsiString" Direction="Input" ParameterName="@EventType" Precision="0" ProviderType="VarChar" Scale="0" Size="100" SourceColumn="EventType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="EventSubType" ColumnName="EventSubType" DataSourceName="njvvmf.dbo.appxcms_Event" DataTypeServer="varchar(100)" DbType="AnsiString" Direction="Input" ParameterName="@EventSubType" Precision="0" ProviderType="VarChar" Scale="0" Size="100" SourceColumn="EventSubType" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="EventDate" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="DateTime" Direction="Input" ParameterName="@EventDate" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EventYear" DataSetColumn="EventYear" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="appxCMSEvent" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="appxCMSEvent" msprop:Generator_DataSetName="appxCMSEvent">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Event" msprop:Generator_UserTableName="Event" msprop:Generator_RowDeletedName="EventRowDeleted" msprop:Generator_RowChangedName="EventRowChanged" msprop:Generator_RowClassName="EventRow" msprop:Generator_RowChangingName="EventRowChanging" msprop:Generator_RowEvArgName="EventRowChangeEvent" msprop:Generator_RowEvHandlerName="EventRowChangeEventHandler" msprop:Generator_TableClassName="EventDataTable" msprop:Generator_TableVarName="tableEvent" msprop:Generator_RowDeletingName="EventRowDeleting" msprop:Generator_TablePropName="_Event">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EventId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EventId" msprop:Generator_ColumnPropNameInRow="EventId" msprop:Generator_ColumnVarNameInTable="columnEventId" msprop:Generator_ColumnPropNameInTable="EventIdColumn" type="xs:int" />
+              <xs:element name="EventType" msprop:Generator_UserColumnName="EventType" msprop:Generator_ColumnPropNameInRow="EventType" msprop:Generator_ColumnVarNameInTable="columnEventType" msprop:Generator_ColumnPropNameInTable="EventTypeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EventSubType" msprop:Generator_UserColumnName="EventSubType" msprop:Generator_ColumnPropNameInRow="EventSubType" msprop:Generator_ColumnVarNameInTable="columnEventSubType" msprop:Generator_ColumnPropNameInTable="EventSubTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EventStartMonth" msprop:Generator_UserColumnName="EventStartMonth" msprop:Generator_ColumnPropNameInRow="EventStartMonth" msprop:Generator_ColumnVarNameInTable="columnEventStartMonth" msprop:Generator_ColumnPropNameInTable="EventStartMonthColumn" type="xs:int" />
+              <xs:element name="EventStartDay" msprop:Generator_UserColumnName="EventStartDay" msprop:Generator_ColumnPropNameInRow="EventStartDay" msprop:Generator_ColumnVarNameInTable="columnEventStartDay" msprop:Generator_ColumnPropNameInTable="EventStartDayColumn" type="xs:int" />
+              <xs:element name="EventStartYear" msprop:Generator_UserColumnName="EventStartYear" msprop:Generator_ColumnPropNameInRow="EventStartYear" msprop:Generator_ColumnVarNameInTable="columnEventStartYear" msprop:Generator_ColumnPropNameInTable="EventStartYearColumn" type="xs:int" />
+              <xs:element name="EventStartDate" msdata:ReadOnly="true" msprop:Generator_UserColumnName="EventStartDate" msprop:Generator_ColumnPropNameInRow="EventStartDate" msprop:Generator_ColumnVarNameInTable="columnEventStartDate" msprop:Generator_ColumnPropNameInTable="EventStartDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EventEndMonth" msprop:Generator_UserColumnName="EventEndMonth" msprop:Generator_ColumnPropNameInRow="EventEndMonth" msprop:Generator_ColumnVarNameInTable="columnEventEndMonth" msprop:Generator_ColumnPropNameInTable="EventEndMonthColumn" type="xs:int" />
+              <xs:element name="EventEndDay" msprop:Generator_UserColumnName="EventEndDay" msprop:Generator_ColumnPropNameInRow="EventEndDay" msprop:Generator_ColumnVarNameInTable="columnEventEndDay" msprop:Generator_ColumnPropNameInTable="EventEndDayColumn" type="xs:int" />
+              <xs:element name="EventEndYear" msprop:Generator_UserColumnName="EventEndYear" msprop:Generator_ColumnPropNameInRow="EventEndYear" msprop:Generator_ColumnVarNameInTable="columnEventEndYear" msprop:Generator_ColumnPropNameInTable="EventEndYearColumn" type="xs:int" />
+              <xs:element name="EventEndDate" msdata:ReadOnly="true" msprop:Generator_UserColumnName="EventEndDate" msprop:Generator_ColumnPropNameInRow="EventEndDate" msprop:Generator_ColumnVarNameInTable="columnEventEndDate" msprop:Generator_ColumnPropNameInTable="EventEndDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Enabled" msprop:Generator_UserColumnName="Enabled" msprop:Generator_ColumnPropNameInRow="Enabled" msprop:Generator_ColumnVarNameInTable="columnEnabled" msprop:Generator_ColumnPropNameInTable="EnabledColumn" type="xs:boolean" />
+              <xs:element name="EventTitle" msprop:Generator_UserColumnName="EventTitle" msprop:Generator_ColumnPropNameInRow="EventTitle" msprop:Generator_ColumnVarNameInTable="columnEventTitle" msprop:Generator_ColumnPropNameInTable="EventTitleColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EventDesc" msprop:Generator_UserColumnName="EventDesc" msprop:Generator_ColumnPropNameInRow="EventDesc" msprop:Generator_ColumnVarNameInTable="columnEventDesc" msprop:Generator_ColumnPropNameInTable="EventDescColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EventStartHour" msprop:Generator_UserColumnName="EventStartHour" msprop:Generator_ColumnPropNameInRow="EventStartHour" msprop:Generator_ColumnVarNameInTable="columnEventStartHour" msprop:Generator_ColumnPropNameInTable="EventStartHourColumn" type="xs:int" />
+              <xs:element name="EventStartMin" msprop:Generator_UserColumnName="EventStartMin" msprop:Generator_ColumnPropNameInRow="EventStartMin" msprop:Generator_ColumnVarNameInTable="columnEventStartMin" msprop:Generator_ColumnPropNameInTable="EventStartMinColumn" type="xs:int" />
+              <xs:element name="EventEndHour" msprop:Generator_UserColumnName="EventEndHour" msprop:Generator_ColumnPropNameInRow="EventEndHour" msprop:Generator_ColumnVarNameInTable="columnEventEndHour" msprop:Generator_ColumnPropNameInTable="EventEndHourColumn" type="xs:int" />
+              <xs:element name="EventEndMin" msprop:Generator_UserColumnName="EventEndMin" msprop:Generator_ColumnPropNameInRow="EventEndMin" msprop:Generator_ColumnVarNameInTable="columnEventEndMin" msprop:Generator_ColumnPropNameInTable="EventEndMinColumn" type="xs:int" />
+              <xs:element name="EventSummary" msprop:Generator_UserColumnName="EventSummary" msprop:Generator_ColumnPropNameInRow="EventSummary" msprop:Generator_ColumnVarNameInTable="columnEventSummary" msprop:Generator_ColumnPropNameInTable="EventSummaryColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventYears" msprop:Generator_UserTableName="EventYears" msprop:Generator_RowDeletedName="EventYearsRowDeleted" msprop:Generator_RowChangedName="EventYearsRowChanged" msprop:Generator_RowClassName="EventYearsRow" msprop:Generator_RowChangingName="EventYearsRowChanging" msprop:Generator_RowEvArgName="EventYearsRowChangeEvent" msprop:Generator_RowEvHandlerName="EventYearsRowChangeEventHandler" msprop:Generator_TableClassName="EventYearsDataTable" msprop:Generator_TableVarName="tableEventYears" msprop:Generator_RowDeletingName="EventYearsRowDeleting" msprop:Generator_TablePropName="EventYears">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EventYear" msdata:ReadOnly="true" msprop:Generator_UserColumnName="EventYear" msprop:Generator_ColumnPropNameInRow="EventYear" msprop:Generator_ColumnVarNameInTable="columnEventYear" msprop:Generator_ColumnPropNameInTable="EventYearColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Event" />
+      <xs:field xpath="mstns:EventId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
