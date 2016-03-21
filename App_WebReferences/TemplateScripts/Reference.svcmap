@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="aabd9c34-e5f1-4cf5-8ea3-850e60b9a993" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://templateserver.taradel.com/JSONTemplateAPI.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="JSONTemplateAPI1.wsdl" MetadataType="Wsdl" ID="2b90423d-2fc2-4cb9-94a9-339c193192eb" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?wsdl" />
+    <MetadataFile FileName="JSONTemplateAPI.disco" MetadataType="Disco" ID="9068b171-7418-416b-8956-3a149874fe27" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?disco" />
+    <MetadataFile FileName="JSONTemplateAPI.wsdl" MetadataType="Wsdl" ID="061536b2-06ce-4aff-8c65-c5b68695ebf9" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="JSONTemplateAPI2.xsd" MetadataType="Schema" ID="c020b404-48af-4b5e-a8cd-3c1cfba73059" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?xsd=xsd2" />
+    <MetadataFile FileName="JSONTemplateAPI1.xsd" MetadataType="Schema" ID="380215b3-32e5-4171-ad1b-1f9fe20f357c" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?xsd=xsd0" />
+    <MetadataFile FileName="JSONTemplateAPI.xsd" MetadataType="Schema" ID="e6c32765-1a52-4f8f-8656-fef4fee8a767" SourceId="1" SourceUrl="http://templateserver.taradel.com/JSONTemplateAPI.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

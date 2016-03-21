@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="CarrierRouteData" elementFormDefault="qualified" targetNamespace="CarrierRouteData" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Taradel.MapServer" />
+  <xs:element name="SaveSelections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SelectName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Taradel.MapServer" minOccurs="0" name="oSelects" nillable="true" type="q1:ArrayOfAreaSelection" />
+        <xs:element minOccurs="0" name="StartAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="StartZip" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UseBusiness" type="xs:boolean" />
+        <xs:element minOccurs="0" name="UsePOBoxes" type="xs:boolean" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveSelectionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveSelectionsResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ReferenceId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Taradel.MapServer" minOccurs="0" name="GetSelectionsResult" nillable="true" type="q2:ArrayOfAreaSelection" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSectionName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ReferenceId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSectionNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetSectionNameResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionSummary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ReferenceId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionSummaryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Taradel.MapServer" minOccurs="0" name="GetSelectionSummaryResult" nillable="true" type="q3:SelectionSummary" />
+        <xs:element minOccurs="0" name="sMsg" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveSelectionPreview">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ReferenceId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sImgData" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveSelectionPreviewResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveSelectionPreviewResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

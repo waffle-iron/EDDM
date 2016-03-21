@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="/Imports">
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd0" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TemplateServerCore" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://templateserver.taradel.com/TemplateAPI.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="TemplateAPI_GetIndustries_InputMessage">
+    <wsdl:part name="parameters" element="GetIndustries" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustries_OutputMessage">
+    <wsdl:part name="parameters" element="GetIndustriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustry_InputMessage">
+    <wsdl:part name="parameters" element="GetIndustry" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustry_OutputMessage">
+    <wsdl:part name="parameters" element="GetIndustryResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustryAndBusinessLines_InputMessage">
+    <wsdl:part name="parameters" element="GetIndustryAndBusinessLines" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustryAndBusinessLines_OutputMessage">
+    <wsdl:part name="parameters" element="GetIndustryAndBusinessLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustriesAndBusinessLines_InputMessage">
+    <wsdl:part name="parameters" element="GetIndustriesAndBusinessLines" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustriesAndBusinessLines_OutputMessage">
+    <wsdl:part name="parameters" element="GetIndustriesAndBusinessLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBusinessLines_InputMessage">
+    <wsdl:part name="parameters" element="GetBusinessLines" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBusinessLines_OutputMessage">
+    <wsdl:part name="parameters" element="GetBusinessLinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBusinessLine_InputMessage">
+    <wsdl:part name="parameters" element="GetBusinessLine" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBusinessLine_OutputMessage">
+    <wsdl:part name="parameters" element="GetBusinessLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetAllTemplateSizes_InputMessage">
+    <wsdl:part name="parameters" element="GetAllTemplateSizes" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetAllTemplateSizes_OutputMessage">
+    <wsdl:part name="parameters" element="GetAllTemplateSizesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplateSizes_InputMessage">
+    <wsdl:part name="parameters" element="GetTemplateSizes" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplateSizes_OutputMessage">
+    <wsdl:part name="parameters" element="GetTemplateSizesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplateSize_InputMessage">
+    <wsdl:part name="parameters" element="GetTemplateSize" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplateSize_OutputMessage">
+    <wsdl:part name="parameters" element="GetTemplateSizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBaseTemplate_InputMessage">
+    <wsdl:part name="parameters" element="GetBaseTemplate" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetBaseTemplate_OutputMessage">
+    <wsdl:part name="parameters" element="GetBaseTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplate_InputMessage">
+    <wsdl:part name="parameters" element="GetTemplate" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplate_OutputMessage">
+    <wsdl:part name="parameters" element="GetTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustryTemplates_InputMessage">
+    <wsdl:part name="parameters" element="GetIndustryTemplates" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetIndustryTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="GetIndustryTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplates_InputMessage">
+    <wsdl:part name="parameters" element="GetTemplates" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="GetTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetRandomNTemplates_InputMessage">
+    <wsdl:part name="parameters" element="GetRandomNTemplates" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetRandomNTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="GetRandomNTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetRandomTemplatesBySize_InputMessage">
+    <wsdl:part name="parameters" element="GetRandomTemplatesBySize" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_GetRandomTemplatesBySize_OutputMessage">
+    <wsdl:part name="parameters" element="GetRandomTemplatesBySizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_FindTemplates_InputMessage">
+    <wsdl:part name="parameters" element="FindTemplates" />
+  </wsdl:message>
+  <wsdl:message name="TemplateAPI_FindTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="FindTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TemplateAPI">
+    <wsdl:operation name="GetIndustries">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetIndustries" message="TemplateAPI_GetIndustries_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetIndustriesResponse" message="TemplateAPI_GetIndustries_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustry">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetIndustry" message="TemplateAPI_GetIndustry_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetIndustryResponse" message="TemplateAPI_GetIndustry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryAndBusinessLines">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetIndustryAndBusinessLines" message="TemplateAPI_GetIndustryAndBusinessLines_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetIndustryAndBusinessLinesResponse" message="TemplateAPI_GetIndustryAndBusinessLines_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustriesAndBusinessLines">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetIndustriesAndBusinessLines" message="TemplateAPI_GetIndustriesAndBusinessLines_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetIndustriesAndBusinessLinesResponse" message="TemplateAPI_GetIndustriesAndBusinessLines_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessLines">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetBusinessLines" message="TemplateAPI_GetBusinessLines_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetBusinessLinesResponse" message="TemplateAPI_GetBusinessLines_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessLine">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetBusinessLine" message="TemplateAPI_GetBusinessLine_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetBusinessLineResponse" message="TemplateAPI_GetBusinessLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTemplateSizes">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetAllTemplateSizes" message="TemplateAPI_GetAllTemplateSizes_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetAllTemplateSizesResponse" message="TemplateAPI_GetAllTemplateSizes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplateSizes">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetTemplateSizes" message="TemplateAPI_GetTemplateSizes_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetTemplateSizesResponse" message="TemplateAPI_GetTemplateSizes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplateSize">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetTemplateSize" message="TemplateAPI_GetTemplateSize_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetTemplateSizeResponse" message="TemplateAPI_GetTemplateSize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBaseTemplate">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetBaseTemplate" message="TemplateAPI_GetBaseTemplate_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetBaseTemplateResponse" message="TemplateAPI_GetBaseTemplate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplate">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetTemplate" message="TemplateAPI_GetTemplate_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetTemplateResponse" message="TemplateAPI_GetTemplate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustryTemplates">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetIndustryTemplates" message="TemplateAPI_GetIndustryTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetIndustryTemplatesResponse" message="TemplateAPI_GetIndustryTemplates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetTemplates" message="TemplateAPI_GetTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetTemplatesResponse" message="TemplateAPI_GetTemplates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomNTemplates">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetRandomNTemplates" message="TemplateAPI_GetRandomNTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetRandomNTemplatesResponse" message="TemplateAPI_GetRandomNTemplates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomTemplatesBySize">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/GetRandomTemplatesBySize" message="TemplateAPI_GetRandomTemplatesBySize_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/GetRandomTemplatesBySizeResponse" message="TemplateAPI_GetRandomTemplatesBySize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindTemplates">
+      <wsdl:input wsaw:Action="urn:TemplateAPI/FindTemplates" message="TemplateAPI_FindTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="urn:TemplateAPI/FindTemplatesResponse" message="TemplateAPI_FindTemplates_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

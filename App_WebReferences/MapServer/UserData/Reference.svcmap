@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1b6fa3a5-7a19-41d3-bc81-89ba599fca69" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://mapdev.taradel.com/webservices/userdata.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UserData3.xsd" MetadataType="Schema" ID="6ba435bb-c3b8-4653-a762-e566923bf232" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserData32.xsd" MetadataType="Schema" ID="af87f02f-64e0-4c55-bccb-338bb58ff0a1" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserData2.wsdl" MetadataType="Wsdl" ID="7a91cf02-656b-4331-a2c7-20fd1fd09b42" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="UserData22.wsdl" MetadataType="Wsdl" ID="85ef2a5a-f945-4383-b307-f24fc8b256de" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?wsdl" />
+    <MetadataFile FileName="UserData33.xsd" MetadataType="Schema" ID="9d00080c-1204-4c1a-92ec-2b25db92b128" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserData1.disco" MetadataType="Disco" ID="62f2a9de-6bd3-4c85-89ae-3b265c269d45" SourceId="1" SourceUrl="http://mapdev.taradel.com/webservices/UserData.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

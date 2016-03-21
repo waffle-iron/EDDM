@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://applicationx.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://applicationx.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://applicationx.net/">
+      <s:element name="GetSurveyHeader">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSurveyHeaderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSurveyHeaderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSurveyQuestions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSurveyQuestionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSurveyQuestionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecordSurveyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sResponse" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecordSurveyResponseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordSurveyResponseResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitPrepareAndSendReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Recipient" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReportMode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHost" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitPrepareAndSendReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InitPrepareAndSendReportResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrepareAndSendReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SurveyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Recipient" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReportMode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHost" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSurveyHeaderSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSurveyHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSurveyHeaderSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSurveyHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSurveyQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSurveyQuestions" />
+  </wsdl:message>
+  <wsdl:message name="GetSurveyQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSurveyQuestionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecordSurveyResponseSoapIn">
+    <wsdl:part name="parameters" element="tns:RecordSurveyResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecordSurveyResponseSoapOut">
+    <wsdl:part name="parameters" element="tns:RecordSurveyResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="InitPrepareAndSendReportSoapIn">
+    <wsdl:part name="parameters" element="tns:InitPrepareAndSendReport" />
+  </wsdl:message>
+  <wsdl:message name="InitPrepareAndSendReportSoapOut">
+    <wsdl:part name="parameters" element="tns:InitPrepareAndSendReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrepareAndSendReportSoapIn">
+    <wsdl:part name="parameters" element="tns:PrepareAndSendReport" />
+  </wsdl:message>
+  <wsdl:portType name="appxSurveyWSSoap">
+    <wsdl:operation name="GetSurveyHeader">
+      <wsdl:input message="tns:GetSurveyHeaderSoapIn" />
+      <wsdl:output message="tns:GetSurveyHeaderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyQuestions">
+      <wsdl:input message="tns:GetSurveyQuestionsSoapIn" />
+      <wsdl:output message="tns:GetSurveyQuestionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecordSurveyResponse">
+      <wsdl:input message="tns:RecordSurveyResponseSoapIn" />
+      <wsdl:output message="tns:RecordSurveyResponseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitPrepareAndSendReport">
+      <wsdl:input message="tns:InitPrepareAndSendReportSoapIn" />
+      <wsdl:output message="tns:InitPrepareAndSendReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrepareAndSendReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate CSV report of survey responses and e-mail results.</wsdl:documentation>
+      <wsdl:input message="tns:PrepareAndSendReportSoapIn" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="appxSurveyWSSoap" type="tns:appxSurveyWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSurveyHeader">
+      <soap:operation soapAction="http://applicationx.net/GetSurveyHeader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyQuestions">
+      <soap:operation soapAction="http://applicationx.net/GetSurveyQuestions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecordSurveyResponse">
+      <soap:operation soapAction="http://applicationx.net/RecordSurveyResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitPrepareAndSendReport">
+      <soap:operation soapAction="http://applicationx.net/InitPrepareAndSendReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareAndSendReport">
+      <soap:operation soapAction="http://applicationx.net/PrepareAndSendReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="appxSurveyWSSoap12" type="tns:appxSurveyWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSurveyHeader">
+      <soap12:operation soapAction="http://applicationx.net/GetSurveyHeader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyQuestions">
+      <soap12:operation soapAction="http://applicationx.net/GetSurveyQuestions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecordSurveyResponse">
+      <soap12:operation soapAction="http://applicationx.net/RecordSurveyResponse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitPrepareAndSendReport">
+      <soap12:operation soapAction="http://applicationx.net/InitPrepareAndSendReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareAndSendReport">
+      <soap12:operation soapAction="http://applicationx.net/PrepareAndSendReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="appxSurveyWS">
+    <wsdl:port name="appxSurveyWSSoap" binding="tns:appxSurveyWSSoap">
+      <soap:address location="http://localhost:50639/web/WebServices/appxSurveyWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="appxSurveyWSSoap12" binding="tns:appxSurveyWSSoap12">
+      <soap12:address location="http://localhost:50639/web/WebServices/appxSurveyWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

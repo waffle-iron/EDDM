@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://appxcms/WebServices/MessageBlastWS.asmx?wsdl" docRef="http://appxcms/WebServices/MessageBlastWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://appxcms/WebServices/MessageBlastWS.asmx" xmlns:q1="http://applicationx.net/" binding="q1:MessageBlastWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://appxcms/WebServices/MessageBlastWS.asmx" xmlns:q2="http://applicationx.net/" binding="q2:MessageBlastWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

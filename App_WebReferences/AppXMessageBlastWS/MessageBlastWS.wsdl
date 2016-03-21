@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://applicationx.net/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://applicationx.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://applicationx.net/">
+      <s:element name="InitCampaignSend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitCampaignSendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InitCampaignSendResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendCampaign">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CampaignID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InitCampaignSendSoapIn">
+    <wsdl:part name="parameters" element="tns:InitCampaignSend" />
+  </wsdl:message>
+  <wsdl:message name="InitCampaignSendSoapOut">
+    <wsdl:part name="parameters" element="tns:InitCampaignSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendCampaignSoapIn">
+    <wsdl:part name="parameters" element="tns:SendCampaign" />
+  </wsdl:message>
+  <wsdl:portType name="MessageBlastWSSoap">
+    <wsdl:operation name="InitCampaignSend">
+      <wsdl:input message="tns:InitCampaignSendSoapIn" />
+      <wsdl:output message="tns:InitCampaignSendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCampaign">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends message blast campaign to distribution</wsdl:documentation>
+      <wsdl:input message="tns:SendCampaignSoapIn" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageBlastWSSoap" type="tns:MessageBlastWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InitCampaignSend">
+      <soap:operation soapAction="http://applicationx.net/InitCampaignSend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCampaign">
+      <soap:operation soapAction="http://applicationx.net/SendCampaign" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageBlastWSSoap12" type="tns:MessageBlastWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InitCampaignSend">
+      <soap12:operation soapAction="http://applicationx.net/InitCampaignSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCampaign">
+      <soap12:operation soapAction="http://applicationx.net/SendCampaign" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageBlastWS">
+    <wsdl:port name="MessageBlastWSSoap" binding="tns:MessageBlastWSSoap">
+      <soap:address location="http://scs/scsadmin/WebServices/MessageBlastWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageBlastWSSoap12" binding="tns:MessageBlastWSSoap12">
+      <soap12:address location="http://scs/scsadmin/WebServices/MessageBlastWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="88376d2b-b586-4478-a30f-11623195e356" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://templatedev.taradel.com/TemplateAPI.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TemplateAPI7.xsd" MetadataType="Schema" ID="3b7f10e7-7165-44f1-8fc8-53661f160e1c" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd2" />
+    <MetadataFile FileName="TemplateAPI2.wsdl" MetadataType="Wsdl" ID="feaa547c-582b-4f7a-8a87-e1e8a9dd2369" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?wsdl" />
+    <MetadataFile FileName="TemplateAPI1.disco" MetadataType="Disco" ID="432ce788-064b-4255-aab6-1863ee7a2118" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?disco" />
+    <MetadataFile FileName="TemplateAPI72.xsd" MetadataType="Schema" ID="9e9692a9-0431-4ed3-980f-efc8bd9bf5c2" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd6" />
+    <MetadataFile FileName="TemplateAPI73.xsd" MetadataType="Schema" ID="e9e7810a-8f49-4e6f-9982-b709e51608a3" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd5" />
+    <MetadataFile FileName="TemplateAPI74.xsd" MetadataType="Schema" ID="87af1747-49e4-4cb6-9563-cc44b25bf233" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd1" />
+    <MetadataFile FileName="TemplateAPI75.xsd" MetadataType="Schema" ID="c6a7b9fb-8695-44f4-a1e3-2a5e98989777" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd0" />
+    <MetadataFile FileName="TemplateAPI76.xsd" MetadataType="Schema" ID="839acbd5-466f-41c0-ab27-699b2300cb92" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd4" />
+    <MetadataFile FileName="TemplateAPI22.wsdl" MetadataType="Wsdl" ID="4793143d-1366-4d77-8ca8-b3dbbec21618" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="TemplateAPI77.xsd" MetadataType="Schema" ID="61637e0c-0020-4b76-b51e-dfe3943ce83e" SourceId="1" SourceUrl="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

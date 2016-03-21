@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bbe36dfc-1cfb-45e7-878b-91a8f3e26e08" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:50639/web/WebServices/appxSitemapWS.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="appxSitemapWS.wsdl" MetadataType="Wsdl" ID="1b7204f3-a7cc-4f35-9c41-cc56e5b72653" SourceId="1" SourceUrl="http://localhost:50639/web/WebServices/appxSitemapWS.svc?wsdl" />
+    <MetadataFile FileName="appxSitemapWS.xsd" MetadataType="Schema" ID="89515fba-af21-43c5-a6d1-9840ae4bce26" SourceId="1" SourceUrl="http://localhost:50639/web/WebServices/appxSitemapWS.svc?xsd=xsd0" />
+    <MetadataFile FileName="appxSitemapWS1.wsdl" MetadataType="Wsdl" ID="95c0c3cb-193a-4186-8da2-365bfbd7401c" SourceId="1" SourceUrl="http://localhost:50639/web/WebServices/appxSitemapWS.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="appxSitemapWS1.xsd" MetadataType="Schema" ID="84f8ca9d-569b-4d41-bbe3-d83d265a2833" SourceId="1" SourceUrl="http://localhost:50639/web/WebServices/appxSitemapWS.svc?xsd=xsd1" />
+    <MetadataFile FileName="appxSitemapWS.disco" MetadataType="Disco" ID="16d9996d-d5ac-4b9c-9f98-0031be5e74ea" SourceId="1" SourceUrl="http://localhost:50639/web/WebServices/appxSitemapWS.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

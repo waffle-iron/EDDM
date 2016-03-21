@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" />
+  <xs:import schemaLocation="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TemplateServerCore" />
+  <xs:import schemaLocation="http://templatedev.taradel.com/TemplateAPI.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="GetIndustries">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetIndustriesResult" nillable="true" type="q1:ArrayOfIndustry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyIndustry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyIndustryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetMyIndustryResult" nillable="true" type="q2:ArrayOfIndustry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IndustryId" type="xs:int" />
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetIndustryResult" nillable="true" type="q3:Industry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryAndBusinessLines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IndustryId" type="xs:int" />
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryAndBusinessLinesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetIndustryAndBusinessLinesResult" nillable="true" type="q4:Industry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustriesAndBusinessLines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustriesAndBusinessLinesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetIndustriesAndBusinessLinesResult" nillable="true" type="q5:ArrayOfIndustry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGlobalIndustries">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGlobalIndustriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetGlobalIndustriesResult" nillable="true" type="q6:ArrayOfIndustry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRestrictedIndustries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRestrictedIndustriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetRestrictedIndustriesResult" nillable="true" type="q7:ArrayOfIndustry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessLines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="IndustryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessLinesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetBusinessLinesResult" nillable="true" type="q8:ArrayOfBusinessLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="BusinessLineId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessLineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetBusinessLineResult" nillable="true" type="q9:BusinessLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTemplateSizes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTemplateSizesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetAllTemplateSizesResult" nillable="true" type="q10:ArrayOfTemplateSize" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplateSizes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="BusinessLineId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplateSizesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetTemplateSizesResult" nillable="true" type="q11:ArrayOfTemplateSize" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplateSize">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PageSizeId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplateSizeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetTemplateSizeResult" nillable="true" type="q12:TemplateSize" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBaseTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="TemplateId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBaseTemplateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/TemplateServerCore" minOccurs="0" name="GetBaseTemplateResult" nillable="true" type="q13:Template" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="TemplateId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetTemplateResult" nillable="true" type="q14:Template" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryTemplates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="IndustryId" type="xs:int" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PageSizes" nillable="true" type="q15:ArrayOfint" />
+        <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageRecords" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIndustryTemplatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetIndustryTemplatesResult" nillable="true" type="q16:TemplateList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="BusinessLineId" type="xs:int" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PageSizes" nillable="true" type="q17:ArrayOfint" />
+        <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageRecords" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTemplatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetTemplatesResult" nillable="true" type="q18:TemplateList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRandomNTemplates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="PageSize" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PageCount" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRandomNTemplatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetRandomNTemplatesResult" nillable="true" type="q19:ArrayOfTemplate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRandomTemplatesBySize">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+        <xs:element minOccurs="0" name="PageCount" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRandomTemplatesBySizeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="GetRandomTemplatesBySizeResult" nillable="true" type="q20:ArrayOfTemplate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTemplates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="Keyword" nillable="true" type="xs:string" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PageSizes" nillable="true" type="q21:ArrayOfint" />
+        <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageRecords" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTemplatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="FindTemplatesResult" nillable="true" type="q22:TemplateList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTemplatesForIndustry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="Keyword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="IndustryId" type="xs:int" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PageSizes" nillable="true" type="q23:ArrayOfint" />
+        <xs:element minOccurs="0" name="CurrentPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageRecords" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTemplatesForIndustryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/TemplateServerCore.API" minOccurs="0" name="FindTemplatesForIndustryResult" nillable="true" type="q24:TemplateList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="CarrierRouteData" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="CarrierRouteData" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CarrierRouteData/Imports">
+      <xsd:import schemaLocation="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd0" namespace="CarrierRouteData" />
+      <xsd:import schemaLocation="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://mapdev.taradel.com/webservices/UserData.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Taradel.MapServer" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UserData_SaveSelections_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSelections" />
+  </wsdl:message>
+  <wsdl:message name="UserData_SaveSelections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSelectionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSelections_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelections" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSelections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSectionName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSectionName" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSectionName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSectionNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSelectionSummary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionSummary" />
+  </wsdl:message>
+  <wsdl:message name="UserData_GetSelectionSummary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserData_SaveSelectionPreview_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSelectionPreview" />
+  </wsdl:message>
+  <wsdl:message name="UserData_SaveSelectionPreview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSelectionPreviewResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UserData">
+    <wsdl:operation name="SaveSelections">
+      <wsdl:input wsaw:Action="CarrierRouteData/UserData/SaveSelections" message="tns:UserData_SaveSelections_InputMessage" />
+      <wsdl:output wsaw:Action="CarrierRouteData/UserData/SaveSelectionsResponse" message="tns:UserData_SaveSelections_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelections">
+      <wsdl:input wsaw:Action="CarrierRouteData/UserData/GetSelections" message="tns:UserData_GetSelections_InputMessage" />
+      <wsdl:output wsaw:Action="CarrierRouteData/UserData/GetSelectionsResponse" message="tns:UserData_GetSelections_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSectionName">
+      <wsdl:input wsaw:Action="CarrierRouteData/UserData/GetSectionName" message="tns:UserData_GetSectionName_InputMessage" />
+      <wsdl:output wsaw:Action="CarrierRouteData/UserData/GetSectionNameResponse" message="tns:UserData_GetSectionName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectionSummary">
+      <wsdl:input wsaw:Action="CarrierRouteData/UserData/GetSelectionSummary" message="tns:UserData_GetSelectionSummary_InputMessage" />
+      <wsdl:output wsaw:Action="CarrierRouteData/UserData/GetSelectionSummaryResponse" message="tns:UserData_GetSelectionSummary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSelectionPreview">
+      <wsdl:input wsaw:Action="CarrierRouteData/UserData/SaveSelectionPreview" message="tns:UserData_SaveSelectionPreview_InputMessage" />
+      <wsdl:output wsaw:Action="CarrierRouteData/UserData/SaveSelectionPreviewResponse" message="tns:UserData_SaveSelectionPreview_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
