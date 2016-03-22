@@ -49,6 +49,7 @@ using System.Configuration;
 // Session["sesBaseProductID"] 
 // Session["sesMapName"]
 //===============================================================================================================
+//test of commit - deployment 3/22/2016
 
 
 public partial class TargetDataMap1 : appxCMS.PageBase
