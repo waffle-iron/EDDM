@@ -1090,7 +1090,7 @@ Partial Class Step2_ProductOptions
                                 'Set Hidden Fields
                                 hidDistributionID.Value = Me.UserDistributionId
                                 hidTotalSelected.Value = Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString() ''Misty found here
-                                txtTotalSelected.Text = Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString()
+                                txtTotalSelected.Text = Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString()  3/22/2016
                                 hidDesignFee.Value = DesignFee
 
                                 hidProductID.Value = Me.ProductID
