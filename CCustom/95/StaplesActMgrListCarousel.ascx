@@ -127,7 +127,7 @@
             
                                 <div class="ctaLandingWrapper" id="ctaContent3">
 
-                                    <h1>PERSONALIZED MAIL</h1>   
+                                    <h1>PERSONALIZED MAIL</h1>
             
                                     <p class="lead text-center">Rent a mailing list or upload your own.<br />
                                     Try our easy direct mail campaign builder.</p>
