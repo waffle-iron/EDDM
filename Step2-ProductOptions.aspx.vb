@@ -1089,7 +1089,7 @@ Partial Class Step2_ProductOptions
 
                                 'Set Hidden Fields
                                 hidDistributionID.Value = Me.UserDistributionId
-                                hidTotalSelected.Value = Me.Distribution.TotalDeliveries.ToString()
+                                hidTotalSelected.Value = Me.Distribution.TotalDeliveries.ToString() ''Misty found here
                                 txtTotalSelected.Text = Me.Distribution.TotalDeliveries.ToString()
                                 hidDesignFee.Value = DesignFee
 
@@ -1707,7 +1707,7 @@ Partial Class Step2_ProductOptions
                         areaCount = areaCount + 1
                     Next
 
-                    TotalSelected = (residentialTotal + businessTotal + poboxTotal)
+                    TotalSelected = (residentialTotal + businessTotal + poboxTotal) ''total selected is variable that should be used going forward --- 
 
                 Else
 
