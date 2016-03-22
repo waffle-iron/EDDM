@@ -21,16 +21,16 @@
 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                Addressed Direct Mail<span class="caret"></span></a>
+                Personalized Mail<span class="caret"></span></a>
 
             <ul class="dropdown-menu">
-                <li><a href="/Addressed-Overview">Get Started</a></li>
+                <li><a href="/Personalized-Mail-Overview">Get Started</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/Addressed-Overview">Overview</a></li>
+                <li><a href="/Personalized-Mail-Overview">Overview</a></li>
                 <li><a href="/Addressed/Step1-BuildYourList.aspx">Generate A List</a></li>
                 <li><a href="/Addressed/Step1-UploadYourList.aspx">Upload Your List</a></li>
-                <li><a href="/Addressed-Pricing">Pricing</a></li>
-                <li><a href="/Addressed-Design">Design</a></li>
+                <li><a href="/Personalized-Mail-Pricing">Pricing</a></li>
+                <li><a href="/Personalized-Mail-Design">Design</a></li>
                 <%--<li><a href="/Addressed-List-Quote-Request">Get Price Quote</a></li>--%>
             </ul>
         </li>
