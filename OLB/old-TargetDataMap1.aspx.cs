@@ -97,6 +97,7 @@ public partial class TargetDataMap1 : appxCMS.PageBase
         public const string TemplateID = "TemplateID";
         public const string TotalMailed = "TotalMailed";
         public const string TotSelected = "TotSelected";
+        public const string ScoobySnack = "Yummy";
 
     }
 
