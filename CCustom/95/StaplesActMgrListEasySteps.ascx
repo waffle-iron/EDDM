@@ -131,7 +131,7 @@
 
                     <h3>Generate New Mailing List</h3>
 
-                    <p>Reach a highly-targeted audience with personalized offers using our Addressed Direct Mail solution. Build a new list using
+                    <p>Reach a highly-targeted audience with personalized offers using our Personalized Mail solution. Build a new list using
                     advanced demographic, geographic, and behavioral data.  It's never been faster, easier, and more affordable to reach your ideal 
                     prospects.</p>
 
