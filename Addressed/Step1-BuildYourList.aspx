@@ -240,6 +240,8 @@
                         <%--Intro Block--%>
                         <div class="well well-sm" id="introBlock">
 
+                            <p>I am adicted to the Hokey Pokey but I'll turn myself around...</p>
+
                             <p class="lead"><span class="leadDropWord">How This Works</span><br />
                             Generating your Personalized Mail list is easy with our online campaign builder. 
                             Step by step, you can create and launch effective direct mail campaigns in minutes.</p>
