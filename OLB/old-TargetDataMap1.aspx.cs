@@ -84,6 +84,7 @@ public partial class TargetDataMap1 : appxCMS.PageBase
         public const string EstCost = "EstCost";
         public const string Franchise = "Franchise";
         public const string Frequency = "Frequency";
+        public const string GreatMaps = "GreatMaps";
         public const string Impressions = "Impressions";
         public const string Location = "Location";
         public const string MapName = "MapName";
@@ -97,6 +98,8 @@ public partial class TargetDataMap1 : appxCMS.PageBase
         public const string TemplateID = "TemplateID";
         public const string TotalMailed = "TotalMailed";
         public const string TotSelected = "TotSelected";
+
+
 
     }
 
