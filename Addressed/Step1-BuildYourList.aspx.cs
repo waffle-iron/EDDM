@@ -91,21 +91,20 @@ public partial class BuildList : appxCMS.PageBase
             OrderSteps.step5State = "";
             OrderSteps.step5Icon = "fa-credit-card";
 
-            
+
 
             //Page Header
             if (!siteDetails.UseRibbonBanners)
             {
                 PageHeader.headerType = "simple";
-                PageHeader.simpleHeader = "Generate A List";
+                PageHeader.simpleHeader = "Build Your List";
             }
 
             else
             {
                 PageHeader.headerType = "partial";
-                PageHeader.mainHeader = "Generate A List";
+                PageHeader.mainHeader = "Build Your List";
                 PageHeader.subHeader = "Start Here";
-
             }
 
 
