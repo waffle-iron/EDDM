@@ -734,6 +734,62 @@ Partial Class Step2_ProductOptions
     End Sub
 
 
+    ''this should set it up correctly 3/22/2016
+    Private Function CalculateTotalSelected(oDist As Taradel.CustomerDistribution) As Integer
+        USelectID = oDist.USelectMethodReference.ForeignKey()
+
+        Select Case USelectID
+            Case 1
+                EDDMMap = True
+            Case 5
+                UploadedAddressedList = True
+            Case 6
+                GeneratedAddressedList = True
+            Case 7
+                TMCMap = True
+        End Select
+
+
+        If (EDDMMap) Or (UploadedAddressedList) Or (GeneratedAddressedList) Then
+            TotalSelected = oDist.TotalDeliveries
+        End If
+
+
+        If (EDDMMap) Then
+            Dim sDistRef As String = oDist.ReferenceId
+            Dim oSummary As Taradel.MapServer.UserData.SelectionSummary = Taradel.CustomerDistributions.GetSelectionSummary(sDistRef)
+            Dim oSelects As List(Of Taradel.MapServer.UserData.AreaSelection) = Taradel.CustomerDistributions.GetSelections(sDistRef)
+            Dim residentialTotal As Integer = 0
+            Dim businessTotal As Integer = 0
+            Dim poboxTotal As Integer = 0
+            Dim useBusinesses As Boolean = True
+            Dim usePOBoxes As Boolean = True
+            Dim areaCount As Integer = 0
+
+            If oSummary IsNot Nothing Then
+                useBusinesses = oSummary.UseBusiness
+                usePOBoxes = oSummary.UsePOBox
+                For Each oArea As Taradel.MapServer.UserData.AreaSelection In oSelects
+                    residentialTotal = residentialTotal + oArea.Residential
+                    If useBusinesses Then
+                        businessTotal = businessTotal + oArea.Business
+                    End If
+                    If usePOBoxes Then
+                        poboxTotal = poboxTotal + oArea.POBoxes
+                    End If
+                    areaCount = areaCount + 1
+                Next
+                TotalSelected = (residentialTotal + businessTotal + poboxTotal) ''total selected is variable that should be used going forward --- 
+            End If
+        End If
+
+
+
+
+
+        Return TotalSelected
+    End Function
+
 
     Protected Sub SetPageProperties(productID As Integer)
 
@@ -768,7 +824,7 @@ Partial Class Step2_ProductOptions
 
         'If is EDDM Distribution or an AddressedList Distribution (2 kinds), then only ONE product is needed.  Set Mark Up properties.
         If (EDDMMap) Or (UploadedAddressedList) Or (GeneratedAddressedList) Then
-            TotalSelected = oDist.TotalDeliveries
+            TotalSelected = CalculateTotalSelected(oDist) ''new 3/22/2016
             MarkUp = productObj.Markup
             MarkUpType = productObj.MarkupType
 
@@ -1089,8 +1145,8 @@ Partial Class Step2_ProductOptions
 
                                 'Set Hidden Fields
                                 hidDistributionID.Value = Me.UserDistributionId
-                                hidTotalSelected.Value = Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString() ''Misty found here
-                                txtTotalSelected.Text = Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString()  3/22/2016
+                                hidTotalSelected.Value = CalculateTotalSelected(Me.Distribution) 'Me.Distribution.TotalDeliveries.ToString() ''Misty found here
+                                txtTotalSelected.Text = CalculateTotalSelected(Me.Distribution) 'Me.TotalSelected.ToString() 'Me.Distribution.TotalDeliveries.ToString()  3/22/2016
                                 hidDesignFee.Value = DesignFee
 
                                 hidProductID.Value = Me.ProductID
@@ -1642,32 +1698,19 @@ Partial Class Step2_ProductOptions
 
 
     Private Sub CreateDropsDropdown()
-
-
+        TotalSelected = CalculateTotalSelected(Me.Distribution)
 
         'Load number of MAX available drops.
         If maxDrops = 0 Then maxDrops = 4
-
-
         'Build for Single Impression sites only.
         If maxDrops = 1 Then
-
             For i As Integer = 1 To maxDrops
                 ddlNumOfDrops.Items.Add(New ListItem("1", "One Drop"))
             Next
-
-
-        'Multiple Impression Enabled sites..
+            'Multiple Impression Enabled sites..
         Else
-
-
-
-
             'EDDM Drop Logic
             If (EDDMMap) Then
-
-
-
                 Dim sDistRef As String = Me.Distribution.ReferenceId
                 Dim oSummary As Taradel.MapServer.UserData.SelectionSummary = Taradel.CustomerDistributions.GetSelectionSummary(sDistRef)
                 Dim oSelects As List(Of Taradel.MapServer.UserData.AreaSelection) = Taradel.CustomerDistributions.GetSelections(sDistRef)
@@ -1677,67 +1720,43 @@ Partial Class Step2_ProductOptions
                 Dim useBusinesses As Boolean = True
                 Dim usePOBoxes As Boolean = True
                 Dim areaCount As Integer = 0
-
-
-
                 'Preload the defaults
                 For i As Integer = 1 To maxDrops
                     ddlNumOfDrops.Items.Add(New ListItem(i.ToString(), i.ToString()))
                 Next
 
-
-
                 If oSummary IsNot Nothing Then
-
                     useBusinesses = oSummary.UseBusiness
                     usePOBoxes = oSummary.UsePOBox
-
                     For Each oArea As Taradel.MapServer.UserData.AreaSelection In oSelects
-
                         residentialTotal = residentialTotal + oArea.Residential
-
                         If useBusinesses Then
                             businessTotal = businessTotal + oArea.Business
                         End If
-
                         If usePOBoxes Then
                             poboxTotal = poboxTotal + oArea.POBoxes
                         End If
-
                         areaCount = areaCount + 1
                     Next
-
-                    TotalSelected = (residentialTotal + businessTotal + poboxTotal) ''total selected is variable that should be used going forward --- 
-
+                    'commenting out for now -->TotalSelected = (residentialTotal + businessTotal + poboxTotal) ''total selected is variable that should be used going forward --- 
                 Else
-
                     Dim oMinRange As Taradel.PriceMatrix = Taradel.ProductDataSource.GetMinRange(Me.BaseProductID)
-
                     If oMinRange IsNot Nothing Then
                         Me.MinimumQuantity = oMinRange.MinQty
                     End If
-
                 End If
-
-
 
                 '-- Leave all 4 drops intact
                 If TotalSelected > 10000 Then
-
                     'nothing here
-
                 Else
-
                     Dim iRemFrom As Integer = 3
-
                     If iRemFrom > areaCount Then
                         iRemFrom = areaCount + 1
                     End If
-
                     If TotalSelected <= 1000 Then
                         iRemFrom = 2
                     End If
-
                     '-- Remove drops that they don't qualify for
                     For i As Integer = iRemFrom To maxDrops
                         Dim oItem As ListItem = ddlNumOfDrops.Items.FindByValue(i.ToString)
@@ -1745,7 +1764,6 @@ Partial Class Step2_ProductOptions
                             ddlNumOfDrops.Items.Remove(oItem)
                         End If
                     Next
-
                 End If
 
 
@@ -3128,11 +3146,6 @@ Partial Class Step2_ProductOptions
         End If
 
         oCart = (CartUtility.AddDrops(oCart, "AddressedList", oCust.Company, oCust.Address1, oCust.Address2, oCust.City, oCust.State, oCust.ZipCode, "", "", useResidential, useBusinesses, usePOBoxes))
-
-
-
-
-
 
         '5) ADDRESSED INDIV DROPS
         Dim addressedDropBreak As Integer = addressedObjCalc.MailPieces / addressedObjCalc.NumOfDrops
