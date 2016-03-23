@@ -43,13 +43,13 @@
 
                                             <div class="col-md-4 text-center">
                                                 <asp:Hyperlink ID="hypUploadList" runat="server" NavigateUrl="~/Addressed/Step1-UploadYourList.aspx" CssClass="btn btn-block btn-info btn-lg">
-                                                    UPLOAD MAILING LIST
+                                                    UPLOAD YOUR LIST
                                                 </asp:Hyperlink>
                                             </div>
 
                                             <div class="col-md-4 text-center">
-                                                <asp:Hyperlink ID="hypGenerateList" runat="server" NavigateUrl="~/Addressed/Step1-BuildYourList.aspx" CssClass="btn btn-block btn-primary btn-lg">
-                                                    GENERATE MAILING LIST
+                                                <asp:Hyperlink ID="hypBuildList" runat="server" NavigateUrl="~/Addressed/Step1-BuildYourList.aspx" CssClass="btn btn-block btn-primary btn-lg">
+                                                    BUILD YOUR LIST
                                                 </asp:Hyperlink>
                                             </div>
 
@@ -144,7 +144,7 @@
 
                                         <div class="col-md-5 col-sm-6 text-center">
                                             <asp:Hyperlink ID="hypGenerate" runat="server" NavigateUrl="~/Addressed/Step1-BuildYourList.aspx" CssClass="btn btn-info btn-lg" ToolTip="Get Started">
-                                                <span class="fa fa-cog"></span>&nbsp;BUILD NEW LIST
+                                                <span class="fa fa-cog"></span>&nbsp;BUILD YOUR LIST
                                             </asp:Hyperlink>
                                         </div>
 

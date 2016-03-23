@@ -27,7 +27,7 @@
                 <li><a href="/Personalized-Mail-Overview">Get Started</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/Personalized-Mail-Overview">Overview</a></li>
-                <li><a href="/Addressed/Step1-BuildYourList.aspx">Generate A List</a></li>
+                <li><a href="/Addressed/Step1-BuildYourList.aspx">Build Your List</a></li>
                 <li><a href="/Addressed/Step1-UploadYourList.aspx">Upload Your List</a></li>
                 <li><a href="/Personalized-Mail-Pricing">Pricing</a></li>
                 <li><a href="/Personalized-Mail-Design">Design</a></li>
