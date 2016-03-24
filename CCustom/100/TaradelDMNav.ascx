@@ -29,8 +29,8 @@
                 <li><a href="/Personalized-Mail-Overview">Overview</a></li>
                 <li><a href="/Addressed/Step1-BuildYourList.aspx">Build Your List</a></li>
                 <li><a href="/Addressed/Step1-UploadYourList.aspx">Upload Your List</a></li>
-                <li><a href="/Addressed-Pricing">Pricing</a></li>
-                <li><a href="/Addressed-Design">Design</a></li>
+                <li><a href="/Personalized-Mail-Pricing">Pricing</a></li>
+                <li><a href="/Personalized-Mail-Design">Design</a></li>
                 <li><a href="/Personalized-Mail-Quote-Request">Get Price Quote</a></li>
             </ul>
         </li>
