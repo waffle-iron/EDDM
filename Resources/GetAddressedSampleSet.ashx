@@ -49,7 +49,7 @@ public class GetAddressedSampleSet : IHttpHandler
 
 
         bool debug = false;                                                             //used for debugging.
-        bool maskData = true;                                                           //used to mask some data to make it unusable but readable.
+        bool maskData = false;                                                          //used to mask some data to make it unusable but readable.
         int numOfSampleRecords = 15;                                                    //used to limit number of results. 
         string responseDescription = "";                                                //used for debugging.
         int numOfReturnedRecords = 0;                                                   //used for debugging.
