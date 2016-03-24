@@ -5,6 +5,8 @@
 //
 //  1.1.0   2/19/2016   Added a lot of functionality and functions to allow the filters to be preset upon used using the
 //                      back button. CheckForRevisit(), HideFirstTimeBlocks(), PreselectFiltersAndLabels().
+//
+//  1.2.0   3/24/2016   Added show-sample click function. 
 //==============================================================================================================
 
 
@@ -25,7 +27,7 @@
 // MartialStatus: A, B, M, S.  Currently ONLY using M or S
 // NetWorth: char values, comma delimited.
 // Property Value (HomeMktVal): char values, comma delimited.
-
+// OutputSample=True/False" Will return sample set of X or full complete set.
 
 
 // INCOME Ranges:
@@ -121,28 +123,25 @@
 
 
 // PAGE LOAD
-$(function ()
-{
+$(function () {
 
     //income controls
     $("#incomeSlider").slider(
     {
-        
+
         range: true,
         min: 0,
         max: 250000,
         step: 5000,
         values: [0, 250000],     //<-- default settings
-        stop: function (event, ui)
-        {
+        stop: function (event, ui) {
             GetIncomeRange();
             BuildPostUrl();
             CalculateAddressedCount();
             //console.log("STOP");
         },
 
-        slide: function (event, ui) 
-        {
+        slide: function (event, ui) {
 
             $("#minIncome").html(Formatter.CurrencyDollars(ui.values[0]));
 
@@ -177,13 +176,11 @@ $(function ()
 
 
     //add '+' if maxed out
-    if ($("#incomeSlider").slider("values", 1) >= 250000)
-    {
+    if ($("#incomeSlider").slider("values", 1) >= 250000) {
         $("#maxIncome").html(Formatter.CurrencyDollars(parseInt($("#incomeSlider").slider("values", 1))) + '+');
     }
 
-    else
-    {
+    else {
         $("#maxIncome").html(Formatter.CurrencyDollars(parseInt($("#incomeSlider").slider("values", 1))));
     }
 
@@ -210,15 +207,13 @@ $(function ()
             max: 75,
             step: 1,
             values: [18, 75],     //<-- default settings
-            stop: function (event, ui)
-            {
+            stop: function (event, ui) {
                 GetAgeRange();
                 BuildPostUrl();
                 CalculateAddressedCount();
             },
 
-            slide: function (event, ui)
-            {
+            slide: function (event, ui) {
 
                 $("#minAge").html(ui.values[0]);
 
@@ -229,8 +224,8 @@ $(function ()
                 { $("#maxAge").html((ui.values[1])); }
 
                 //update filter age label
-                if((ui.values[0] == 18) && (ui.values[1] == 75 ))
-                { $("#ageLabel").html('No Filter');}
+                if ((ui.values[0] == 18) && (ui.values[1] == 75))
+                { $("#ageLabel").html('No Filter'); }
                 else
                 { $("#ageLabel").html(BuildAgeLabel()); }
 
@@ -273,8 +268,7 @@ $(function ()
         step: 10000,
         values: [0, 1000000],     //<-- default settings
 
-        slide: function (event, ui)
-        {
+        slide: function (event, ui) {
 
             $("#minNetWorth").html('$' + NumberWithCommas(ui.values[0]));
 
@@ -306,25 +300,23 @@ $(function ()
 
     $("#hidRawMinNetWorth").val($("#netWorthSlider").slider("values", 0));
     $("#hidRawMaxNetWorth").val($("#netWorthSlider").slider("values", 1));
-    $("#minNetWorth").html('$' + NumberWithCommas($("#netWorthSlider").slider("values", 0)));
+    $("#minNetWorth").html('$' + Formatter.Commas($("#netWorthSlider").slider("values", 0)));
 
     //add '+' if maxed out
     if ($("#netWorthSlider").slider("values", 1) >= 1000000)
-    { $("#maxNetWorth").html('$' + NumberWithCommas($("#netWorthSlider").slider("values", 1) + '+')); }
+    { $("#maxNetWorth").html('$' + Formatter.Commas($("#netWorthSlider").slider("values", 1) + '+')); }
     else
-    { $("#maxNetWorth").html('$' + NumberWithCommas($("#netWorthSlider").slider("values", 1))); }
+    { $("#maxNetWorth").html('$' + Formatter.Commas($("#netWorthSlider").slider("values", 1))); }
     //end of property value controls
 
 
     //Check for user coming 'back' by using the back button. Will reset filters and controls as needed.
-    if (CheckForRevisit() == true)
-    {
+    if (CheckForRevisit() == true) {
         PreselectFiltersAndLabels();
         HideFirstTimeBlocks();
     }
 
-    else
-    {
+    else {
         $("#defineYourAreaToBegin").show(2000);
         $("#defineYourAreaToBegin").slideDown(2000);
     }
@@ -336,8 +328,7 @@ $(function ()
 
 
 //** Target Area **
-function RadiusValueChanged()
-{
+function RadiusValueChanged() {
 
     FindLatLonData();
     BuildPostUrl();
@@ -346,8 +337,7 @@ function RadiusValueChanged()
 
 
 
-function RadiusTypeChanged()
-{
+function RadiusTypeChanged() {
 
     FindLatLonData();
     BuildPostUrl();
@@ -356,18 +346,15 @@ function RadiusTypeChanged()
 
 
 
-function TargetAreaTypeChanged()
-{
+function TargetAreaTypeChanged() {
 
     //Zip Codes is selected.  Check string.
-    if ($('#radZipCodes').is(':checked'))
-    {
+    if ($('#radZipCodes').is(':checked')) {
         $("#txtZipCodes").val($("#txtZipCodesList").val());
         BuildPostUrl();
     }
 
-    else
-    {
+    else {
         $("#txtZipCodes").val("(not defined)");
         BuildPostUrl();
     }
@@ -378,12 +365,10 @@ function TargetAreaTypeChanged()
 
 
 
-function AddressChanged()
-{
+function AddressChanged() {
 
 
-    if (parseInt($('#txtAddress').val().length) > 0)
-    {
+    if (parseInt($('#txtAddress').val().length) > 0) {
 
         //hide error message, skin button, skin control wrapper
         $('#validationSummary').hide();
@@ -399,8 +384,7 @@ function AddressChanged()
 
     }
 
-    else
-    {
+    else {
 
         //show error message, skin button, skin control wrapper
         $('#validationSummary').show();
@@ -420,11 +404,9 @@ function AddressChanged()
 
 
 
-function ZipCodeChanged()
-{
+function ZipCodeChanged() {
 
-    if (parseInt($('#txtZipCode').val().length) >= 5)
-    {
+    if (parseInt($('#txtZipCode').val().length) >= 5) {
 
         //hide error message, skin button, skin control
         $('#validationSummary').hide();
@@ -442,8 +424,7 @@ function ZipCodeChanged()
     }
 
 
-    else
-    {
+    else {
         $('#validationSummary').show();
         $('#validationSummary').removeAttr("class");
         $('#validationSummary').attr("class", "alert alert-danger");
@@ -463,15 +444,13 @@ function ZipCodeChanged()
 
 
 
-function ZipCodesListChanged()
-{
+function ZipCodesListChanged() {
 
     var providedZipList = $("#txtZipCodesList").val();
 
 
     //Zip Code string is too short
-    if (providedZipList.length < 5)
-    {
+    if (providedZipList.length < 5) {
 
         $('#validationSummary').show();
         $('#validationSummary').removeAttr("class");
@@ -487,8 +466,7 @@ function ZipCodesListChanged()
     }
 
         //Zip Codes string passes length test
-    else
-    {
+    else {
 
 
         //hide error message, skin button, skin control
@@ -520,13 +498,11 @@ function ZipCodesListChanged()
 
 
 //** Home Ownership **
-function HomeOwnershipSelected(buttonName)
-{
+function HomeOwnershipSelected(buttonName) {
 
 
     //Homeowner IS selected, remove styling from renter
-    if (buttonName == 'btnHomeowner')
-    {
+    if (buttonName == 'btnHomeowner') {
 
         //strip off styling of Renter
         $('#btnRenter').removeClass();
@@ -538,8 +514,7 @@ function HomeOwnershipSelected(buttonName)
         var currentClass = $('#btnHomeowner').attr('class');
 
         //Homeowner was already selected but now is to be turned off
-        if (currentClass == 'btn btn-sm btn-block selected')
-        {
+        if (currentClass == 'btn btn-sm btn-block selected') {
             $('#txtHomeOwnership').val('(not defined)');
             $('#btnHomeowner').removeClass();
             $('#btnHomeowner').addClass('btn btn-sm btn-block');
@@ -551,8 +526,7 @@ function HomeOwnershipSelected(buttonName)
         }
 
             //Homeowner was NOT selected so let's select it
-        else
-        {
+        else {
             $('#txtHomeOwnership').val('O');
             $('#btnHomeowner').removeClass();
             $('#btnHomeowner').addClass('btn btn-sm btn-block selected');
@@ -565,8 +539,7 @@ function HomeOwnershipSelected(buttonName)
     }
 
         //Renter is selected
-    else
-    {
+    else {
 
         //strip off styling of Homeowner
         $('#btnHomeowner').removeClass();
@@ -578,8 +551,7 @@ function HomeOwnershipSelected(buttonName)
         var currentClass = $('#btnRenter').attr('class');
 
         //Renter was already selected but now is to be turned off
-        if (currentClass == 'btn btn-sm btn-block selected') 
-        {
+        if (currentClass == 'btn btn-sm btn-block selected') {
             $('#txtHomeOwnership').val('(not defined)');
             $('#btnRenter').removeClass();
             $('#btnRenter').addClass('btn btn-sm btn-block');
@@ -612,8 +584,7 @@ function HomeOwnershipSelected(buttonName)
 
 
 //** Marital Status **
-function MaritalSelected(buttonName)
-{
+function MaritalSelected(buttonName) {
 
 
     //Married IS selected, remove styling from Not Married
@@ -698,8 +669,7 @@ function MaritalSelected(buttonName)
 
 
 //** Children **
-function ChildrenSelected(buttonName)
-{
+function ChildrenSelected(buttonName) {
 
 
     //Homeowner IS selected, remove styling from renter
@@ -783,8 +753,7 @@ function ChildrenSelected(buttonName)
 
 
 //** Gender **
-function GenderSelected(buttonName)
-{
+function GenderSelected(buttonName) {
 
 
     //Male IS selected, remove styling from renter
@@ -868,12 +837,10 @@ function GenderSelected(buttonName)
 
 
 //** Income **
-function GetIncomeRange()
-{
+function GetIncomeRange() {
 
 
-    var Range = function (letter, minVal, maxVal)
-    {
+    var Range = function (letter, minVal, maxVal) {
         this.letter = letter;
         this.minVal = minVal;
         this.maxVal = maxVal;
@@ -947,8 +914,7 @@ function GetIncomeRange()
 
 
 
-function BuildIncomeLabel()
-{
+function BuildIncomeLabel() {
 
     //This is the label in the filter header. Ex: '$25k - $225k'.
     var results = "";
@@ -959,8 +925,7 @@ function BuildIncomeLabel()
 
 
     //min string
-    if (selectedMin == "$0")
-    {
+    if (selectedMin == "$0") {
         selectedMin = "$0,000";
         minLength = selectedMin.length;
     }
@@ -993,8 +958,7 @@ function BuildIncomeLabel()
 
 
 //** Age **
-function GetAgeRange()
-{
+function GetAgeRange() {
 
 
     var Range = function (ageRange, minAge, maxAge) {
@@ -1068,8 +1032,7 @@ function GetAgeRange()
 
 
 
-function BuildAgeLabel()
-{
+function BuildAgeLabel() {
 
     var selectedMin = $("#minAge").html();
     var selectedMax = $("#maxAge").html();
@@ -1089,16 +1052,14 @@ function BuildAgeLabel()
 
 
 //** Property Value **
-function PropValueSelected()
-{
+function PropValueSelected() {
 
     //reset Select All if needed
     var totSelected = parseInt(CountSelectedCheckboxes("PropertyValue"));
     var numOfPropValuesCheckboxes = 19;
 
 
-    if (totSelected < numOfPropValuesCheckboxes)
-    {
+    if (totSelected < numOfPropValuesCheckboxes) {
         $("#selectAllPropValueLabel").html("Select All");
         $("#chkSelectAllPropValue").prop("checked", false);
     }
@@ -1123,8 +1084,7 @@ function PropValueSelected()
 
 
 
-function BuildPropValueLabel()
-{
+function BuildPropValueLabel() {
 
     var totSelected = parseInt($("#hidPropValueTotalSelected").val());
 
@@ -1148,8 +1108,7 @@ function BuildPropValueLabel()
 
 
 
-function BuildPropValueString()
-{
+function BuildPropValueString() {
 
     //Updates text box for BuildPostURL to read from
     var numOfPropValuesCheckboxes = 19;
@@ -1157,18 +1116,14 @@ function BuildPropValueString()
     var totSelected = parseInt(CountSelectedCheckboxes("PropertyValue"));
 
 
-    if ((totSelected == 0) | (totSelected == numOfPropValuesCheckboxes))
-    {
+    if ((totSelected == 0) | (totSelected == numOfPropValuesCheckboxes)) {
         results = "(not defined)";
     }
 
-    else
-    {
+    else {
 
-        for (i = 1; i <= numOfPropValuesCheckboxes; i++)
-        {
-            if ($("#chkPropValue" + i).is(':checked'))
-            {
+        for (i = 1; i <= numOfPropValuesCheckboxes; i++) {
+            if ($("#chkPropValue" + i).is(':checked')) {
                 results = results + $("#chkPropValue" + i).val() + ",";
             }
         }
@@ -1194,8 +1149,7 @@ function BuildPropValueString()
 
 
 //** Net Worth **
-function NetWorthSelected()
-{
+function NetWorthSelected() {
 
     //reset Select All if needed
     var totSelected = parseInt(CountSelectedCheckboxes("NetWorth"));
@@ -1229,8 +1183,7 @@ function NetWorthSelected()
 
 
 
-function BuildNetWorthLabel()
-{
+function BuildNetWorthLabel() {
 
     var totSelected = parseInt($("#hidNetWorthTotalSelected").val());
 
@@ -1254,8 +1207,7 @@ function BuildNetWorthLabel()
 
 
 
-function BuildNetWorthString()
-{
+function BuildNetWorthString() {
 
     //Updates text box for BuildPostURL to read from
     var numOfNetWorthCheckboxes = 11;
@@ -1294,8 +1246,7 @@ function BuildNetWorthString()
 
 
 //** Ethnicity **
-function EthnicitySelected(buttonName)
-{
+function EthnicitySelected(buttonName) {
 
 
     var prevSelections = $('#txtEthnicity').val();
@@ -1318,8 +1269,7 @@ function EthnicitySelected(buttonName)
 
 
     //African American was selected
-    if (buttonName == 'btnAfricanAmerican')
-    {
+    if (buttonName == 'btnAfricanAmerican') {
 
         //see if African American was already selected
         var currentClass = $('#btnAfricanAmerican').attr('class');
@@ -1359,8 +1309,7 @@ function EthnicitySelected(buttonName)
 
 
     //Arab was selected
-    if (buttonName == 'btnArab')
-    {
+    if (buttonName == 'btnArab') {
 
 
         //see if Arab was already selected
@@ -1722,8 +1671,7 @@ function EthnicitySelected(buttonName)
 
 
     //btnNorthernEuropean was selected
-    if (buttonName == 'btnNorthernEuropean')
-    {
+    if (buttonName == 'btnNorthernEuropean') {
 
         //see if btnNorthernEuropean was already selected
         var currentClass = $('#btnNorthernEuropean').attr('class');
@@ -1939,8 +1887,7 @@ function EthnicitySelected(buttonName)
 
 
 
-function UpdateEthnicityTotal(increment)
-{
+function UpdateEthnicityTotal(increment) {
 
     var currentTotal = parseInt($("#hidTotalEthnicitySelected").val());
     var newTotal = currentTotal + parseInt(increment);
@@ -1960,8 +1907,7 @@ function UpdateEthnicityTotal(increment)
 
 
 
-function BuildEthnicityString(selectedItem)
-{
+function BuildEthnicityString(selectedItem) {
 
     //look to see what is already selected.
     var prevSelections = $('#txtEthnicity').val();
@@ -1986,8 +1932,7 @@ function BuildEthnicityString(selectedItem)
 
 
 //API  
-function CalculateAddressedCount()
-{
+function CalculateAddressedCount() {
 
     $('#resultsBlock').block
     ({
@@ -2004,21 +1949,18 @@ function CalculateAddressedCount()
         url: postURL,
         type: "GET",
         dataType: "json",
-        success: function (msg)
-        {
+        success: function (msg) {
             count = parseInt(msg);
 
-            if (count <= 0)
-            {
+            if (count <= 0) {
                 $("#returnedResults").hide();
                 $("#noResults").show();
             }
 
-            else
-            {
+            else {
                 $("#returnedResults").show();
                 $("#noResults").hide();
-                $("#addressedMailCount").html(NumberWithCommas(count));
+                $("#addressedMailCount").html(Formatter.Commas(count));
                 $("#txtCount").val(count);
 
             }
@@ -2028,8 +1970,7 @@ function CalculateAddressedCount()
 
         },
 
-        error: function (ex)
-        {
+        error: function (ex) {
             console.log('postURL: ' + postURL);
             console.log('error calling api...');
             $("#addressedMailCount").html("Error" + ex.statusText);
@@ -2044,8 +1985,7 @@ function CalculateAddressedCount()
 
 
 
-function BuildPostUrl()
-{
+function BuildPostUrl() {
 
     var radius = $("#ddlRadiusValue").val();
     var radiusType = $("#ddlRadiusType").val();
@@ -2091,20 +2031,17 @@ function BuildPostUrl()
 
 
 //CONTROLS / BUTTONS
-function GoToStep2()
-{
+function GoToStep2() {
 
 
 
     //Zip Codes is selected.  Check string.
-    if ($('#radZipCodes').is(':checked'))
-    {
+    if ($('#radZipCodes').is(':checked')) {
 
         var zipCodeLength = $("#txtZipCodes").val();
 
         //Zip Code string is too short
-        if (zipCodeLength.length < 5)
-        {
+        if (zipCodeLength.length < 5) {
 
             $('#validationSummary').show();
             $('#validationSummary').removeAttr("class");
@@ -2121,8 +2058,7 @@ function GoToStep2()
         }
 
             //Zip Codes string passes length test
-        else
-        {
+        else {
 
             //hide error message, skin button, skin control
             $('#validationSummary').hide();
@@ -2152,9 +2088,8 @@ function GoToStep2()
 
     }
 
-    //Radius / Address was selected
-    else
-    {
+        //Radius / Address was selected
+    else {
 
         UpdateOrderSteps(2);
 
@@ -2174,8 +2109,7 @@ function GoToStep2()
 
 
 
-$('a[data-action=rotateIcon]').click(function (e)
-{
+$('a[data-action=rotateIcon]').click(function (e) {
 
     //No postback
     e.preventDefault();
@@ -2186,20 +2120,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'homeOwnershipSelect')
-    {
+    if (filterTriggered == 'homeOwnershipSelect') {
 
         currentClass = $('#homeOwnershipIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#homeOwnershipIcon').removeAttr('class');
             $('#homeOwnershipIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#homeOwnershipIcon').removeAttr('class');
             $('#homeOwnershipIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2232,20 +2163,17 @@ $('a[data-action=rotateIcon]').click(function (e)
     }
 
 
-    if (filterTriggered == 'maritalStatusSelect')
-    {
+    if (filterTriggered == 'maritalStatusSelect') {
 
         currentClass = $('#maritalStatusIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#maritalStatusIcon').removeAttr('class');
             $('#maritalStatusIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#maritalStatusIcon').removeAttr('class');
             $('#maritalStatusIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2279,20 +2207,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'childrenSelect')
-    {
+    if (filterTriggered == 'childrenSelect') {
 
         currentClass = $('#childrenIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#childrenIcon').removeAttr('class');
             $('#childrenIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#childrenIcon').removeAttr('class');
             $('#childrenIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2326,20 +2251,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'genderSelect')
-    {
+    if (filterTriggered == 'genderSelect') {
 
         currentClass = $('#genderIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#genderIcon').removeAttr('class');
             $('#genderIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#genderIcon').removeAttr('class');
             $('#genderIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2373,20 +2295,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'incomeSelect')
-    {
+    if (filterTriggered == 'incomeSelect') {
 
         currentClass = $('#incomeIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#incomeIcon').removeAttr('class');
             $('#incomeIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#incomeIcon').removeAttr('class');
             $('#incomeIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2419,20 +2338,17 @@ $('a[data-action=rotateIcon]').click(function (e)
     }
 
 
-    if (filterTriggered == 'ageSelect')
-    {
+    if (filterTriggered == 'ageSelect') {
 
         currentClass = $('#ageIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#ageIcon').removeAttr('class');
             $('#ageIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#ageIcon').removeAttr('class');
             $('#ageIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2466,20 +2382,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'propertySelect')
-    {
+    if (filterTriggered == 'propertySelect') {
 
         currentClass = $('#propertyIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#propertyIcon').removeAttr('class');
             $('#propertyIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#propertyIcon').removeAttr('class');
             $('#propertyIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2513,20 +2426,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'netWorthSelect')
-    {
+    if (filterTriggered == 'netWorthSelect') {
 
         currentClass = $('#netWorthIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#netWorthIcon').removeAttr('class');
             $('#netWorthIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#netWorthIcon').removeAttr('class');
             $('#netWorthIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2560,20 +2470,17 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-    if (filterTriggered == 'ethnicitySelect')
-    {
+    if (filterTriggered == 'ethnicitySelect') {
 
         currentClass = $('#ethnicityIcon').attr('class');
 
         //if NOT expanded then show minus
-        if (currentClass == 'fa fa-plus fa-border')
-        {
+        if (currentClass == 'fa fa-plus fa-border') {
             $('#ethnicityIcon').removeAttr('class');
             $('#ethnicityIcon').attr('class', 'fa fa-minus fa-border');
         }
 
-        else
-        {
+        else {
             $('#ethnicityIcon').removeAttr('class');
             $('#ethnicityIcon').attr('class', 'fa fa-plus fa-border');
         }
@@ -2609,8 +2516,7 @@ $('a[data-action=rotateIcon]').click(function (e)
 
 
 
-$("#resetFilters").click(function (event)
-{
+$("#resetFilters").click(function (event) {
     event.preventDefault();
 
     var numOfNetWorthCheckboxes = 11;
@@ -2661,8 +2567,7 @@ $("#resetFilters").click(function (event)
 
 
     //NET WORTH
-    for (i = 1; i <= numOfNetWorthCheckboxes; i++)
-    {
+    for (i = 1; i <= numOfNetWorthCheckboxes; i++) {
         if ($("#chkNetWorth" + i).is(':checked'))
         { $("#chkNetWorth" + i).prop("checked", false); }
     }
@@ -2676,8 +2581,7 @@ $("#resetFilters").click(function (event)
 
 
     //PROPERTY VALUE
-    for (i = 1; i <= numOfPropValuesCheckboxes; i++)
-    {
+    for (i = 1; i <= numOfPropValuesCheckboxes; i++) {
         if ($("#chkPropValue" + i).is(':checked'))
         { $("#chkPropValue" + i).prop("checked", false); }
     }
@@ -2741,8 +2645,7 @@ $("#resetFilters").click(function (event)
 
 
 
-$("#changeTarget").click(function (event)
-{
+$("#changeTarget").click(function (event) {
 
     event.preventDefault();
 
@@ -2758,47 +2661,39 @@ $("#changeTarget").click(function (event)
 
 
 
-$('#radAddress').click(function ()
-{
+$('#radAddress').click(function () {
     $('#addressBlock').show(1000);
     $('#zipCodesBlock').hide(1000);
 });
 
 
 
-$('#radZipCodes').click(function ()
-{
+$('#radZipCodes').click(function () {
     $('#addressBlock').hide(1000);
     $('#zipCodesBlock').show(1000);
 });
 
 
 
-$("#chkSelectAllNetWorth").click(function ()
-{
+$("#chkSelectAllNetWorth").click(function () {
 
-    if ($(this).prop("checked"))
-    {
+    if ($(this).prop("checked")) {
         $(".networth").prop("checked", true);
         $("#selectAllNetWorthLabel").html("Deselect All");
         $("#txtNetWorth").val("(not defined)");
     }
 
-    else
-    {
+    else {
         $(".networth").prop("checked", false);
         $("#selectAllNetWorthLabel").html("Select All");
     }
 
 
-    $('.networth').click(function ()
-    {
-        if ($(".networth").length == $(".networth:checked").length)
-        {
+    $('.networth').click(function () {
+        if ($(".networth").length == $(".networth:checked").length) {
             $("#chkSelectAllNetWorth").prop("checked", true);
         }
-        else
-        {
+        else {
             $("#chkSelectAllNetWorth").prop("checked", false);
         }
     });
@@ -2811,32 +2706,26 @@ $("#chkSelectAllNetWorth").click(function ()
 
 
 
-$("#chkSelectAllPropValue").click(function ()
-{
+$("#chkSelectAllPropValue").click(function () {
 
-    if ($(this).prop("checked"))
-    {
+    if ($(this).prop("checked")) {
         $(".propval").prop("checked", true);
         $("#selectAllPropValueLabel").html("Deselect All");
         $("#txtPropertyValue").val("(not defined)");
     }
 
-    else
-    {
+    else {
         $(".propval").prop("checked", false);
         $("#selectAllPropValueLabel").html("Select All");
     }
 
 
-    $('.propval').click(function ()
-    {
-        if ($(".propval").length == $(".propval:checked").length)
-        {
+    $('.propval').click(function () {
+        if ($(".propval").length == $(".propval:checked").length) {
             $("#chkSelectAllPropValue").prop("checked", true);
         }
 
-        else
-        {
+        else {
             $("#chkSelectAllPropValue").prop("checked", false);
         }
 
@@ -2850,6 +2739,107 @@ $("#chkSelectAllPropValue").click(function ()
 
 
 
+$("#show-sample").click(function () {
+
+    event.preventDefault();
+
+
+    //Build the request url
+    var baseEndPoint = "http://staplesactmgrlist.redesign.eddmsite.com/Resources/GetAddressedSampleSet.ashx?OutputSample=True&CountOnly=False";
+    var radius = "&Radius=" + $("#ddlRadiusValue").val();
+    var lat = "&Lat=" + $("#txtLatitude").val();
+    var lon = "&Lon=" + $("#txtLongitude").val();
+    var radiusType = "&RadiusType=" + $("#ddlRadiusType").val();
+
+    var gender = "";
+    if ($("#txtGender").val() != "(not defined)")
+    { gender = "&Gender=" + $("#txtGender").val(); }
+
+    var homeOwnership = "";
+    if ($("#txtHomeOwnership").val() != "(not defined)")
+    { homeOwnership = "&HomeOwnership=" + $("#txtHomeOwnership").val(); }
+
+    var income = "";
+    if ($("#txtCombinedIncome").val() != "(not defined)")
+    { income = "&Income=" + $("#txtCombinedIncome").val(); }
+
+    var children = "";
+    if ($("#txtChildren").val() != "(not defined)")
+    { children = "&KidsPresent=" + $("#txtChildren").val(); }
+
+    var maritalStatus = "";
+    if ($("#txtMartialStatus").val() != "(not defined)")
+    { maritalStatus = "&MaritalStatus=" + $("#txtMartialStatus").val(); }
+
+    var ageRange = "";
+    if ($("#txtAgeRanges").val() != "(not defined)")
+    { ageRange = "&AgeRange=" + $("#txtAgeRanges").val(); }
+
+    var ethnicity = "";
+    if ($("#txtEthnicity").val() != "(not defined)")
+    { ethnicity = "&Ethnicity=" + $("#txtEthnicity").val(); }
+
+    var zipcode = "";
+    if ($("#txtZipCodes").val() != "(not defined)")
+    { zipcode = "&ZipCode=" + $("#txtZipCodes").val(); }
+
+    var propertyValue = "";
+    if ($("#txtPropertyValue").val() != "(not defined)")
+    { propertyValue = "&HomeMktVal=" + $("#txtPropertyValue").val(); }
+
+    var netWorth = "";
+    if ($("#txtNetWorth").val() != "(not defined)")
+    { propertyValue = "&NetWorth=" + $("#txtNetWorth").val(); }
+
+
+    var fullEndPoint = baseEndPoint + radius + lat + lon + radiusType + gender + homeOwnership + income + children + maritalStatus + ageRange + ethnicity + zipcode + propertyValue + netWorth;
+
+
+    //console.log(fullEndPoint);
+
+
+
+    $('#sample-data').block
+    ({
+        message: '<div><br/><h5><span class="fa fa-2x fa-cog fa-spin"></span>&nbsp;Getting your sample.....</h5><br/><br/><br/></div>',
+        css: { width: '100%', height: '100%', border: '1px solid #dddddd' }
+    });
+
+
+    $.ajax(
+        {
+            url: fullEndPoint,
+            type: 'POST',
+
+            success: function (response) {
+
+                if (response != null && response != '') {
+
+                    //Response is too short.  Something must be wrong.
+                    if (response.length < 400)
+                    { $("#sample-data").html('<div class="alert alert-danger"><h3 class="text-danger"><span class="fa fa-exclamation-circle fa-2x"></span>&nbsp;Uh oh, something went wrong.</h3><p>We\'re sorry but something went wrong when retrieving the sample. Please <a href="/Support">contact us</a> to request sample data.</p><p>&nbsp;</p></div>'); }
+                    else
+                    { $("#sample-data").html(response); }
+
+
+                }
+
+                $('#sample-data').unblock();
+
+            },
+
+            error: function (ex) {
+                console.log("Show Sample Error: " + ex.statusText);
+                $("#sample-data").html('<div class="alert alert-danger"><h3 class="text-danger"><span class="fa fa-exclamation-circle fa-2x"></span>&nbsp;Uh oh, something went wrong.</h3><p>We\'re sorry but something went wrong when retrieving the sample. Please <a href="/Support">contact us</a> to request sample data.</p><p>&nbsp;</p><p>Error Code: ' + ex.statusText + '</p></div>');
+                $('#sample-data').unblock();
+
+            }
+
+        });
+
+});
+
+
 
 
 
@@ -2857,8 +2847,7 @@ $("#chkSelectAllPropValue").click(function ()
 
 
 // HELPER / CALCULATE / CALL FUNCTIONS
-function FindLatLonData()
-{
+function FindLatLonData() {
 
 
     //***** JSon Obj *******
@@ -2897,22 +2886,19 @@ function FindLatLonData()
 
 
 
-function EscapeRegExp(string)
-{
+function EscapeRegExp(string) {
     return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
 
 
-function ReplaceAll(string, find, replace)
-{
+function ReplaceAll(string, find, replace) {
     return string.replace(new RegExp(EscapeRegExp(find), 'g'), replace);  //g flag replaces all
 }
 
 
 
-function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
-{
+function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel) {
     //CURRENTLY NOT USE. 10/29/2015.
 
     //mode
@@ -2991,8 +2977,7 @@ function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
 
             success: function (msg) {
 
-                if (msg != null && msg != '')
-                {
+                if (msg != null && msg != '') {
 
 
                     var minPrice = msg.PricePerPiece * 1000;
@@ -3017,8 +3002,7 @@ function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
                     }
 
 
-                    else
-                    {
+                    else {
                         //console.log('minimum WAS met');
                     }
 
@@ -3030,8 +3014,7 @@ function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
                 }
 
 
-                if (debug == "true")
-                {
+                if (debug == "true") {
 
                     //Debugging
                     //console.log("************UpdatePriceQuote****************");
@@ -3043,8 +3026,7 @@ function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
 
             },
 
-            error: function ()
-            {
+            error: function () {
                 //nothing yet
             }
 
@@ -3055,18 +3037,15 @@ function GetPriceQuote(baseProductID, totalCount, pppLabel, totalCostLabel)
 
 
 
-function CountSelectedCheckboxes(checkboxGroup)
-{
+function CountSelectedCheckboxes(checkboxGroup) {
 
     var results = 0;
     var totNumNetWorthCheckboxes = 11;
     var totNumPropValueCheckboxes = 19;
 
-    if (checkboxGroup == "NetWorth")
-    {
+    if (checkboxGroup == "NetWorth") {
 
-        for (i = 1; i <= totNumNetWorthCheckboxes; i++)
-        {
+        for (i = 1; i <= totNumNetWorthCheckboxes; i++) {
             if ($("#chkNetWorth" + i).is(':checked'))
             { results++; }
         }
@@ -3077,11 +3056,9 @@ function CountSelectedCheckboxes(checkboxGroup)
     }
 
 
-    if (checkboxGroup == "PropertyValue")
-    {
+    if (checkboxGroup == "PropertyValue") {
 
-        for (i = 1; i <= totNumPropValueCheckboxes; i++)
-        {
+        for (i = 1; i <= totNumPropValueCheckboxes; i++) {
             if ($("#chkPropValue" + i).is(':checked'))
             { results++; }
         }
@@ -3098,11 +3075,9 @@ function CountSelectedCheckboxes(checkboxGroup)
 
 
 
-function UpdateOrderSteps(stepNumber)
-{
+function UpdateOrderSteps(stepNumber) {
 
-    if (stepNumber == 1)
-    {
+    if (stepNumber == 1) {
         //pass the number for the CURRENT Step to be shown as current
 
         $("#liStep1").removeClass();
@@ -3115,8 +3090,7 @@ function UpdateOrderSteps(stepNumber)
     }
 
 
-    if (stepNumber == 2)
-    {
+    if (stepNumber == 2) {
         $("#liStep1").removeClass();
         $("#liStep2").removeClass();
         $("#liStep3").removeClass();
@@ -3127,8 +3101,7 @@ function UpdateOrderSteps(stepNumber)
         $("#liStep2").addClass("current");
     }
 
-    if (stepNumber == 3)
-    {
+    if (stepNumber == 3) {
         $("#liStep1").removeClass();
         $("#liStep2").removeClass();
         $("#liStep3").removeClass();
@@ -3140,8 +3113,7 @@ function UpdateOrderSteps(stepNumber)
         $("#liStep3").addClass("current");
     }
 
-    if (stepNumber == 4)
-    {
+    if (stepNumber == 4) {
         $("#liStep1").removeClass();
         $("#liStep2").removeClass();
         $("#liStep3").removeClass();
@@ -3154,8 +3126,7 @@ function UpdateOrderSteps(stepNumber)
         $("#liStep4").addClass("current");
     }
 
-    if (stepNumber == 5)
-    {
+    if (stepNumber == 5) {
         $("#liStep1").removeClass();
         $("#liStep2").removeClass();
         $("#liStep3").removeClass();
@@ -3172,21 +3143,15 @@ function UpdateOrderSteps(stepNumber)
 }
 
 
-//this is obsolete
-function NumberWithCommas(rawNum)
-{ return rawNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
 
-
-function ValidateAddressAndZip()
-{
+function ValidateAddressAndZip() {
 
     var addressLength = $('#txtAddress').val().length;
     var zipcodeLength = $('#txtZipCode').val().length;
 
     //address and valid(ish) zip code exists
-    if ((addressLength > 1) && (zipcodeLength >= 5))
-    {
+    if ((addressLength > 1) && (zipcodeLength >= 5)) {
         $('#addressInstructions').hide();
         $('#hypNext').removeAttr("class");
         $("#hypNext").attr("class", "btn btn-cta");
@@ -3203,8 +3168,7 @@ function ValidateAddressAndZip()
         FindLatLonData();
 
         //Wait for FindLatLonData to finish
-        setTimeout(function ()
-        {
+        setTimeout(function () {
             BuildPostUrl();
 
             //unblock button
@@ -3214,8 +3178,7 @@ function ValidateAddressAndZip()
 
     }
 
-    else
-    {
+    else {
         $('#addressInstructions').show();
         $('#hypNext').removeAttr("class");
         $("#hypNext").attr("class", "btn btn-default disabled");
@@ -3229,8 +3192,7 @@ function ValidateAddressAndZip()
 
 
 
-function CheckForRevisit()
-{
+function CheckForRevisit() {
 
     //This function will check the controls to see if they contain content.  This likely happens if the user hits the 
     //'back' button from Step1-TargetReview.aspx. If so, it will re-able the button and hide warning.
@@ -3239,20 +3201,20 @@ function CheckForRevisit()
     var zipCode = $('#txtZipCode').val();
     var zipCodeList = $('#txtZipCodesList').val();
     var results = false;
-    
+
 
 
     //address and zip code was filled out
     if (address.length >= 5 && zipCode.length >= 5)
     { results = true; }
 
-    //zip code(s) was filled out
+        //zip code(s) was filled out
     else if (zipCodeList.length >= 5)
     { results = true; }
 
-    //must be first visit
+        //must be first visit
     else
-    { results = false;}
+    { results = false; }
 
     return results;
 
@@ -3261,8 +3223,7 @@ function CheckForRevisit()
 
 
 
-function HideFirstTimeBlocks()
-{
+function HideFirstTimeBlocks() {
 
     //This function hide the page elements which are visible to the user the FIRST time they use this page.
     //Since they have come 'back' to this page via the Back button, these elements should be disabled.
@@ -3281,14 +3242,12 @@ function HideFirstTimeBlocks()
 
 
     //See which radio button is checked and show the appropriate block.
-    if ($('#radZipCodes').is(':checked'))
-    {
+    if ($('#radZipCodes').is(':checked')) {
         $("#addressBlock").hide();
         $("#zipCodesBlock").show();
     }
 
-    if ($('#radAddress').is(':checked'))
-    {
+    if ($('#radAddress').is(':checked')) {
         $("#addressBlock").show();
         $("#zipCodesBlock").hide();
     }
@@ -3298,15 +3257,13 @@ function HideFirstTimeBlocks()
 
 
 
-function PreselectFiltersAndLabels()
-{
+function PreselectFiltersAndLabels() {
 
 
     //Homeownership
     var homeownership = $("#txtHomeOwnership").val();
 
-    if (homeownership == "O")
-    {
+    if (homeownership == "O") {
         $('#btnHomeowner').removeClass();
         $('#btnHomeowner').addClass('btn btn-sm btn-block selected');
 
@@ -3314,8 +3271,7 @@ function PreselectFiltersAndLabels()
         $('#homeOwnershipLabel').html('Homeowner');
     }
 
-    if (homeownership == "R")
-    {
+    if (homeownership == "R") {
         $('#btnRenter').removeClass();
         $('#btnRenter').addClass('btn btn-sm btn-block selected');
 
@@ -3330,8 +3286,7 @@ function PreselectFiltersAndLabels()
     //Marital Status
     var maritalStatus = $("#txtMartialStatus").val();
 
-    if (maritalStatus == "M")
-    {
+    if (maritalStatus == "M") {
         $('#btnMarried').removeClass();
         $('#btnMarried').addClass('btn btn-sm btn-block selected');
 
@@ -3339,8 +3294,7 @@ function PreselectFiltersAndLabels()
         $('#maritalStatusLabel').html('Married');
     }
 
-    if (maritalStatus == "S")
-    {
+    if (maritalStatus == "S") {
         $('#btnSingle').removeClass();
         $('#btnSingle').addClass('btn btn-sm btn-block selected');
 
@@ -3355,8 +3309,7 @@ function PreselectFiltersAndLabels()
     //Kids Present
     var kidsPresent = $("#txtChildren").val();
 
-    if (kidsPresent == "Y")
-    {
+    if (kidsPresent == "Y") {
         $('#btnChildren').removeClass();
         $('#btnChildren').addClass('btn btn-sm btn-block selected');
 
@@ -3364,8 +3317,7 @@ function PreselectFiltersAndLabels()
         $('#childrenLabel').html('Children');
     }
 
-    if (kidsPresent == "N")
-    {
+    if (kidsPresent == "N") {
         $('#btnNoChildren').removeClass();
         $('#btnNoChildren').addClass('btn btn-sm btn-block selected');
 
@@ -3380,8 +3332,7 @@ function PreselectFiltersAndLabels()
     //Gender
     var gender = $("#txtGender").val();
 
-    if (gender == "M")
-    {
+    if (gender == "M") {
         $('#btnMale').removeClass();
         $('#btnMale').addClass('btn btn-sm btn-block selected');
 
@@ -3389,8 +3340,7 @@ function PreselectFiltersAndLabels()
         $('#genderLabel').html('Male');
     }
 
-    if (gender == "F")
-    {
+    if (gender == "F") {
         $('#btnFemale').removeClass();
         $('#btnFemale').addClass('btn btn-sm btn-block selected');
 
@@ -3407,8 +3357,7 @@ function PreselectFiltersAndLabels()
     var minIncome = $("#txtMinIncome").val();
     var maxIncome = $("#txtMaxIncome").val();
 
-    if (income != "(not defined)")
-    {
+    if (income != "(not defined)") {
 
         //min label
         $("#minIncome").html(Formatter.CurrencyDollars(minIncome));
@@ -3441,8 +3390,7 @@ function PreselectFiltersAndLabels()
     var maxAge = $("#txtMaxAge").val();
     var ageRanges = $("#txtAgeRanges").val();
 
-    if (ageRanges != "(not defined)")
-    {
+    if (ageRanges != "(not defined)") {
 
         //set the min and max labesl above the slider.
         //min label
@@ -3475,8 +3423,7 @@ function PreselectFiltersAndLabels()
     var selectedPropertyCount = $("#txtPropValueTotalSelected").val();
     var selectedPropertyValues = $("#txtPropertyValue").val();
 
-    if (selectedPropertyValues != "(not defined)")
-    {
+    if (selectedPropertyValues != "(not defined)") {
         //checkboxes maintain their state when going 'back' so only the total needs to be recalcualted.
         $("#propertyLabel").html(selectedPropertyCount + " ranges selected");
 
@@ -3489,8 +3436,7 @@ function PreselectFiltersAndLabels()
     var selectedNetWorthCount = $("#txtNetWorthTotalSelected").val();
     var selectedNetWorthValues = $("#txtNetWorth").val();
 
-    if (selectedNetWorthValues != "(not defined)")
-    {
+    if (selectedNetWorthValues != "(not defined)") {
         //checkboxes maintain their state when going 'back' so only the total needs to be recalcualted.
         $("#netWorthLabel").html(selectedNetWorthCount + " ranges selected");
 
@@ -3504,8 +3450,7 @@ function PreselectFiltersAndLabels()
     var selectedEthnicityCount = $("#txtTotalEthnicitySelected").val();
     var selectedEthnicytValues = $("#txtEthnicity").val();
 
-    if (selectedEthnicytValues != "(not defined)")
-    {
+    if (selectedEthnicytValues != "(not defined)") {
         //checkboxes maintain their state when going 'back' so only the total needs to be recalcualted.
         $("#ethnicityLabel").html(selectedEthnicityCount + " selected");
 
@@ -3531,92 +3476,77 @@ function PreselectFiltersAndLabels()
         //console.log(string.indexOf(substring) > -1);
 
         //if not found, will return a -1.
-        if (selectedEthnicytValues.indexOf(africanAmerican) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(africanAmerican) > -1) {
             $('#btnAfricanAmerican').removeClass();
             $('#btnAfricanAmerican').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(arab) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(arab) > -1) {
             $('#btnArab').removeClass();
             $('#btnArab').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(asian) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(asian) > -1) {
             $('#btnAsian').removeClass();
             $('#btnAsian').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(asianNonOriental) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(asianNonOriental) > -1) {
             $('#btnAsianNonOriental').removeClass();
             $('#btnAsianNonOriental').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(french) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(french) > -1) {
             $('#btnFrench').removeClass();
             $('#btnFrench').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(german) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(german) > -1) {
             $('#btnGerman').removeClass();
             $('#btnGerman').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(hispanic) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(hispanic) > -1) {
             $('#btnHispanic').removeClass();
             $('#btnHispanic').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(italian) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(italian) > -1) {
             $('#btnItalian').removeClass();
             $('#btnItalian').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(jewish) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(jewish) > -1) {
             $('#btnJewish').removeClass();
             $('#btnJewish').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(miscellaneous) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(miscellaneous) > -1) {
             $('#btnMiscellaneous').removeClass();
             $('#btnMiscellaneous').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(northernEurpoean) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(northernEurpoean) > -1) {
             $('#btnNorthernEuropean').removeClass();
             $('#btnNorthernEuropean').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(polynesian) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(polynesian) > -1) {
             $('#btnPolynesian').removeClass();
             $('#btnPolynesian').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(scottishIrish) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(scottishIrish) > -1) {
             $('#btnScottishIrish').removeClass();
             $('#btnScottishIrish').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(southernEuropean) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(southernEuropean) > -1) {
             $('#btnSouthernEuropean').removeClass();
             $('#btnSouthernEuropean').addClass('btn btn-sm btn-block selected');
         }
 
-        if (selectedEthnicytValues.indexOf(unclassified) > -1)
-        {
+        if (selectedEthnicytValues.indexOf(unclassified) > -1) {
             $('#btnUnclassified').removeClass();
             $('#btnUnclassified').addClass('btn btn-sm btn-block selected');
         }
@@ -3628,7 +3558,7 @@ function PreselectFiltersAndLabels()
 
 
 
-    
+
 
 
 }
