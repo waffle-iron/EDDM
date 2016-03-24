@@ -222,7 +222,7 @@
             <div class="row">
 
                 <%--Data--%>
-                <div class="col-sm-8">
+                <div class="col-md-8 col-sm-7 col-xs-12">
 
                     <%--Error Panel--%>
                     <asp:Panel ID="pnlError" runat="server" Visible="false" CssClass="alert alert-danger">
@@ -245,63 +245,63 @@
                             Step by step, you can create and launch effective direct mail campaigns in minutes.</p>
 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-md-10 col-sm-12 col-xs-12">
                                     <h5>Step 1 - Define Target Area</h5>
                                     <p>Get started by entering your business address or ZIP Code(s) to define a geographic target area. 
                                     You can also apply a radius or drive-time around your target area to further enhance results.</p>
                                 </div>
 
-                                <div class="col-sm-2 hidden-xs">
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <h5 class="text-center"><span class="fa fa-fw fa-4x fa-crosshairs"></span></h5>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-md-10 col-sm-12 col-xs-12">
                                     <h5>Step 2 - Target Customers</h5>
                                     <p>Next, refine your list based on the traits and characteristics which best represent your ideal prospect. 
                                     Choose from demographic and behavioral selects such as home ownership, gender, net worth, income level, ethnicity, 
                                     and more. As you refine your search, the total number of prospects will increase or decrease accordingly.</p>
                                 </div>
 
-                                <div class="col-sm-2 hidden-xs">
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <h5 class="text-center"><span class="fa fa-fw fa-4x fa-user-plus"></span></h5>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-md-10 col-sm-12 col-xs-12">
                                     <h5>Step 3 - Choose Design & Print Options</h5>
                                     <p>With your ideal prospects targeted, you can now choose your preferred design and print options. 
                                     From FREE design templates, to large format postcards, we make getting great results easy.</p>
                                 </div>
 
-                                <div class="col-sm-2 hidden-xs">
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <h5 class="text-center"><span class="fa fa-fw fa-4x fa-list"></span></h5>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-md-10 col-sm-12 col-xs-12">
                                     <h5>Step 4 - Schedule Mail Delivery</h5>
                                     <p>Based on your campaign requirements, our online campaign builder presents you with a list of available 
                                     delivery schedules. Simply choose the preferred delivery date range to ensure that your offers deliver to 
                                     the right prospects, at the right time.</p>
                                 </div>
 
-                                <div class="col-sm-2 hidden-xs">
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <h5 class="text-center"><span class="fa fa-fw fa-4x fa-truck"></span></h5>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-md-10 col-sm-12 col-xs-12">
                                     <h5>Step 5 - Checkout</h5>
                                     <p>Review your campaign details and confirm that all information appears correctly. 
                                     Next, complete all required billing and payment information and submit your order. </p>
                                 </div>
 
-                                <div class="col-sm-2 hidden-xs">
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <h5 class="text-center"><span class="fa fa-fw fa-4x fa-cart-plus"></span></h5>
                                 </div>
 
@@ -437,7 +437,7 @@
                 </div>
 
                 <%--Form & Filters--%>
-                <div class="col-sm-4">
+                <div class="col-md-4 col-sm-5 col-xs-12">
 
                     <div>
 
