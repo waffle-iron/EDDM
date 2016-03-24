@@ -367,6 +367,38 @@
                                     apply less filters.
                                 </div>
 
+
+                                <%--Sample Data--%>
+                                <p class="text-center">
+                                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#sample-preview" id="show-sample">
+                                        <span class="fa fa-search"></span>&nbsp;Show me a sample
+                                    </a>
+                                </p>
+
+
+                                <%--Sample Modal--%>
+                                <div class="modal fade" id="sample-preview" tabindex="-1" role="dialog" aria-labelledby="sample-preview-label" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <div class="modal-title">Sample Preview</div>
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <div id="sample-data" style="min-height:125px;"></div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-cancel" data-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div>&nbsp;</div>
@@ -1099,7 +1131,7 @@
 <asp:content id="Content3" contentplaceholderid="cpScripts" runat="Server">
 
 
-    <script src="/assets/javascripts/Step1-BuildYourList.min.js?ver=1.1.0" type="text/javascript"></script>
+    <script src="/assets/javascripts/Step1-BuildYourList.min.js?ver=1.2.0" type="text/javascript"></script>
     <%--<script src="/assets/javascripts/Step1-BuildYourList.js" type="text/javascript"></script>--%>
 
     
