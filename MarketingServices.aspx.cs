@@ -688,58 +688,6 @@ public partial class MarketingServices : appxCMS.PageBase
 
 
 
-            //New Mover properties
-            if (appxCMS.Util.CMSSettings.GetBoolean("Product", "NewMover", siteID))
-            {
-                showNewMover = true;
-                newMoverCount = GetNewMoverCount();
-            }
-
-
-            //Targeted Email properties
-            if (appxCMS.Util.CMSSettings.GetBoolean("Product", "Email", siteID))
-            {
-                showEmails = true;
-                targetedEmailCount = GetEmailCount();
-            }
-
-
-
-
-            //Addressed AddOn 
-            //For the moment, this is only offered and used by OLB.  Will need additional development to extend to other sites.
-            if (siteID == 11)
-            {
-
-
-                //ONLY applies to OLB!
-                //Addressed AddOn properties
-                if (appxCMS.Util.CMSSettings.GetBoolean("Product", "AddressedListAddOns", siteID))
-                {
-
-                    showAddressedListAddOns = true;
-
-
-                    //get addressedmail mark up and mark up type from database!
-                    oAddressedMailProd = Taradel.WLProductDataSource.GetProductByBaseId(addressedAddOnBaseProductID);
-                    addressedMailMarkUp = oAddressedMailProd.Markup;
-                    addressedMailMarkUpType = oAddressedMailProd.MarkupType;
-
-                    addOnAddressedProspects = RetrieveHyperTargetRouteCount(Session["Franchise"].ToString(), Session["Location"].ToString());
-
-
-                    //AddressedAddOn Price Per Piece from initial page load
-                    if (addOnAddressedProspects > 0)  //<-- How and when is this set?
-                    {
-                        Taradel.ProductPriceQuote oPriceQuoteAddressed = new Taradel.ProductPriceQuote(siteID, addressedAddOnBaseProductID, addOnAddressedProspects, 0, 0, 0, 1, null, zipCode, false, false, 0, "");
-                        addressedAddOnPricePerPiece = oPriceQuoteAddressed.PricePerPiece;
-                    }
-
-                }
-
-
-            }
-
 
 
             //New Mover, Targeted Email ProductID and BaseProductIDs
@@ -803,6 +751,58 @@ public partial class MarketingServices : appxCMS.PageBase
 
             }
 
+
+
+            //New Mover properties
+            if (appxCMS.Util.CMSSettings.GetBoolean("Product", "NewMover", siteID))
+            {
+                showNewMover = true;
+                newMoverCount = GetNewMoverCount();
+            }
+
+
+            //Targeted Email properties
+            if (appxCMS.Util.CMSSettings.GetBoolean("Product", "Email", siteID))
+            {
+                showEmails = true;
+                targetedEmailCount = GetEmailCount();
+            }
+
+
+
+            //Addressed AddOn 
+            //For the moment, this is only offered and used by OLB.  Will need additional development to extend to other sites.
+            if (siteID == 11)
+            {
+
+
+                //ONLY applies to OLB!
+                //Addressed AddOn properties
+                if (appxCMS.Util.CMSSettings.GetBoolean("Product", "AddressedListAddOns", siteID))
+                {
+
+                    showAddressedListAddOns = true;
+
+
+                    //get addressedmail mark up and mark up type from database!
+                    oAddressedMailProd = Taradel.WLProductDataSource.GetProductByBaseId(addressedAddOnBaseProductID);
+                    addressedMailMarkUp = oAddressedMailProd.Markup;
+                    addressedMailMarkUpType = oAddressedMailProd.MarkupType;
+
+                    addOnAddressedProspects = RetrieveHyperTargetRouteCount(Session["Franchise"].ToString(), Session["Location"].ToString());
+
+
+                    //AddressedAddOn Price Per Piece from initial page load
+                    if (addOnAddressedProspects > 0)  //<-- How and when is this set?
+                    {
+                        Taradel.ProductPriceQuote oPriceQuoteAddressed = new Taradel.ProductPriceQuote(siteID, addressedAddOnBaseProductID, addOnAddressedProspects, 0, 0, 0, 1, null, zipCode, false, false, 0, "");
+                        addressedAddOnPricePerPiece = oPriceQuoteAddressed.PricePerPiece;
+                    }
+
+                }
+
+
+            }
 
             //Set values of hidden fields.
             //Used to send BaseProductID and ProductID to hyperlinks to fire proper help modals
