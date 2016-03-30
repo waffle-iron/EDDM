@@ -2745,7 +2745,8 @@ $("#show-sample").click(function () {
 
 
     //Build the request url
-    var baseEndPoint = "http://staplesactmgrlist.redesign.eddmsite.com/Resources/GetAddressedSampleSet.ashx?OutputSample=True&CountOnly=False";
+    var hostName = window.location.hostname;
+    var baseEndPoint = "http://" + hostName  + "/Resources/GetAddressedSampleSet.ashx?OutputSample=True&CountOnly=False";
     var radius = "&Radius=" + $("#ddlRadiusValue").val();
     var lat = "&Lat=" + $("#txtLatitude").val();
     var lon = "&Lon=" + $("#txtLongitude").val();
@@ -2795,7 +2796,7 @@ $("#show-sample").click(function () {
     var fullEndPoint = baseEndPoint + radius + lat + lon + radiusType + gender + homeOwnership + income + children + maritalStatus + ageRange + ethnicity + zipcode + propertyValue + netWorth;
 
 
-    //console.log(fullEndPoint);
+    console.log(fullEndPoint);
 
 
 
@@ -3553,12 +3554,6 @@ function PreselectFiltersAndLabels() {
 
 
     }
-
-
-
-
-
-
 
 
 }
