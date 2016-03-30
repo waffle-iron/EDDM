@@ -688,37 +688,28 @@ public partial class MarketingServices : appxCMS.PageBase
 
 
 
+            
+
             //New Mover, Targeted Email ProductID and BaseProductIDs
             //PROD
             if (currentMode != "dev")
             {
+
+                //Production IDs
                 addressedAddOnBaseProductID = 244;
-                oAddressedMailProd = Taradel.WLProductDataSource.GetProductByBaseId(addressedAddOnBaseProductID);
-                addressedAddOnProductID = oAddressedMailProd.ProductID;
-
                 newMoverBaseProductID = 235;
-                oNewMoverProd = Taradel.WLProductDataSource.GetProductByBaseId(newMoverBaseProductID);
-                newMoverProductID = oNewMoverProd.ProductID;
-
                 targetedEmailBaseProductID = 236;
-                oTargetedEmailProd = Taradel.WLProductDataSource.GetProductByBaseId(targetedEmailBaseProductID);
-                targetedEmailProductID = oTargetedEmailProd.ProductID; 
             }
 
             //DEV
             else
             {
+
+                //DEV IDs
                 addressedAddOnBaseProductID = 246;
-                oAddressedMailProd = Taradel.WLProductDataSource.GetProductByBaseId(addressedAddOnBaseProductID);
-                addressedAddOnProductID = oAddressedMailProd.ProductID;
-
                 newMoverBaseProductID = 237;
-                oNewMoverProd = Taradel.WLProductDataSource.GetProductByBaseId(newMoverBaseProductID);
-                newMoverProductID = oNewMoverProd.ProductID;
-
                 targetedEmailBaseProductID = 238;
-                oTargetedEmailProd = Taradel.WLProductDataSource.GetProductByBaseId(targetedEmailBaseProductID);
-                targetedEmailProductID = oTargetedEmailProd.ProductID;
+
             }
 
 
@@ -737,9 +728,6 @@ public partial class MarketingServices : appxCMS.PageBase
                 showEmails = true;
                 targetedEmailCount = GetEmailCount();
             }
-
-
-
 
 
 
@@ -776,6 +764,27 @@ public partial class MarketingServices : appxCMS.PageBase
 
 
             }
+
+
+            //Now lets set some ProducIDs
+            if (showAddressedListAddOns)
+            {
+                oAddressedMailProd = Taradel.WLProductDataSource.GetProductByBaseId(addressedAddOnBaseProductID);
+                addressedAddOnProductID = oAddressedMailProd.ProductID;
+            }
+
+            if (showNewMover)
+            {
+                oNewMoverProd = Taradel.WLProductDataSource.GetProductByBaseId(newMoverBaseProductID);
+                newMoverProductID = oNewMoverProd.ProductID;
+            }
+
+            if (showEmails)
+            {
+                oTargetedEmailProd = Taradel.WLProductDataSource.GetProductByBaseId(targetedEmailBaseProductID);
+                targetedEmailProductID = oTargetedEmailProd.ProductID;
+            }
+
 
 
 

@@ -36,8 +36,8 @@
                                         <div class="row">
 
                                             <div class="col-md-6 text-center">
-                                                <asp:Hyperlink ID="hypAddressed" runat="server" NavigateUrl="~/Addressed-Overview" CssClass="btn btn-primary btn-lg btn-shadow lrgActionButton">
-                                                    ADDRESSED DIRECT MAIL<br /><small>The best way to reach a specific audience</small>
+                                                <asp:Hyperlink ID="hypPersonalizedMail" runat="server" NavigateUrl="~/Addressed-Overview" CssClass="btn btn-primary btn-lg btn-shadow lrgActionButton">
+                                                    PERSONALIZED MAIL<br /><small>The best way to reach a specific audience</small>
                                                 </asp:Hyperlink>
                                             </div>
 
@@ -127,7 +127,7 @@
             
                                 <div class="ctaLandingWrapper" id="ctaContent3">
 
-                                    <h1>Targeted Mailing Lists</h1>
+                                    <h1>Personalized Mailing Lists</h1>
             
                                     <p class="lead text-center">Purchase a mailing list or upload your own.<br />
                                     Try our easy direct mail campaign builder.</p>
@@ -144,7 +144,7 @@
 
                                         <div class="col-md-5 col-sm-6 text-center">
                                             <asp:Hyperlink ID="hypGenerate" runat="server" NavigateUrl="~/Addressed/Step1-BuildYourList.aspx" CssClass="btn btn-shadow btn-info btn-lg" ToolTip="Get Started">
-                                                <span class="fa fa-cog"></span>&nbsp;BUILD NEW LIST
+                                                <span class="fa fa-cog"></span>&nbsp;BUILD YOUR LIST
                                             </asp:Hyperlink>
                                         </div>
 

@@ -77,6 +77,12 @@ public partial class CCustom_BoldChatTextLink : System.Web.UI.UserControl
             break;
 
 
+            //NYSAR
+            case 59:
+                fileName = "BoldChatTextScript-NYSAR.txt";
+                break;
+
+
             //CHHJ
             case 60:
             fileName = "BoldChatTextScript-CHHJ.txt";

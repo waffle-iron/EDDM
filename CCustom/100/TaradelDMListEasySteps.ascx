@@ -123,9 +123,9 @@
 
                 <div class="col-md-5 col-sm-offset-1">
 
-                    <h3>Generate New Mailing List</h3>
+                    <h3>Build Your Mailing List</h3>
 
-                    <p>Reach a highly-targeted audience with personalized offers using our Addressed Direct Mail solution. Build a new list using
+                    <p>Reach a highly-targeted audience with personalized offers using our Personalized Mail solution. Build a new list using
                     advanced demographic, geographic, and behavioral data.  It's never been faster, easier, and more affordable to reach your ideal 
                     prospects.</p>
 
@@ -133,7 +133,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 hidden-sm hidden-xs">
-                            <p class="text-center"><a href="/Addressed/Step1-BuildYourList.aspx" class="btn btn-block btn-shadow btn-info btn-lg">Generate Mailing List</a></p>
+                            <p class="text-center"><a href="/Addressed/Step1-BuildYourList.aspx" class="btn btn-block btn-shadow btn-info btn-lg">Build Your Mailing List</a></p>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
 
             <div class="row">
                 <div class="col-sm-12 visible-sm visible-xs">
-                    <p class="text-center"><a href="/Addressed/Step1-BuildYourList.aspx" class="btn btn-block btn-info btn-lg">Generate Mailing List</a></p>
+                    <p class="text-center"><a href="/Addressed/Step1-BuildYourList.aspx" class="btn btn-block btn-info btn-lg">Build Your Mailing List</a></p>
                 </div>
             </div>
 
