@@ -331,6 +331,11 @@
                             </tr>
 
                             <tr>
+                                <td>DropFeeRate</td>
+                                <td><asp:Literal ID="litDropFeeRate" runat="server" /></td>
+                            </tr>
+
+                            <tr>
                                 <td>EDDM</td>
                                 <td><asp:Literal ID="litDebugEDDM" runat="server" /></td>
                             </tr>
@@ -428,11 +433,6 @@
                             <tr>
                                 <td>TestMode</td>
                                 <td><asp:Literal ID="litTestMode" runat="server" /></td>
-                            </tr>
-
-                            <tr>
-                                <td>TMC</td>
-                                <td><asp:Literal ID="litDebugTMC" runat="server" /></td>
                             </tr>
 
                             <tr>
@@ -1027,7 +1027,7 @@
 
                     </div>
 
-                    <%--Sticky / Your Selection--%>
+                    <%--Campaign Overview--%>
                     <div class="col-sm-4">
                         <asp:Panel ID="pnlCampaignOverview" runat="server" ClientIDMode="Static">
                             <appx:CampaignOverview runat="server" id="CampaignOverview" />

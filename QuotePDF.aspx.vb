@@ -14,8 +14,15 @@ Imports System.Data.SqlClient
 
 
 '=========================================================================================================================
+'   AUTHOR: DSF
+'
 '   NOTES:
-'   Will require additional development to include Marketing Services add-ons.
+'
+'   oSavedCart (Container Class) is a object which contains ALL information about the Cart.  The 'cart' Xml is just one of many properties of the SavedCartObj.
+'
+'   Do NOT perform any calculations here.  Just read the cart to be consistent with what is displayed on Step3-Checkout.
+'
+'   This page will require additional development To include Marketing Services add-ons.
 '
 '=========================================================================================================================
 
@@ -33,7 +40,7 @@ Partial Class QuotePDF
     Protected oCart As XmlNode = Nothing
     Protected oQuote As Taradel.ProductPriceQuote = Nothing
     Protected oBaseQuote As Taradel.ProductPriceQuote = Nothing
-    Protected SavedCartObj As New SavedCart
+    Protected oSavedCart As New SavedCart
     Protected numEmailBlasts As Integer = 3
     Protected dropFeeRate As Decimal = 99
 
@@ -185,6 +192,20 @@ Partial Class QuotePDF
 
         Set(value As Decimal)
             _ExtraPcsPricePerPiece = value
+        End Set
+
+    End Property
+
+
+    Private _MailPiecesPrice As Decimal = 0
+    Public Property MailPiecesPrice As Decimal
+
+        Get
+            Return _MailPiecesPrice
+        End Get
+
+        Set(value As Decimal)
+            _MailPiecesPrice = value
         End Set
 
     End Property
@@ -360,13 +381,15 @@ Partial Class QuotePDF
     End Property
 
 
-    Private _TMCMap As Boolean = False
-    Public Property TMCMap As Boolean
+    Private _TotalMailed As Integer = 0
+    Public Property TotalMailed As Integer
+
         Get
-            Return _TMCMap
+            Return _TotalMailed
         End Get
-        Set(value As Boolean)
-            _TMCMap = value
+
+        Set(value As Integer)
+            _TotalMailed = value
         End Set
 
     End Property
@@ -467,6 +490,10 @@ Partial Class QuotePDF
     End Property
 
 
+
+
+
+
 #End Region
 
 
@@ -487,6 +514,14 @@ Partial Class QuotePDF
         'Helpers
         SetPageProperties()
         ShowHidePageElements()
+
+
+        'Extra Copies
+        If ExtraCopies > 0 Then
+            phExtraPcs.Visible = True
+            BuildExtraCopiesDisplay()
+        End If
+
 
 
         If (TestMode) Then
@@ -548,7 +583,7 @@ Partial Class QuotePDF
 
         'SIMULATING Profile.Cart.
         'Reading from database. The WebsuperGoo ABCPdf cannot access the Profile.Cart data.
-        Dim cartData As String = SavedCartObj.Cart
+        Dim cartData As String = oSavedCart.Cart
 
         'Fill the XmlDoc
         oXML.LoadXml(cartData)
@@ -560,7 +595,7 @@ Partial Class QuotePDF
 
 
         'UerName
-        UserName = SavedCartObj.CreatedBy
+        UserName = oSavedCart.CreatedBy
 
 
         'DistributionID
@@ -619,10 +654,10 @@ Partial Class QuotePDF
             PostageRate = appxCMS.Util.AppSettings.GetDecimal("USPSPostageRate")
 
             If PostageRate = 0 Then
-                PostageRate = 0.16
+                PostageRate = 0.154
             End If
         Else
-            PostageRate = 0.3
+            PostageRate = 0.29
         End If
 
 
@@ -630,12 +665,10 @@ Partial Class QuotePDF
         PricePerPiece = CartUtility.GetPricePerPiece(oCart, productType)
 
 
+
         'Extra Copies
         ExtraCopies = CartUtility.GetExtraPiecesQty(oCart, productType)
 
-
-        'Extra Copies Price Per Piece
-        ExtraPcsPricePerPiece = (PricePerPiece - PostageRate)
 
 
         'Professional Design Fee
@@ -691,6 +724,19 @@ Partial Class QuotePDF
         TotalSelected = CartUtility.GetTotalSelected(oCart, productNodeFilter, NumOfImpressions)
 
 
+        'Total Mailed
+        TotalMailed = (TotalSelected * NumOfImpressions)
+
+
+        'MailPiecesPrice
+        MailPiecesPrice = (TotalMailed * PricePerPiece)
+
+
+
+        'Extra Copies Price Per Piece
+        ExtraPcsPricePerPiece = (PricePerPiece - PostageRate)
+
+
         'Sales Tax
         'Set to 0 for now...
         SalesTax = 0
@@ -704,6 +750,7 @@ Partial Class QuotePDF
 
 
     End Sub
+
 
 
 
@@ -1195,39 +1242,22 @@ Partial Class QuotePDF
         Dim sProdName As String = xmlhelp.ReadAttribute(eddmProdNode, "Name")
         litEddmProductName.Text = sProdName
 
-        ''adding logic here to account for 1000 minimum quantity 11/4/2015  1 of 2 'parameterize this if necessary
-        Dim metTheMinimum As Integer = 0
-        metTheMinimum = (TotalSelected * NumOfImpressions) + ExtraCopies
-        'end adding logic here to account for 1000 minimum quantity 11/4/2015  1 of 2
+
 
 
         'Update the EDDM Mailing Row
-        lblPrintingEstimate.Text = ((TotalSelected * NumOfImpressions) * PricePerPiece).ToString("C")
-        litNumOfPcs.Text = (TotalSelected * NumOfImpressions).ToString("N0") & " @ " & PricePerPiece.ToString("C")
-
-
-        litExtraPcs.Text = ExtraCopies.ToString("N0") & " @ " & ExtraPcsPricePerPiece.ToString("C")
-        litShipTo.Text = ShipToAddress
-        lblShippingEstimate.Text = (ExtraPcsPricePerPiece * ExtraCopies).ToString("C")
+        lblPrintingEstimate.Text = MailPiecesPrice.ToString("C")
+        litNumOfPcs.Text = TotalMailed.ToString("N0") & " @ " & PricePerPiece.ToString("C")
 
 
         'SubTotal & Total
-        Dim subTotal As Decimal = ((TotalSelected * NumOfImpressions) * PricePerPiece) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
+        Dim subTotal As Decimal = (MailPiecesPrice) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
         lblSubTotal.Text = subTotal.ToString("C")
 
         Dim total As Decimal = (subTotal + SalesTax)
         TotalEstimate.Text = total.ToString("C")
 
-        ''adding logic here to account for 1000 minimum quantity 11/4/2015  2 of 2 'parameterize this if necessary
-        If metTheMinimum < 1000 Then
-            lblPrintingEstimate.Text = (1000 * PricePerPiece).ToString("C")
-            litNumOfPcs.Text = (TotalSelected * NumOfImpressions).ToString("N0") & " (1000 minimum) @ " & PricePerPiece.ToString("C")
-            subTotal = (1000 * PricePerPiece) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
-            lblSubTotal.Text = subTotal.ToString("C")
-            total = subTotal
-            TotalEstimate.Text = total.ToString("C")
-        End If
-        ''end adding logic here to account for 1000 minimum quantity 11/4/2015  2 of 2 'parameterize this if necessary
+
 
     End Sub
 
@@ -1583,41 +1613,20 @@ Partial Class QuotePDF
         Dim sProdName As String = xmlhelp.ReadAttribute(listProdNode, "Name")
         litAddressedProductName.Text = sProdName
 
-        ''adding logic here to account for 1000 minimum quantity 11/4/2015  1 of 2 'parameterize this if necessary
-        Dim metTheMinimum As Integer = 0
-        metTheMinimum = (TotalSelected * NumOfImpressions) + ExtraCopies
-        'end adding logic here to account for 1000 minimum quantity 11/4/2015  1 of 2
 
 
-        'Update the EDDM Mailing Row
-        lblPrintingEstimate.Text = ((TotalSelected * NumOfImpressions) * PricePerPiece).ToString("C")
-        litNumOfPcs.Text = (TotalSelected * NumOfImpressions).ToString("N0") & " @ " & PricePerPiece.ToString("C")
+        'Update the Mailing Row
+        lblPrintingEstimate.Text = MailPiecesPrice.ToString("C")
+        litNumOfPcs.Text = TotalMailed.ToString("N0") & " @ " & PricePerPiece.ToString("C")
 
-
-        litExtraPcs.Text = ExtraCopies.ToString("N0") & " @ " & ExtraPcsPricePerPiece.ToString("C")
-        litShipTo.Text = ShipToAddress
-        lblShippingEstimate.Text = (ExtraPcsPricePerPiece * ExtraCopies).ToString("C")
 
 
         'SubTotal & Total
-        Dim subTotal As Decimal = ((TotalSelected * NumOfImpressions) * PricePerPiece) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
+        Dim subTotal As Decimal = (MailPiecesPrice) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
         lblSubTotal.Text = subTotal.ToString("C")
 
         Dim total As Decimal = (subTotal + SalesTax)
         TotalEstimate.Text = total.ToString("C")
-
-        ''adding logic here to account for 1000 minimum quantity 11/4/2015  2 of 2 'parameterize this if necessary
-        If metTheMinimum < 1000 Then
-            lblPrintingEstimate.Text = (1000 * PricePerPiece).ToString("C")
-            litNumOfPcs.Text = (TotalSelected * NumOfImpressions).ToString("N0") & " (1000 minimum) @ " & PricePerPiece.ToString("C")
-            subTotal = (1000 * PricePerPiece) + (DesignFee) + (DropFee) + (ExtraCopies * ExtraPcsPricePerPiece)
-            lblSubTotal.Text = subTotal.ToString("C")
-            total = subTotal
-            TotalEstimate.Text = total.ToString("C")
-        End If
-        ''end adding logic here to account for 1000 minimum quantity 11/4/2015  2 of 2 'parameterize this if necessary
-
-
 
 
     End Sub
@@ -1643,13 +1652,13 @@ Partial Class QuotePDF
             If sqlReader.HasRows Then
                 sqlReader.Read()
 
-                SavedCartObj.QuoteID = Convert.ToInt32(sqlReader("pnd_SavedCartID"))
-                SavedCartObj.SiteID = sqlReader("SiteID")
-                SavedCartObj.QuoteGUID = sqlReader("GUID")
-                SavedCartObj.Cart = sqlReader("Cart")
-                SavedCartObj.ExpirationDate = sqlReader("ExpirationDate")
-                SavedCartObj.CreatedDate = sqlReader("CreatedDate")
-                SavedCartObj.CreatedBy = sqlReader("CreatedBy")
+                oSavedCart.QuoteID = Convert.ToInt32(sqlReader("pnd_SavedCartID"))
+                oSavedCart.SiteID = sqlReader("SiteID")
+                oSavedCart.QuoteGUID = sqlReader("GUID")
+                oSavedCart.Cart = sqlReader("Cart")
+                oSavedCart.ExpirationDate = sqlReader("ExpirationDate")
+                oSavedCart.CreatedDate = sqlReader("CreatedDate")
+                oSavedCart.CreatedBy = sqlReader("CreatedBy")
             Else
                 phQuote.Visible = False
                 pnlError.Visible = True
@@ -1773,10 +1782,8 @@ Partial Class QuotePDF
 
     Protected Sub BuildExtraCopiesDisplay()
 
-        'This needs to emulate what the usp_RetrieveOrderPaymentDetails and OrderCalculator do.  The OrderCalc is dependent on the Profile.Cart and 
-        'the Authorized User.  This page cannot use those so we need to emulate how the ExtraCopies PPP is calculated.
 
-        litExtraPcs.Text = ExtraCopies.ToString("N0") & " @ " & ExtraPcsPricePerPiece.ToString("C")
+        litExtraPcs.Text = ExtraCopies.ToString("N0") & " @ " & TaradelReceiptUtility.OrderCalculator.FormatAsCurrency3(ExtraPcsPricePerPiece)
         litShipTo.Text = ShipToAddress
         lblShippingEstimate.Text = (ExtraPcsPricePerPiece * ExtraCopies).ToString("C")
 
@@ -1842,7 +1849,7 @@ Partial Class QuotePDF
                     End If
                 End If
 
-                litQuoteExpiration.Text = SavedCartObj.ExpirationDate.ToShortDateString()
+                litQuoteExpiration.Text = oSavedCart.ExpirationDate.ToShortDateString()
                 lReceiptPartnerPhone.Text = sPhoneNumber
                 lReceiptPartnerName.Text = oSite.Name
 
@@ -1957,7 +1964,6 @@ Partial Class QuotePDF
 
 
 
-
     'Debug
     Protected Sub ShowDebug()
 
@@ -1975,7 +1981,6 @@ Partial Class QuotePDF
         litEDDMMap.Text = EDDMMap.ToString().ToUpper()
         litGeneratedAddressedList.Text = GeneratedAddressedList.ToString().ToUpper()
         litUploadedAddressedList.Text = UploadedAddressedList.ToString().ToUpper()
-        litTMCMap.Text = TMCMap.ToString().ToUpper()
         litPostageRate.Text = PostageRate.ToString()
         litExtraCopies.Text = ExtraCopies.ToString().ToUpper()
         litIsProfessionalDesign.Text = IsProfessionalDesign.ToString().ToUpper()
@@ -1997,10 +2002,12 @@ Partial Class QuotePDF
         litUserName.Text = UserName.ToString()
         litPONumber.Text = PONumber.ToString()
         litIsMultiple.Text = IsMultiple.ToString().ToUpper()
+        litTotalMailed.Text = TotalMailed.ToString()
+        litMailPiecesPrice.Text = MailPiecesPrice.ToString("C")
 
+        txtDebugCart.Text = oSavedCart.Cart.ToString()
 
     End Sub
-
 
 
 

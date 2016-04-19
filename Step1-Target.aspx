@@ -9,3 +9,13 @@
 
 </asp:Content>
 
+
+
+<asp:Content ID="Content3" ContentPlaceHolderID="cpScripts" runat="Server">
+
+    <script type="text/javascript">
+        $('li.active').removeAttr('class'); 
+        $("li:contains('Target')").addClass("active")
+    </script>
+
+</asp:Content>

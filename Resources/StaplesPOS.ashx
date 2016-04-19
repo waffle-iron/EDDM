@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Xml;
 
 
 
@@ -47,26 +48,16 @@ public class StaplesPOS : IHttpHandler
     }
 
     /// <summary>
-    public class Address
+    public class StaplesOrder
     {
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string addressId { get; set; }
-        public string city { get; set; }
-        public string companyName { get; set; }
-        public string extensionNumber { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string phone1 { get; set; }
-        public string state { get; set; }
-        public string zipcode { get; set; }
+        public string orderid { get; set; }
         public string xml { get; set; }
         public string paid { get; set; }
     }
 
     public class Member
     {
-        public List<Address> address { get; set; }
+        public List<StaplesOrder> orders { get; set; }
     }
 
     public class RootObject2
@@ -77,7 +68,10 @@ public class StaplesPOS : IHttpHandler
     /// <param name="context"></param>
 
 
-
+    ///1. Accept StaplesXML
+    ///2. Find the Order Number
+    ///3. Update pnd_OrderPayment 
+    ///
     public void ProcessRequest(HttpContext context)
     {
         //context.Response.Write("this is a test of the context");
@@ -87,39 +81,85 @@ public class StaplesPOS : IHttpHandler
         byte[] buffer = new byte[stream.Length];
         stream.Read(buffer, 0, buffer.Length);
         string xmlTest = Encoding.UTF8.GetString(buffer);
+        string logMessage = "Process hit " + DateTime.Now.ToShortDateString() + " at " + DateTime.Now.ToShortTimeString();
+        string logFileName = "~\\Logs\\StaplesXML.txt";
+        string fullPath = HttpContext.Current.Server.MapPath(logFileName);
+
+
+        try
+        {
+            using (System.IO.StreamWriter sw = System.IO.File.AppendText(fullPath))
+            {
+                sw.WriteLine("--------------------------------------------------------------------");
+                sw.WriteLine(logMessage);
+                sw.WriteLine(xmlTest);
+
+                ///Load the XML into something we can use
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xmlTest);
+                sw.WriteLine("--------------------------------------------------------------------");
+                sw.WriteLine("xmlTest.Length:" + xmlTest.Length);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            string errorFileName = "~\\Logs\\StaplesXML_Error.txt";
+            string errorFullPath = HttpContext.Current.Server.MapPath(errorFileName);
+
+            try
+            {
+                using (System.IO.StreamWriter sw = System.IO.File.AppendText(errorFullPath))
+                {
+                    sw.WriteLine("-------------------------START ERROR-------------------------------------------");
+                    sw.WriteLine(ex.ToString());
+                    sw.WriteLine(logMessage);
+                    sw.WriteLine("-------------------------END ERROR-------------------------------------------");
+
+                }
+            }
+            catch(Exception ex2)
+            {
+                //eat it
+            }
+        }
 
 
 
 
-        System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+        //System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
 
 
-        //if (context.Request.Form.AllKeys.Length != 0)
+        ////if (context.Request.Form.AllKeys.Length != 0)
+        ////{
+        //StaplesOrder test = new StaplesOrder();
+        ////test.firstname = "Clark";
+        ////test.lastname = "Kent";
+        ////test.phone1 = "8885551212";
+        ////test.state = "NY";
+        ////test.zipcode = "02313";
+        //test.xml = xmlTest;
+        //test.paid = "false";
+
+        //context.Response.ContentType = "application/json"; //was json
+
+
+
+
+        //foreach (string key in HttpContext.Current.Request.Form.AllKeys)
         //{
-        Address test = new Address();
-        test.firstname = "Clark";
-        test.lastname = "Kent";
-        test.phone1 = "8885551212";
-        test.state = "NY";
-        test.zipcode = "02313";
-        test.xml = xmlTest;
-        test.paid = "false";
+        //    string value = HttpContext.Current.Request.Form[key];
+        //    //test.firstname += key;
+        //    test.xml = value;
+        //}
 
-        context.Response.ContentType = "application/json"; //was json
+        //if (test.xml.Length > 0)
+        //{
+        //    test.paid = "true";
+        //}
 
-        foreach (string key in HttpContext.Current.Request.Form.AllKeys)
-        {
-            string value = HttpContext.Current.Request.Form[key];
-            test.firstname += key;
-            test.xml = value;
-        }
-
-        if(test.xml.Length > 0)
-        {
-            test.paid = "true";
-        }
-
-        context.Response.Write(jsonSerializer.Serialize(test));
+        //context.Response.Write(jsonSerializer.Serialize(test));
 
 
         //context.Response.Write(test.xml);

@@ -135,15 +135,20 @@
                                                         </small>
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("DistributionId") & "|" & Eval("ReferenceId") %>' OnClick="OpenMapForEdit" CssClass="btn btn-edit btn-shadow btn-xs">
-                                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
-                                                        </asp:LinkButton>
-                                                        <asp:HyperLink ID="hplOpenSelect" runat="server" cssclass="btn btn-primary btn-xs btn-shadow">
-                                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Start Order
+
+                                                        <asp:HyperLink ID="hplOpenSelect" runat="server" cssclass="btn btn-cta btn-xs btn-shadow" ToolTip="Start Order">
+                                                            <span class="fa fa-check"></span>&nbsp;Start Order
                                                         </asp:HyperLink>
-                                                        <asp:LinkButton ID="lnkDelete" runat="server" confirmmsg="Are you sure you want to delete this project?" OnClick="DeleteUSelect" CssClass="btn btn-delete btn-shadow btn-xs" CommandArgument='<%#Eval("DistributionId") %>'>
-                                                            <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+
+                                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("DistributionId") & "|" & Eval("ReferenceId") %>' OnClick="OpenMapForEdit" CssClass="btn btn-edit btn-shadow btn-xs" ToolTip="Edit Map">
+                                                            <span class="fa fa-pencil"></span>&nbsp;Edit
                                                         </asp:LinkButton>
+                                                       
+                                                        
+                                                        <asp:LinkButton ID="lnkDelete" runat="server" confirmmsg="Are you sure you want to delete this project?" OnClick="DeleteUSelect" CssClass="btn btn-delete btn-shadow btn-xs" CommandArgument='<%#Eval("DistributionId") %>' ToolTip="Delete Map">
+                                                            <span class="fa fa-close"></span>&nbsp;Delete
+                                                        </asp:LinkButton>
+
                                                     </td>
                                                 </tr>
 
@@ -181,21 +186,25 @@
                                                             </div>
 
                                                             <div class="row visible-xs">
-                                                                <div class="col-xs-3 col-xs-offset-3">
-                                                                    <asp:LinkButton ID="lnkEditXS" runat="server" CommandArgument='<%#Eval("DistributionId") & "|" & Eval("ReferenceId") %>' OnClick="OpenMapForEdit" CssClass="btn btn-edit btn-shadow">
-                                                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
-                                                                    </asp:LinkButton>
-                                                                </div>
+
                                                                 <div class="col-xs-3">
-                                                                    <asp:HyperLink ID="hypOpenSelectXS" runat="server" cssclass="btn btn-primary">
-                                                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Start Order
+                                                                    <asp:HyperLink ID="hypOpenSelectXS" runat="server" cssclass="btn btn-cta" ToolTip="Start Order">
+                                                                        <span class="fa fa-check"></span>&nbsp;Start Order
                                                                     </asp:HyperLink>
                                                                 </div>
-                                                                <div class="col-xs-3">
-                                                                    <asp:LinkButton ID="lnkDeleteXS" runat="server" confirmmsg="Are you sure you want to delete this project?" OnClick="DeleteUSelect" CssClass="btn btn-delete btn-shadow" CommandArgument='<%#Eval("DistributionId") %>'>
-                                                                        <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+
+                                                                <div class="col-xs-3 col-xs-offset-3">
+                                                                    <asp:LinkButton ID="lnkEditXS" runat="server" CommandArgument='<%#Eval("DistributionId") & "|" & Eval("ReferenceId") %>' OnClick="OpenMapForEdit" CssClass="btn btn-edit btn-shadow" ToolTip="Edit Map">
+                                                                        <span class="fa fa-pencil"></span>&nbsp;Edit
                                                                     </asp:LinkButton>
                                                                 </div>
+
+                                                                <div class="col-xs-3">
+                                                                    <asp:LinkButton ID="lnkDeleteXS" runat="server" confirmmsg="Are you sure you want to delete this project?" OnClick="DeleteUSelect" CssClass="btn btn-delete btn-shadow" CommandArgument='<%#Eval("DistributionId") %>' ToolTip="Delete Map">
+                                                                        <span class="fa fa-close"></span>&nbsp;Delete
+                                                                    </asp:LinkButton>
+                                                                </div>
+
                                                             </div>
 
                                                         </div>

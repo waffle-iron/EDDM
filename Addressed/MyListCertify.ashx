@@ -101,7 +101,9 @@ Public Class MyListCertify : Implements IHttpHandler
                 Dim oRow As DataRow = oWorksheet.Rows(iRow)
                 Dim oRowData As New List(Of String)
                 For iCol As Integer = 0 To oWorksheet.Columns.Count - 1
-                    oRowData.Add(oRow(iCol).ToString())
+                    '-- Get rid of any pipes, they are gonna be our delimiter
+                    oRowData.Add(oRow(iCol).ToString().Replace("|", "/"))
+                    'oRowData.Add(oRow(iCol).ToString())
                 Next
                 oSb.AppendLine(String.Join("|", oRowData.ToArray()))
             Next

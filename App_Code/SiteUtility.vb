@@ -47,6 +47,14 @@ Public Class SiteUtility
     '
     '   ValidateExtraCopiesAddress      When this is set to TRUE, it will require the user to select a Delivery Address on Step2-ProductOptions
     '                                   instead of defaulting to an address.  
+    '
+    '   TransmitOrderData               Designed to indicate whether or not we want to send data to 3rd party vendors or client APIs such as Staples. 
+    '                                   You can use this To write logic to pull the URL from TransmitOrderAPIEndPoint property.
+    '
+    '   TransmitOrderAPIEndPoint        Designed to contain the EndPoint URL to transmit order data to.
+    '
+    '   RequireStoreNumber              When set to TRUE, the StoreNumber panel will become visible (and be required) on Step3-Checkout and the Receipt pages.
+    '                                   This is currently being used on Staples sites 91 & 95.
     '=================================================================================================================================================
 
 
@@ -84,7 +92,7 @@ Public Class SiteUtility
                         siteDetails.AdminEmail = dr("AdminEmail").ToString()
                         siteDetails.SysFromEmailAcct = dr("SysFromEmailAcct").ToString()
                         siteDetails.BCCOrderEmails = dr("BCCOrderEmails").ToString()
-                        siteDetails.SupportPhone = dr("SupportPhone").ToString()
+                        'siteDetails.SupportPhone = dr("SupportPhone").ToString()'<-- Delete after 5/1/2016
                         siteDetails.AllowGetQuote = Convert.ToBoolean(dr("AllowGetQuote"))
                         siteDetails.ShowReceiptEmail = Convert.ToBoolean(dr("ShowReceiptEmail"))
                         siteDetails.ShowChat = Convert.ToBoolean(dr("ShowChat"))
@@ -133,7 +141,9 @@ Public Class SiteUtility
                         siteDetails.UseReceiptPDFBarCodes = Convert.ToBoolean(dr("UseReceiptPDFBarCodes"))
                         siteDetails.ValidateExtraCopiesAddress = Convert.ToBoolean(dr("ValidateExtraCopiesAddress"))
                         siteDetails.StatusMsg = "OK"
-
+                        siteDetails.TransmitOrderData = Convert.ToBoolean(dr("TransmitOrderData"))
+                        siteDetails.TransmitOrderAPIEndPoint = dr("TransmitOrderAPIEndPoint").ToString()
+                        siteDetails.RequireStoreNumber = Convert.ToBoolean(dr("RequireStoreNumber"))
                     Next
                 End Using
             End Using
@@ -159,26 +169,24 @@ Public Class SiteUtility
 
 
     Public Shared Function UpdateSiteSettings(SiteID As Integer, TestMode As Boolean, ShowChat As Boolean, ShowFAQ As Boolean, HideTaradel As Boolean, ShowPWDLink As Boolean, _
-                                            ShowRegisterModal As Boolean, UseCoBrandLogo As Boolean, UseRibbponBanners As Boolean, salesEmail As String, supportEmail As String, _
+                                              ShowRegisterModal As Boolean, UseCoBrandLogo As Boolean, UseRibbponBanners As Boolean, salesEmail As String, supportEmail As String, _
                                             adminEmail As String, systemEmail As String, bccOrders As String, sendCustShipEmail As Boolean, sendCustPOEmail As Boolean, _
-                                            ccAccountHolderOnReceipt As Boolean, supportPhone As String, useBoldChatVM As Boolean, useGoogleAnalytics As Boolean, _
+                                            ccAccountHolderOnReceipt As Boolean, useBoldChatVM As Boolean, useGoogleAnalytics As Boolean, _
                                             allowEDDMProducts As Boolean, allowListProducts As Boolean, offersExclusiveRoutes As Boolean, numImpressionsForExclusive As Integer, _
                                             minQtyForExclusive As Integer, numDaysExclusiveExpires As Integer, step1TargetReviewRedirectIfSingleProduct As Boolean, allowSplitDrops As Boolean, _
                                             campaignOverviewDisplayDelay As Boolean, hideSplitDrops As Boolean, preselectRequireProof As Boolean, maxImpressions As Integer, _
-                                            minOrderQty As Integer, minEDDMPricingQty As Integer, minAddressedPricingQty As Integer, defaultNumImpressions As Integer, 
-                                            validateExtraCopiesAddress As Boolean, allowGetQuote As Boolean, prefillBillingInfo As Boolean, requirePONumber As Boolean, _ 
-                                            showBillingEmail As Boolean, showBillingInfo As Boolean, showReceiptEmail As Boolean, numDaysPymntDuePriorToDrop As Integer, _ 
-                                            requiredDownPymtPercentage As Integer, showReceiptPaymentInfo As Boolean, showReceiptTerms As Boolean, useReceiptBarCodes As Boolean, _ 
-                                            authAuthorizeAPIUrl As String, authCCMerchantId As String, authMerchantId As String, authSettlementTime As String, authTestMode As Boolean, _ 
-                                            authTransactionId As String, authCCTransactionId As String, authTransactionLog As String, enableHubSpot As Boolean) As Integer
-        '57
-
+                                            minOrderQty As Integer, minEDDMPricingQty As Integer, minAddressedPricingQty As Integer, defaultNumImpressions As Integer, _
+                                            validateExtraCopiesAddress As Boolean, allowGetQuote As Boolean, prefillBillingInfo As Boolean, requirePONumber As Boolean, _
+                                            showBillingEmail As Boolean, showBillingInfo As Boolean, showReceiptEmail As Boolean, numDaysPymntDuePriorToDrop As Integer, _
+                                            requiredDownPymtPercentage As Integer, showReceiptPaymentInfo As Boolean, showReceiptTerms As Boolean, useReceiptBarCodes As Boolean, _
+                                            authAuthorizeAPIUrl As String, authCCMerchantId As String, authMerchantId As String, authSettlementTime As String, authTestMode As Boolean, _
+                                            authTransactionId As String, authCCTransactionId As String, authTransactionLog As String, enableHubSpot As Boolean, transmitOrderData As Boolean, _
+                                            transmitOrderAPIEndPoint As String, requireStoreNumber As Boolean) As Integer
         Dim results As Integer = 0
         Dim connectionString As String = System.Configuration.ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ToString()
         Dim updateSql As StringBuilder = New StringBuilder()
         Dim connObj As New System.Data.SqlClient.SqlConnection(connectionString)
 
-        '57
         updateSql.Append("EXEC usp_UpdateSiteDetails ")
         updateSql.Append("@paramSiteID = " & SiteID & ", ")
         updateSql.Append("@paramTestMode = " & Convert.ToInt16(TestMode) & ", ")
@@ -197,7 +205,7 @@ Public Class SiteUtility
         updateSql.Append("@paramSendCustShipEmail = " & sendCustShipEmail & ", ")
         updateSql.Append("@paramSendCustPOEmail = " & sendCustPOEmail & ", ")
         updateSql.Append("@paramCCAccountHolderOnReceipt = " & ccAccountHolderOnReceipt & ", ")
-        updateSql.Append("@paramSupportPhone = '" & supportPhone & "', ")
+        'updateSql.Append("@paramSupportPhone = '" & supportPhone & "', ")              '<-- Delete after 5/1/2016
         updateSql.Append("@paramUseBoldChatVM = " & useBoldChatVM & ", ")
         updateSql.Append("@paramUseGoogleAnalytics = " & useGoogleAnalytics & ", ")
         updateSql.Append("@paramAllowEDDMProducts = " & allowEDDMProducts & ", ")
@@ -236,7 +244,10 @@ Public Class SiteUtility
         updateSql.Append("@paramAuthTransactionId = '" & authTransactionId & "', ")
         updateSql.Append("@paramAuthCCTransactionId = '" & authCCTransactionId & "', ")
         updateSql.Append("@paramAuthTransactionLog = '" & authTransactionLog & "', ")
-        updateSql.Append("@paramEnableHubspot = " & enableHubSpot & "")
+        updateSql.Append("@paramEnableHubspot = " & enableHubSpot & ", ")
+        updateSql.Append("@paramTransmitOrderData = " & transmitOrderData & ", ")
+        updateSql.Append("@paramTransmitOrderAPIEndPoint = '" & transmitOrderAPIEndPoint & "',")
+        updateSql.Append("@paramRequireStoreNumber = " & requireStoreNumber)
 
 
 
@@ -266,16 +277,15 @@ Public Class SiteUtility
 
 
 
-    'To do
     Public Shared Function InsertSiteSettings(SiteID As Integer) As Integer
 
+        'TO DO
         Dim results As Integer = 0
 
 
         Return results
 
     End Function
-
 
 
 
@@ -425,15 +435,15 @@ Public Class SiteUtility
         End Property
 
 
-        Private _SupportPhone As String
-        Public Property SupportPhone() As String
-            Get
-                Return _SupportPhone
-            End Get
-            Set(ByVal value As String)
-                _SupportPhone = value
-            End Set
-        End Property
+        'Private _SupportPhone As String'<-- Delete after 5/1/2016
+        'Public Property SupportPhone() As String'<-- Delete after 5/1/2016
+        '    Get
+        '        Return _SupportPhone'<-- Delete after 5/1/2016
+        '    End Get'<-- Delete after 5/1/2016
+        '    Set(ByVal value As String)
+        '        _SupportPhone = value'<-- Delete after 5/1/2016
+        '    End Set
+        'End Property'<-- Delete after 5/1/2016
 
 
         Private _AllowGetQuote As Boolean
@@ -678,7 +688,6 @@ Public Class SiteUtility
         End Property
 
 
-        'TO DO: Convert to Boolean
         Private _AuthTestMode As String
         Public Property Auth_TestMode() As String
             Get
@@ -723,7 +732,6 @@ Public Class SiteUtility
         End Property
 
 
-        'Intentionally not set.???
         Private _CCTransactionId As String
         Public Property Auth_CCTransactionId() As String
             Get
@@ -970,6 +978,39 @@ Public Class SiteUtility
             End Get
             Set(ByVal value As String)
                 _StatusMsg = value
+            End Set
+        End Property
+
+
+        Private _TransmitOrderData As Boolean
+        Public Property TransmitOrderData() As Boolean
+            Get
+                Return _TransmitOrderData
+            End Get
+            Set(ByVal value As Boolean)
+                _TransmitOrderData = value
+            End Set
+        End Property
+
+
+        Private _TransmitOrderAPIEndPoint As String
+        Public Property TransmitOrderAPIEndPoint() As String
+            Get
+                Return _TransmitOrderAPIEndPoint
+            End Get
+            Set(ByVal value As String)
+                _TransmitOrderAPIEndPoint = value
+            End Set
+        End Property
+
+
+        Private _RequireStoreNumber As Boolean
+        Public Property RequireStoreNumber() As Boolean
+            Get
+                Return _RequireStoreNumber
+            End Get
+            Set(ByVal value As Boolean)
+                _RequireStoreNumber = value
             End Set
         End Property
 

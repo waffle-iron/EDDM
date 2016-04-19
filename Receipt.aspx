@@ -213,6 +213,8 @@
             <%--Normal Display--%>
             <asp:Panel ID="pnlReceiptSuccess" runat="server" Visible="True">
 
+
+
                 <%--Header information--%>
                 <section id="HeaderSection">
                     
@@ -220,7 +222,20 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div>
+                                
                                 <eddm:ReceiptHeaderImage runat="server" id="ReceiptHeaderImage" />
+
+                                <%--Bar Codes--%>
+                                <asp:Panel ID="pnlBarCodes" runat="server" Visible="False">
+
+                                    <div class="padded-10-wrapper">
+                                        <span class="extraLeftMargin"><small><strong><asp:Literal ID="litBarCodeHeader" runat="server" /></strong></small></span><br />
+                                        <asp:Image ID="imgBarCode" runat="server" BorderWidth="0" CssClass="padded-10-img-wrapper" /><br />
+                                        <span class="extraLeftMargin"><small><strong><asp:Literal ID="litBarCodeDesc" runat="server" /></strong></small></span><br />
+                                    </div>
+
+                                </asp:Panel>
+
                             </div>
                             <p><strong><asp:Literal ID="lReceiptPartnerName" runat="server" Visible="false" />
                             <asp:Literal runat="server" ID="lReceiptPartnerAddress" />
@@ -234,22 +249,22 @@
                     
                     <div class="row">
                         <div class="col-xs-6"><strong><asp:Literal ID="litSoldTo" runat="server" /></strong></div>
-                        <div class="col-xs-6"><div class="pull-right"><strong><asp:Literal ID="lReceiptDate" runat="server" /></strong></div></div>
+                        <div class="col-xs-6"><div class="pull-right"><strong>Order Date: <asp:Literal ID="lReceiptDate" runat="server" /></strong></div></div>
                     </div>   
                 
                     <div class="row">
                         <div class="col-xs-6"><strong><asp:Literal ID="litSoldToCompanyName" runat="server" /></strong></div>
-                        <div class="col-xs-6"><div class="pull-right"><strong><asp:Literal ID="lReceiptNumber" runat="server" /></strong></div></div>
+                        <div class="col-xs-6"><div class="pull-right"><strong><asp:HyperLink ID="hyperlinkGetPDF" runat="server" Target="_blank" Text="View as PDF/Print"></asp:HyperLink></strong></div></div>
                     </div>   
                 
                     <div class="row">
                         <div class="col-xs-6"><strong><asp:Literal ID="litSoldToAddress" runat="server" /></strong></div>
-                        <div class="col-xs-6"><div class="pull-right"><strong><asp:Literal ID="lOrderNum" runat="server" /></strong></div></div>
+                        <div class="col-xs-6"><div class="pull-right"><strong><asp:Literal ID="lReceiptNumber" runat="server" /></strong></div></div>
                     </div>   
                 
                     <div class="row">
                         <div class="col-xs-6"><strong><asp:Literal ID="litSoldToCityStateZip" runat="server" /></strong></div>
-                        <div class="col-xs-6"><div class="pull-right"><strong><asp:HyperLink ID="hyperlinkGetPDF" runat="server" Target="_blank" Text="View as PDF/Print"></asp:HyperLink></strong></div></div>
+                        <div class="col-xs-6"><div class="pull-right"><strong><asp:Literal ID="lOrderNum" runat="server" /></strong></div></div>
                     </div>   
                         
                     <div class="row">
@@ -1006,40 +1021,22 @@
                         </div>
                     </asp:PlaceHolder>
 
+
+                    <asp:PlaceHolder ID="phFooterContent" runat="server" Visible="false">
+                         <div class="row">
+                            <div class="col-xs-12">
+                                <div>
+                                    <asp:Literal ID="litFooterContent" runat="server" />.
+                                </div>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
+
                 </section>
 
 
-                <%--Custom Footer Imgs--%>
-                <asp:Panel ID="pnlStaplesFooter" runat="server" Visible="False">
-
-                    <table class="centered95Width" id="staplesReceiptFooterTbl">
-                        <tr>
-                            <td colspan="2"><h4 class="text-center"><strong><u>Product</u></strong></h4></td>
-                            <td></td>
-                            <td colspan="2"><h4 class="text-center"><strong><u>Postage</u></strong></h4></td>
-                        </tr>
-
-                        <tr>
-                            <td class="width20"><h4><strong>1) Scan</strong></h4></td>
-                            <td class="width30"><asp:Image ID="imgStaplesProduct" runat="server" /><br /><br /></td>
-                            <td class="width1px"></td>
-                            <td class="width20"><h4><strong>3) Scan</strong></h4></td>
-                            <td class="width30"><asp:Image ID="imgStaplesPostage" runat="server" /><br /><br /></td>
-                        </tr>
-
-                        <tr>
-                            <td class="width20"><h4><strong>2) Type at POS:</strong></h4></td>
-                            <td class="width30"><span class="checkoutPrice"><strong><asp:Label ID="lblStaplesProductCost" runat="server" /></strong></span></td>
-                            <td class="width1px"></td>
-                            <td class="width20"><h4><strong>4) Type at POS:</strong></h4></td>
-                            <td class="width30"><span class="checkoutPrice"><strong><asp:Label ID="lblStaplesPostage" runat="server" /></strong></span></td>
-                        </tr>
-
-                    </table>
-
-                </asp:Panel>
-
                 <div>&nbsp;</div>
+
                 <div>&nbsp;</div>
 
             </asp:Panel>

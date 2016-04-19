@@ -21,7 +21,10 @@
         log.Info("Application is starting up")
         
         '-- Wire in the global sitemap resolver
-        AddHandler SiteMap.SiteMapResolve, AddressOf Provider_SiteMapResolve	
+        AddHandler SiteMap.SiteMapResolve, AddressOf Provider_SiteMapResolve
+
+        'System.Net.WebRequest.DefaultWebProxy = New System.Net.WebProxy("127.0.0.1", 8888)
+	
     End Sub
     
     Private Function Provider_SiteMapResolve(sender As Object, e As SiteMapResolveEventArgs) As SiteMapNode

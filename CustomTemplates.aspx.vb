@@ -75,7 +75,8 @@ Partial Class CustomTemplates
 
         '-- Now we can build the page
         PagedList.IndustryId = iInd
-        PagedList.PageCount = 21
+        'PagedList.PageCount = 21
+        PagedList.PageCount = 42        'doubled the count.  4/4/2016. DSF
         If oTemplateUtil.BusinessLineId > 0 Then
             PagedList.BusinessLineId = oTemplateUtil.BusinessLineId
             Search.Visible = False
@@ -124,3 +125,6 @@ Partial Class CustomTemplates
 
 
 End Class
+
+
+

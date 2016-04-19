@@ -9,7 +9,7 @@ Imports System.Data.SqlClient
 Imports TaradelReceiptUtility
 Imports System.Threading
 Imports System.Net.Mail
-
+Imports System.Net
 
 Partial Class Receipt
     Inherits appxCMS.PageBase
@@ -178,19 +178,6 @@ Partial Class Receipt
 
 
 
-    Private _TMCMap As Boolean = False
-    Public Property TMCMap As Boolean
-        Get
-            Return _TMCMap
-        End Get
-        Set(value As Boolean)
-            _TMCMap = value
-        End Set
-
-    End Property
-
-
-
     Private _NewMoverSelected As Boolean = False
     Public Property NewMoverSelected As Boolean
         Get
@@ -216,6 +203,7 @@ Partial Class Receipt
     End Property
 
 
+
     Private _AddressedAddOnsSelected As Boolean = False
     Public Property AddressedAddOnsSelected As Boolean
         Get
@@ -226,6 +214,7 @@ Partial Class Receipt
         End Set
 
     End Property
+
 
 
     Private _HasDropFee As Boolean = False
@@ -378,6 +367,7 @@ Partial Class Receipt
         End Set
 
     End Property
+
 
 
     Private _ProductType As String
@@ -723,13 +713,6 @@ Partial Class Receipt
             BuildMapDisplay("AddressedList")
         End If
 
-        If (TMCMap) Then
-            BuildProductDisplay("AddressedList")
-            BuildTMCDropsDisplay()
-            BuildDesignDisplay("AddressedList")
-            BuildMapDisplay("AddressedList")
-        End If
-
 
 
 
@@ -739,8 +722,6 @@ Partial Class Receipt
         End If
 
 
-        'Emails
-        'To do.....
 
 
         'If one of the Add Ons is selected then show the schedule
@@ -834,8 +815,10 @@ Partial Class Receipt
         BuildTotalsPaymentsDisplay()
 
         If (SiteDetails.UseReceiptPDFBarCodes) Then
-            ShowBarCodes()
+            ShowBarCodes(OrderID)
         End If
+
+        BuildPageFooter()
 
 
     End Sub
@@ -849,13 +832,16 @@ Partial Class Receipt
         Dim orderCalc As TaradelReceiptUtility.OrderCalculator = New TaradelReceiptUtility.OrderCalculator()
         orderCalc = TaradelReceiptUtility.RetrieveOrderCalculator(Int32.Parse(OrderID), ProductType)
 
+        Dim SiteDetails As SiteUtility.SiteDetails
+        SiteDetails = SiteUtility.RetrieveSiteSettings(siteID)
+
+
         Dim OrderCustomerID = oOrder.CustomerReference.ForeignKey
         Dim oCust As Taradel.Customer = Taradel.CustomerDataSource.GetCustomer(OrderCustomerID)
         Dim sPhoneNumber As String = ""
         Dim addressText As String = ""
         Dim poText As String = ""
 
-        'Dim oCart As XmlDocument = Profile.Cart   <--- obsolete 7/22/2015
 
         Try
 
@@ -884,7 +870,7 @@ Partial Class Receipt
                 End If
 
                 lPhoneNumber.Text = sPhoneNumber
-                lReceiptPartnerPhone.Text = sPhoneNumber
+                lReceiptPartnerPhone.Text = FormatPhoneNumber(sPhoneNumber)
                 lReceiptPartnerName.Text = oSite.Name
 
                 'Address string
@@ -906,7 +892,7 @@ Partial Class Receipt
                 End If
 
 
-            'Default values
+                'Default values
             Else
                 lPhoneNumber.Text = "(804) 364-8444"
                 lReceiptPartnerPhone.Text = "(804) 364-8444"
@@ -922,8 +908,7 @@ Partial Class Receipt
             End If
 
 
-            'For Staples Act Mgr Site 95.  If other sites start to use this feature then make it configurable!
-            If siteID = 95 Then
+            If (SiteDetails.RequireStoreNumber) Then
                 ShowStoreNumber(OrderID)
             End If
 
@@ -937,8 +922,16 @@ Partial Class Receipt
 
         'Order Header Info
         lReceiptDate.Text = orderCalc.ReceiptDate.ToShortDateString()
-        lReceiptNumber.Text = "Receipt #" & orderCalc.ReceiptNumber
-        lOrderNum.Text = "Order #" & Int32.Parse(OrderID)
+
+        'Staples Store specific logic
+        If (siteID = 91) Then
+            lReceiptNumber.Visible = False
+            lOrderNum.Visible = False
+        Else
+            lReceiptNumber.Text = "Receipt #" & orderCalc.ReceiptNumber
+            lOrderNum.Text = "Order #" & Int32.Parse(OrderID)
+        End If
+
 
         orderCalc = Nothing
 
@@ -966,7 +959,6 @@ Partial Class Receipt
             litJobComments.Text = "<small>Job Comments:<br />" & sComments & "</small>"
         End If
 
-        'oCart = Nothing   <--- obsolete 7/22/2015
 
     End Sub
 
@@ -1716,19 +1708,46 @@ Partial Class Receipt
 
 
 
-    Protected Sub ShowBarCodes()
+    Protected Sub ShowBarCodes(OrderID As Integer)
 
-        Dim orderCalc As TaradelReceiptUtility.OrderCalculator = New TaradelReceiptUtility.OrderCalculator()
-        orderCalc = TaradelReceiptUtility.RetrieveOrderCalculator(Int32.Parse(OrderID), ProductType)
+        Dim barcodeImgSrc As String = ""
+        Dim barCodeHeader As String = ""
+        Dim barCodeDesc As String = ""
 
-        pnlStaplesFooter.Visible = True
-        lblStaplesPostage.Text = orderCalc.Postage.ToString("C")
-        lblStaplesProductCost.Text = (orderCalc.Subtotal - orderCalc.Postage - orderCalc.CouponDiscount).ToString("C")
+        'At the moment, only Staples Store Site 91 uses this. If and when this goes beyond one site, we will need to 
+        'make the API calls stored in a table...I suppose...
+        If (siteID = 91) Then
 
-        imgStaplesPostage.ImageUrl = SiteUtility.GetStringResourceValue(siteID, "ReceiptPostageBarCode")
-        imgStaplesProduct.ImageUrl = SiteUtility.GetStringResourceValue(siteID, "ReceiptProductBarCode")
+            barcodeImgSrc = "http://" & Request.ServerVariables("http_host") & "/Resources/StaplesOrderNumberBarCode.ashx?id=" & OrderID.ToString()
+            barCodeHeader = "Staples Order Number"
 
-        orderCalc = Nothing
+            'Get the Order Number from Handler. Create Request.
+            Dim orderNumberRequest As WebRequest = WebRequest.Create("http://" & Request.ServerVariables("http_host") & "/Resources/StaplesOrderNumberRetrieve.ashx?OrderID=" & OrderID.ToString())
+            orderNumberRequest.Credentials = CredentialCache.DefaultCredentials
+
+            'Create Response.
+            Dim orderNumberResponse As WebResponse = orderNumberRequest.GetResponse()
+
+            'Stream the response.
+            Dim dataStream As Stream = orderNumberResponse.GetResponseStream()
+
+
+            'Open the stream using a StreamReader for easy access.
+            Dim reader As StreamReader = New StreamReader(dataStream)
+
+            'Read the content.
+            barCodeDesc = reader.ReadToEnd()
+
+            dataStream.Close()
+            reader.Close()
+
+
+        End If
+
+        pnlBarCodes.Visible = True
+        imgBarCode.ImageUrl = barcodeImgSrc
+        litBarCodeHeader.Text = barCodeHeader
+        litBarCodeDesc.Text = barCodeDesc
 
 
     End Sub
@@ -1792,6 +1811,61 @@ Partial Class Receipt
         Else
             PageHeader.headerType = "full"
             PageHeader.fullHeader = "Your Receipt"
+        End If
+
+    End Sub
+
+
+
+    Private Sub BuildPageFooter()
+
+        Dim footerContent As StringBuilder = New StringBuilder()
+        Dim orderNumber As String = ""
+
+
+        If (siteID = 91) Then
+
+            phFooterContent.Visible = True
+
+
+            'Get the Order Number from Handler. Create Request.
+            Dim orderNumberRequest As WebRequest = WebRequest.Create("http://" & Request.ServerVariables("http_host") & "/Resources/StaplesOrderNumberRetrieve.ashx?OrderID=" & OrderID.ToString())
+            orderNumberRequest.Credentials = CredentialCache.DefaultCredentials
+
+            'Create Response.
+            Dim orderNumberResponse As WebResponse = orderNumberRequest.GetResponse()
+
+            'Stream the response.
+            Dim dataStream As Stream = orderNumberResponse.GetResponseStream()
+
+
+            'Open the stream using a StreamReader for easy access.
+            Dim reader As StreamReader = New StreamReader(dataStream)
+
+            'Read the content.
+            orderNumber = reader.ReadToEnd()
+
+            dataStream.Close()
+            reader.Close()
+
+
+            footerContent.Append(orderNumber & "<div>")
+            footerContent.Append("<small>Back-up Procedures for Order ")
+            footerContent.Append(orderNumber & "<br />")
+            footerContent.Append("Use these instructions ONLY if the F10 Register key or <q>Retrieve Customer Order</q> button failed to retrieve order details.</small>")
+            footerContent.Append("<hr style='border-top: 1px solid #ff0000;' />")
+            footerContent.Append("<ol>")
+            footerContent.Append("<li><small>For each item in the order: <br />&nbsp;&nbsp;&nbsp;Press the <q>Quantity</q> button. Type the listed quantity and press enter. Type the SKU number and press enter.</small></li>")
+            footerContent.Append("<li><small>Verify the order details for accuracy (ensure no SKUs were missed)</small></li>")
+            footerContent.Append("<li><small>Complete transaction</small></li>")
+            footerContent.Append("</ol>")
+            footerContent.Append("</div>")
+            footerContent.Append("<div>&nbsp;</div>")
+            footerContent.Append("<div class=""text-right text-muted"">")
+            footerContent.Append("<small>Taradel-ID: " & OrderID & "</small>")
+            footerContent.Append("</div>")
+            litFooterContent.Text = footerContent.ToString()
+
         End If
 
     End Sub
@@ -1886,8 +1960,43 @@ Partial Class Receipt
 
 
 
-    'DEBUG
 
+
+
+
+    'Helpers
+    Protected Function FormatPhoneNumber(phoneNumber As String) As String
+
+        '//===================================================================================
+        '// This function MUST receive a 10 digit phone number in order to work properly.	
+        '// It returns the 10-digit integer into a format Like (804) 555-5555.				
+        '//===================================================================================
+
+        Dim areaCode As String = ""
+        Dim prefixDigits As String = ""
+        Dim suffixDigits As String = ""
+        Dim formattedNumber As String = ""
+
+        If (String.IsNullOrEmpty(phoneNumber)) Then
+            formattedNumber = ""
+        Else
+
+            areaCode = phoneNumber.Substring(0, 3)
+            prefixDigits = phoneNumber.Substring(3, 3)
+            suffixDigits = phoneNumber.Substring(6, 4)
+            formattedNumber = areaCode & "-" & prefixDigits & "-" + suffixDigits
+
+        End If
+
+
+        Return formattedNumber
+
+    End Function
+
+
+
+
+    'DEBUG
     Protected Sub ShowDebug()
 
 
@@ -1963,7 +2072,6 @@ Partial Class Receipt
         litEDDMMap.Text = EDDMMap
         litGeneratedAddressedList.Text = GeneratedAddressedList
         litUploadedAddressedList.Text = UploadedAddressedList
-        litTMCMap.Text = TMCMap
         litNewMoverSelected.Text = NewMoverSelected
         litTargetedEmailsSelected.Text = TargetedEmailsSelected
         litHasDropFee.Text = HasDropFee

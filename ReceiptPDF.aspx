@@ -45,7 +45,20 @@
                 <tr>
                     <td>
                         <p>&nbsp;</p>
+
                         <p><appx:ReceiptHeaderImage runat="server" id="ReceiptHeaderImage" /></p>
+
+                                <%--Bar Codes--%>
+                                <asp:Panel ID="pnlBarCodes" runat="server" Visible="False">
+
+                                    <p>
+                                        <span class="extraLeftMargin"><small><strong><asp:Literal ID="litBarCodeHeader" runat="server" /></strong></small></span><br />
+                                        <asp:Image ID="imgBarCode" runat="server" BorderWidth="0" CssClass="padded-10-img-wrapper" /><br />
+                                        <span class="extraLeftMargin"><small><strong><asp:Literal ID="litBarCodeDesc" runat="server" /></strong></small></span><br />
+                                    </p>
+
+                                </asp:Panel>
+
                         <p><strong><asp:Literal ID="lReceiptPartnerName" runat="server" Visible="false" />
                         <asp:Literal runat="server" ID="lReceiptPartnerAddress" />
                         <asp:Literal ID="lReceiptPartnerPhone" runat="server" /></strong></p>
@@ -685,7 +698,7 @@
             </asp:Panel>
 
 
-      <%--Addressed AddOns. Optional --%>
+            <%--Addressed AddOns. Optional --%>
             <asp:Panel ID="pnlAddressedAddOns" runat="server" Visible="false">
                         
                 <tr class="pdfHeaderRow">
@@ -993,47 +1006,15 @@
             </asp:Panel>
 
 
-            <%--Custom Footer Imgs--%>
-            <asp:Panel ID="pnlStaplesFooter" runat="server" Visible="False">
-
+            <%--Custom Footer Content--%>
+            <asp:PlaceHolder ID="phFooterContent" runat="server" Visible="false">
                 <tr>
                     <td>
-
-                        <table class="centered95Width" id="staplesReceiptFooterTbl">
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td><h2 class="text-center"><strong><u>Product</u></strong></h2></td>
-                                <td></td>
-                                <td>&nbsp;</td>
-                                <td><h2 class="text-center"><strong><u>Postage</u></strong></h2></td>
-                            </tr>
-
-                            <tr>
-                                <td class="width20"><h4><strong>1) Scan</strong></h4></td>
-                                <td class="width30"><asp:Image ID="imgStaplesProduct" runat="server" /><br /><br /></td>
-                                <td class="width1px"></td>
-                                <td class="width20"><h4><strong>3) Scan</strong></h4></td>
-                                <td class="width30"><asp:Image ID="imgStaplesPostage" runat="server" /><br /><br /></td>
-                            </tr>
-
-                            <tr>
-                                <td class="width20"><h4><strong>2) Type at POS:</strong></h4></td>
-                                <td class="width30"><span class="checkoutPrice"><strong><asp:Label ID="lblStaplesProductCost" runat="server" /></strong></span></td>
-                                <td class="width1px"></td>
-                                <td class="width20"><h4><strong>4) Type at POS:</strong></h4></td>
-                                <td class="width30"><span class="checkoutPrice"><strong><asp:Label ID="lblStaplesPostage" runat="server" /></strong></span></td>
-                            </tr>
-
-                        </table>
-
+                        <asp:Literal ID="litFooterContent" runat="server" />
                     </td>
                 </tr>
+            </asp:PlaceHolder>
 
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-
-            </asp:Panel>
 
             <tr>
                 <td>&nbsp;</td>

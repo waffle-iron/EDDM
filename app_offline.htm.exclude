@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Good Things Are Happening</title>
+</head>
+<body id="masterBody">
+    <div id="pageLayout">
+        <div id="pageBody" class="ui-helper-clearfix">
+            <div class="pageBorder ui-helper-clearfix">
+                <div class="bodyWrapper">
+                    <div class="pageContainer">
+                    <h1>Good Things Are Happening</h1>
+                    <p>Please check back later...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

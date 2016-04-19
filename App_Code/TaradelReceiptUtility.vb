@@ -14,6 +14,7 @@ Imports System
 Imports System.Xml.Linq
 
 Public Class TaradelReceiptUtility
+
     Private Shared Log As ILog = LogManager.GetLogger(Reflection.MethodBase.GetCurrentMethod().DeclaringType())
 
     ''' <summary>
@@ -70,6 +71,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function DebugThis(orderid As Int32) As String
 
         Dim returnThis As String
@@ -88,10 +90,12 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function CustomMathRound(valueToRound As Decimal) As Decimal
         valueToRound = Math.Round(valueToRound, 2, MidpointRounding.AwayFromZero)
         Return valueToRound
     End Function
+
 
 
     Public Shared Function GetPropertyValue(ByVal obj As Object, ByVal PropName As String) As Object
@@ -147,6 +151,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function LogOrderCalculator(orderCalc As OrderCalculator) As DataTable
 
         Dim dt As New DataTable()
@@ -187,6 +192,7 @@ Public Class TaradelReceiptUtility
         Return dt
 
     End Function
+
 
 
     Public Shared Function LogObject(obj As Object) As DataTable
@@ -231,15 +237,17 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function RetrievePostageRate() As Decimal
         'Step 2 - Postage for deduction from taxes
         Dim postageRate As Decimal = 0
         postageRate = appxCMS.Util.AppSettings.GetDecimal("USPSPostageRate") 'Moved to appSettings.config
         If postageRate = 0 Then
-            postageRate = 0.16 ' default value 6/26/2015
+            postageRate = 0.154
         End If
         Return postageRate
     End Function
+
 
 
     Public Shared Function HydrateOrderCalcWithDataSet(orderCalc As OrderCalculator, ds As DataSet) As OrderCalculator
@@ -346,6 +354,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function HydrateOrderCalcWithReader(orderCalc As OrderCalculator, RDR As SqlDataReader) As OrderCalculator
         Do While RDR.Read()
             'generic order data - should the same where financed or not
@@ -428,6 +437,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function GenerateDataTableFromProductListForSqlParam(lstProduct As List(Of Product)) As DataTable
         Dim dt As New DataTable()
         dt.Columns.Add("ProductID", GetType(Integer))
@@ -454,15 +464,18 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function CalculateOrder2(orderCalc As OrderCalculator) As OrderCalculator
-        'Dim connectString As String = "Data Source=65.175.38.199;Initial Catalog=Taradel-Dev;Persist Security Info=True;User ID=pnd_admin;Password=t3$t"
+
         Try
             Using oConnA As New SqlConnection(ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ConnectionString)
+
                 oConnA.Open()
 
-                Dim sSql As String = "usp_CalculateOrderDetailsv5" 'testing 6/1/2015
+                Dim sSql As String = "usp_CalculateOrderDetailsv6"
 
                 Using oCmdA As New SqlCommand(sSql, oConnA)
+
                     oCmdA.CommandType = CommandType.StoredProcedure
                     oCmdA.Parameters.AddWithValue("@paramPiecesToMail", orderCalc.MailPieces)
                     oCmdA.Parameters.AddWithValue("@paramPiecesToShip", orderCalc.ExtraPieces)
@@ -478,7 +491,6 @@ Public Class TaradelReceiptUtility
                     oCmdA.Parameters.AddWithValue("@paramBasePricePerPiece", orderCalc.BasePricePerPiece)
                     oCmdA.Parameters.AddWithValue("@paramIsThisAMultiple", orderCalc.IsThisAMultiple)
 
-                    'SqlParameter tvpParam = command.Parameters.AddWithValue("@tvpRoutes", dt);
                     Dim tvpParam As SqlParameter = oCmdA.Parameters.AddWithValue("@paramProductTable", GenerateDataTableFromProductListForSqlParam(orderCalc.LstProducts))
                     tvpParam.SqlDbType = SqlDbType.Structured
                     tvpParam.TypeName = "dbo.OrderCalcProductTableType"
@@ -493,17 +505,14 @@ Public Class TaradelReceiptUtility
 
                 End Using
             End Using
-            'txtDebug.Text = "SUCCESS:" + vbCrLf + orderCalc.SubtotalWithMarkup.ToString()
-
 
         Catch ex As Exception
             orderCalc.zErrorMessage = ex.StackTrace.ToString() & vbCrLf & ex.Message.ToString()
             Log.Error("RetrieveOrderCalculator:" & ex.Message.ToString(), ex)
-            'txtDebug.Text = ex.ToString()
         End Try
 
-
         Return orderCalc
+
 
     End Function
 
@@ -786,6 +795,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function RetrieveIsThisAMultipleImpression(oCart As XmlDocument) As Boolean
         Dim thisIsAMultiple As Boolean = False
         Dim MailedItems As Int32 = 0
@@ -803,6 +813,7 @@ Public Class TaradelReceiptUtility
 
         Return thisIsAMultiple
     End Function
+
 
 
     Public Shared Function RetrieveMailedItemsInOrder(oCart As XmlDocument) As Integer
@@ -824,6 +835,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function RetrievePricePerPiece(oCart As XmlDocument) As Decimal
         Dim PricePerPiece As Decimal = 0
         Dim XNode As XmlNode = oCart.SelectSingleNode("/cart/Product")
@@ -831,6 +843,7 @@ Public Class TaradelReceiptUtility
 
         Return PricePerPiece
     End Function
+
 
 
     Public Shared Function RetrieveShippedItemsInOrder(oCart As XmlDocument) As Integer
@@ -852,6 +865,7 @@ Public Class TaradelReceiptUtility
     End Function
 
 
+
     Public Shared Function RetrieveShippedIDInOrder(oCart As XmlDocument) As Integer
         Dim AddressID As Int32 = 0
 
@@ -867,6 +881,7 @@ Public Class TaradelReceiptUtility
 
         Return AddressID
     End Function
+
 
 
     Public Shared Function RetrieveOrderCalculator(orderid As Integer, productType As String) As OrderCalculator
@@ -1009,6 +1024,7 @@ Public Class TaradelReceiptUtility
         Return sPDFFile
 
     End Function
+
 
 
     Public Class OrderCalculatorV2
@@ -1971,265 +1987,272 @@ Public Class TaradelReceiptUtility
 
 
     Public Class Product
-            Private _productName As String
-            Public Property ProductName() As String
-                Get
-                    Return _productName
-                End Get
+        Private _productName As String
+        Public Property ProductName() As String
+            Get
+                Return _productName
+            End Get
 
-                Set(ByVal value As String)
-                    _productName = value
-                End Set
+            Set(ByVal value As String)
+                _productName = value
+            End Set
 
-            End Property
+        End Property
 
-            Private _quantity As Integer
-            Public Property Quantity() As Integer
-                Get
-                    Return _quantity
-                End Get
+        Private _quantity As Integer
+        Public Property Quantity() As Integer
+            Get
+                Return _quantity
+            End Get
 
-                Set(ByVal value As Integer)
-                    _quantity = value
-                End Set
+            Set(ByVal value As Integer)
+                _quantity = value
+            End Set
 
-            End Property
-
-
-            Private _pricePerPiece As Decimal
-            Public Property PricePerPiece() As Decimal
-                Get
-                    Return _pricePerPiece
-                End Get
-
-                Set(ByVal value As Decimal)
-                    _pricePerPiece = value
-                End Set
-
-            End Property
+        End Property
 
 
-            Private _totalProductPrice As Decimal
-            Public Property TotalProductPrice() As Decimal
-                Get
-                    Return _totalProductPrice
-                End Get
+        Private _pricePerPiece As Decimal
+        Public Property PricePerPiece() As Decimal
+            Get
+                Return _pricePerPiece
+            End Get
 
-                Set(ByVal value As Decimal)
-                    _totalProductPrice = value
-                End Set
+            Set(ByVal value As Decimal)
+                _pricePerPiece = value
+            End Set
 
-            End Property
-
-            Private _productID As Integer
-            Public Property ProductID() As Integer
-                Get
-                    Return _productID
-                End Get
-
-                Set(ByVal value As Integer)
-                    _productID = value
-                End Set
-
-            End Property
+        End Property
 
 
-        End Class
+        Private _totalProductPrice As Decimal
+        Public Property TotalProductPrice() As Decimal
+            Get
+                Return _totalProductPrice
+            End Get
 
+            Set(ByVal value As Decimal)
+                _totalProductPrice = value
+            End Set
 
-        Private Shared Function RetrieveMapNameBasedOnDistID(distID As Integer) As String
-            'This method accepts the newly created DistributionID from the MapServer (diff server) and looks up the map name
-            Dim results As String = ""
-            Dim connectString As String = System.Configuration.ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ToString()
-            Dim selectSQL As String = "SELECT TOP 1 Name FROM pnd_CustomerDistribution where DistributionID = " + distID.ToString() + " AND [Deleted] = 0"
-            Dim myConnection As New SqlConnection(connectString)
-            Dim mySQLCommand As New SqlCommand()
-            mySQLCommand.Connection = myConnection
-            mySQLCommand.CommandText = selectSQL
+        End Property
 
-            myConnection.Open()
-            results = DirectCast(mySQLCommand.ExecuteScalar(), [String])
-            myConnection.Close()
-            Return results
+        Private _productID As Integer
+        Public Property ProductID() As Integer
+            Get
+                Return _productID
+            End Get
 
-        End Function
+            Set(ByVal value As Integer)
+                _productID = value
+            End Set
 
-        ''' <summary>
-        ''' make a property of Order Calculator ? ? ! ! 
-        ''' </summary>
-        ''' <param name="orderid"></param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-
-        Public Shared Function RetrieveMapName(orderid As Int32) As String
-            Dim MapName As String
-            Dim DistID As Integer = RetrieveDistID(orderid)
-            MapName = RetrieveMapNameBasedOnDistID(DistID)
-            Return MapName
-        End Function
-
-
-        Public Shared Function RetrieveDistID(orderid As Int32) As Integer
-            Dim DistID As Integer = 0
-            Dim xmlDoc As New XmlDocument
-            xmlDoc = RetrieveCartXml(orderid)
-            Dim productNode As XmlNode = xmlDoc.SelectSingleNode("//Product")
-            Integer.TryParse(productNode.Attributes("DistributionId").Value.ToString(), DistID)
-            Return DistID
-        End Function
-
-
-        Public Shared Function RetrieveEDDMPrintedQuantity(orderid As Int32) As Integer
-            Dim EDDMPrinted As Integer = 0
-            Dim xmlDoc As New XmlDocument
-            xmlDoc = RetrieveCartXml(orderid)
-            EDDMPrinted = RetrieveMailedItemsInOrder(xmlDoc)
-            Return EDDMPrinted
-        End Function
-
-
-        Public Shared Function RetrieveCartXml(orderid As Int32) As XmlDocument
-            Dim DistID As Integer = 0
-            Dim xmlDoc As New XmlDocument
-
-            Try
-                Using oConnA As New SqlConnection(ConfigurationManager.ConnectionStrings("appx").ConnectionString)
-                    oConnA.Open()
-
-                    Dim sSql As String = "SELECT TOP 1 OrderItemXml FROM pnd_OrderItem WHERE OrderID = " + orderid.ToString()
-                    Using oCmdA As New SqlCommand(sSql, oConnA)
-                        'Dim paramz As New SqlParameter()
-                        'paramz.ParameterName = "orderID"
-                        'paramz.Value = orderid
-                        oCmdA.CommandType = CommandType.Text
-                        'oCmdA.Parameters.Add(paramz)
-                        Using RDR As SqlDataReader = oCmdA.ExecuteReader()
-                            If RDR.HasRows Then
-                                Do While RDR.Read()
-                                    Dim xmlValue As String = RDR.GetValue(0)
-                                    xmlDoc.LoadXml(xmlValue)
-                                Loop
-                            End If
-                        End Using
-                    End Using
-                End Using
-                'txtDebug.Text = "SUCCESS:" + vbCrLf + orderCalc.SubtotalWithMarkup.ToString()
-
-
-            Catch ex As Exception
-                Log.Error("RetrieveMapName:" & ex.ToString(), ex)
-            End Try
-
-            Dim sOrderXML As String = "<cart>" & xmlDoc.OuterXml & "</cart>"
-            Dim oOrderXML As New XmlDocument
-            oOrderXML.LoadXml(sOrderXML)
-
-            Return oOrderXML
-
-
-        End Function
-
-
-        Public Shared Function RetrievePaymentSchedule(orderid As Int32) As List(Of Payment)
-            Dim lstPayments As New List(Of Payment)
-
-
-            Try
-                Using oConnA As New SqlConnection(ConfigurationManager.ConnectionStrings("appx").ConnectionString)
-                    oConnA.Open()
-
-                    Dim sSql As String = "usp_RetrievePaymentSchedule"
-                    Using oCmdA As New SqlCommand(sSql, oConnA)
-                        Dim paramz As New SqlParameter()
-                        paramz.ParameterName = "orderID"
-                        paramz.Value = orderid
-
-                        oCmdA.CommandType = CommandType.StoredProcedure
-                        oCmdA.Parameters.Add(paramz)
-                        Using RDR = oCmdA.ExecuteReader()
-                            If RDR.HasRows Then
-                                Do While RDR.Read()
-                                    Dim p As New Payment
-                                    p.Payment = OrderCalculator.ConvertToDecimalOrZero(RDR.Item("Payment"))
-                                    p.Balance = OrderCalculator.ConvertToDecimalOrZero(RDR.Item("Balance"))
-                                    p.DropDate = RDR.Item("DropDate").ToString()
-                                    p.BillDate = RDR.Item("BillDate").ToString()
-                                    lstPayments.Add(p)
-                                Loop
-                            End If
-                        End Using
-                    End Using
-                End Using
-                'txtDebug.Text = "SUCCESS:" + vbCrLf + orderCalc.SubtotalWithMarkup.ToString()
-
-
-            Catch ex As Exception
-                Log.Error("RetrievePaymentSchedule:" & ex.ToString(), ex)
-            End Try
-
-
-            Return lstPayments
-
-
-        End Function
-
-
-        Public Class PaymentSchedule
-            Private _ListPayments As New List(Of Payment)
-            Public Property ListPayments() As List(Of Payment)
-                Get
-                    Return _ListPayments
-                End Get
-                Set(ByVal value As List(Of Payment))
-                    _ListPayments = value
-                End Set
-            End Property
-        End Class
-
-
-        Public Class Payment
-            Private _billDate As String
-            Public Property BillDate() As String
-                Get
-                    Return _billDate
-                End Get
-                Set(ByVal value As String)
-                    _billDate = value
-                End Set
-            End Property
-
-            Private _dropDate As Date
-            Public Property DropDate() As Date
-                Get
-                    Return _dropDate
-                End Get
-                Set(ByVal value As Date)
-                    _dropDate = value
-                End Set
-            End Property
-
-            Private _payment As Decimal
-            Public Property Payment() As Decimal
-                Get
-                    Return _payment
-                End Get
-                Set(ByVal value As Decimal)
-                    _payment = value
-                End Set
-            End Property
-
-
-            Private _balance As Decimal
-            Public Property Balance() As Decimal
-                Get
-                    Return _balance
-                End Get
-                Set(ByVal value As Decimal)
-                    _balance = value
-                End Set
-            End Property
-
-        End Class
+        End Property
 
 
     End Class
+
+
+
+    Private Shared Function RetrieveMapNameBasedOnDistID(distID As Integer) As String
+        'This method accepts the newly created DistributionID from the MapServer (diff server) and looks up the map name
+        Dim results As String = ""
+        Dim connectString As String = System.Configuration.ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ToString()
+        Dim selectSQL As String = "SELECT TOP 1 Name FROM pnd_CustomerDistribution where DistributionID = " + distID.ToString() + " AND [Deleted] = 0"
+        Dim myConnection As New SqlConnection(connectString)
+        Dim mySQLCommand As New SqlCommand()
+        mySQLCommand.Connection = myConnection
+        mySQLCommand.CommandText = selectSQL
+
+        myConnection.Open()
+        results = DirectCast(mySQLCommand.ExecuteScalar(), [String])
+        myConnection.Close()
+        Return results
+
+    End Function
+
+    ''' <summary>
+    ''' make a property of Order Calculator ? ? ! ! 
+    ''' </summary>
+    ''' <param name="orderid"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+
+    Public Shared Function RetrieveMapName(orderid As Int32) As String
+        Dim MapName As String
+        Dim DistID As Integer = RetrieveDistID(orderid)
+        MapName = RetrieveMapNameBasedOnDistID(DistID)
+        Return MapName
+    End Function
+
+
+
+    Public Shared Function RetrieveDistID(orderid As Int32) As Integer
+        Dim DistID As Integer = 0
+        Dim xmlDoc As New XmlDocument
+        xmlDoc = RetrieveCartXml(orderid)
+        Dim productNode As XmlNode = xmlDoc.SelectSingleNode("//Product")
+        Integer.TryParse(productNode.Attributes("DistributionId").Value.ToString(), DistID)
+        Return DistID
+    End Function
+
+
+
+    Public Shared Function RetrieveEDDMPrintedQuantity(orderid As Int32) As Integer
+        Dim EDDMPrinted As Integer = 0
+        Dim xmlDoc As New XmlDocument
+        xmlDoc = RetrieveCartXml(orderid)
+        EDDMPrinted = RetrieveMailedItemsInOrder(xmlDoc)
+        Return EDDMPrinted
+    End Function
+
+
+
+    Public Shared Function RetrieveCartXml(orderid As Int32) As XmlDocument
+        Dim DistID As Integer = 0
+        Dim xmlDoc As New XmlDocument
+
+        Try
+            Using oConnA As New SqlConnection(ConfigurationManager.ConnectionStrings("appx").ConnectionString)
+                oConnA.Open()
+
+                Dim sSql As String = "SELECT TOP 1 OrderItemXml FROM pnd_OrderItem WHERE OrderID = " + orderid.ToString()
+                Using oCmdA As New SqlCommand(sSql, oConnA)
+                    'Dim paramz As New SqlParameter()
+                    'paramz.ParameterName = "orderID"
+                    'paramz.Value = orderid
+                    oCmdA.CommandType = CommandType.Text
+                    'oCmdA.Parameters.Add(paramz)
+                    Using RDR As SqlDataReader = oCmdA.ExecuteReader()
+                        If RDR.HasRows Then
+                            Do While RDR.Read()
+                                Dim xmlValue As String = RDR.GetValue(0)
+                                xmlDoc.LoadXml(xmlValue)
+                            Loop
+                        End If
+                    End Using
+                End Using
+            End Using
+            'txtDebug.Text = "SUCCESS:" + vbCrLf + orderCalc.SubtotalWithMarkup.ToString()
+
+
+        Catch ex As Exception
+            Log.Error("RetrieveMapName:" & ex.ToString(), ex)
+        End Try
+
+        Dim sOrderXML As String = "<cart>" & xmlDoc.OuterXml & "</cart>"
+        Dim oOrderXML As New XmlDocument
+        oOrderXML.LoadXml(sOrderXML)
+
+        Return oOrderXML
+
+
+    End Function
+
+
+
+    Public Shared Function RetrievePaymentSchedule(orderid As Int32) As List(Of Payment)
+        Dim lstPayments As New List(Of Payment)
+
+
+        Try
+            Using oConnA As New SqlConnection(ConfigurationManager.ConnectionStrings("appx").ConnectionString)
+                oConnA.Open()
+
+                Dim sSql As String = "usp_RetrievePaymentSchedule"
+                Using oCmdA As New SqlCommand(sSql, oConnA)
+                    Dim paramz As New SqlParameter()
+                    paramz.ParameterName = "orderID"
+                    paramz.Value = orderid
+
+                    oCmdA.CommandType = CommandType.StoredProcedure
+                    oCmdA.Parameters.Add(paramz)
+                    Using RDR = oCmdA.ExecuteReader()
+                        If RDR.HasRows Then
+                            Do While RDR.Read()
+                                Dim p As New Payment
+                                p.Payment = OrderCalculator.ConvertToDecimalOrZero(RDR.Item("Payment"))
+                                p.Balance = OrderCalculator.ConvertToDecimalOrZero(RDR.Item("Balance"))
+                                p.DropDate = RDR.Item("DropDate").ToString()
+                                p.BillDate = RDR.Item("BillDate").ToString()
+                                lstPayments.Add(p)
+                            Loop
+                        End If
+                    End Using
+                End Using
+            End Using
+            'txtDebug.Text = "SUCCESS:" + vbCrLf + orderCalc.SubtotalWithMarkup.ToString()
+
+
+        Catch ex As Exception
+            Log.Error("RetrievePaymentSchedule:" & ex.ToString(), ex)
+        End Try
+
+
+        Return lstPayments
+
+
+    End Function
+
+
+
+    Public Class PaymentSchedule
+        Private _ListPayments As New List(Of Payment)
+        Public Property ListPayments() As List(Of Payment)
+            Get
+                Return _ListPayments
+            End Get
+            Set(ByVal value As List(Of Payment))
+                _ListPayments = value
+            End Set
+        End Property
+    End Class
+
+
+
+    Public Class Payment
+        Private _billDate As String
+        Public Property BillDate() As String
+            Get
+                Return _billDate
+            End Get
+            Set(ByVal value As String)
+                _billDate = value
+            End Set
+        End Property
+
+        Private _dropDate As Date
+        Public Property DropDate() As Date
+            Get
+                Return _dropDate
+            End Get
+            Set(ByVal value As Date)
+                _dropDate = value
+            End Set
+        End Property
+
+        Private _payment As Decimal
+        Public Property Payment() As Decimal
+            Get
+                Return _payment
+            End Get
+            Set(ByVal value As Decimal)
+                _payment = value
+            End Set
+        End Property
+
+
+        Private _balance As Decimal
+        Public Property Balance() As Decimal
+            Get
+                Return _balance
+            End Get
+            Set(ByVal value As Decimal)
+                _balance = value
+            End Set
+        End Property
+
+    End Class
+
+
+End Class

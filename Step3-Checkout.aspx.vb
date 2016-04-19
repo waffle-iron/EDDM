@@ -12,8 +12,7 @@ Imports WebSupergoo.ABCpdf8
 Imports System.Data
 Imports System.Data.Sql
 Imports System.Data.SqlClient
-
-
+Imports System.Net
 
 Partial Class Step3_Checkout
     Inherits appxCMS.PageBase
@@ -569,8 +568,8 @@ Partial Class Step3_Checkout
             End If
 
 
-            'For Staples Act Mgr Site 95.  If other sites start to use this feature then make it configurable!
-            If SiteID = 95 Then
+
+            If (SiteDetails.RequireStoreNumber) Then
                 pnlStoreNumber.Visible = True
             End If
 
@@ -578,6 +577,7 @@ Partial Class Step3_Checkout
             If EDDMMap Then
                 BindEDDMCart()
             End If
+
 
             If (UploadedAddressedList) Or (GeneratedAddressedList) Then
                 BindAddressedCart()
@@ -862,6 +862,7 @@ Partial Class Step3_Checkout
     End Sub
 
 
+
     'Needs clean up and revising.
     Protected Sub lnkCheckout_Click(sender As Object, e As System.EventArgs) Handles lnkCheckout.Click
 
@@ -1089,8 +1090,6 @@ Partial Class Step3_Checkout
             Next
 
 
-            'experiment - hydrate the oOrderItem and see if that works.
-            'START original code 2/11/2015
             Dim oOrderItem As Taradel.OrderItem = Taradel.OrderItem.CreateOrderItem(0, oQuote.Quantity)
             oOrderItem.DesignFee = oQuote.DesignPrice
             oOrderItem.HasResidentialShipping = False
@@ -1114,7 +1113,6 @@ Partial Class Step3_Checkout
                 oOrderItemAttribute.AttributeName = sName
                 oOrderItem.Attributes.Add(oOrderItemAttribute)
             Next
-            'END original code 2/11/2015
 
 
 
@@ -1147,15 +1145,14 @@ Partial Class Step3_Checkout
             oBillPlace.PhoneNumber = BillInfo_Phone.Text
 
             Dim oBillInfo As New Taradel.Contact(oBillName, oBillPlace)
-
             Dim oResponse As Taradel.OrderResponse = Nothing
 
+
+            'PAYMENT TYPE LOGIC
             Select Case radPaymentType.SelectedValue
 
                 Case "CC"
                     If radCCPayNow.Checked Then
-                        'remove the finance attributes from the order xml
-                        'oProd = RemoveFinanceAttributes(oProd)
 
                         '-- Do a full payment now
                         oOrder.PaidAmt = xOrderCalc.OrderTotal 'oAmounts.OrderAmount
@@ -1163,6 +1160,7 @@ Partial Class Step3_Checkout
 
                         oResponse = Taradel.WLOrderDataSource.SaveFullPayment(oOrder, oAmounts, oBillInfo, CCNumber.Text, CVV2.Text, CCExp.SelectedDate, MerchantID, TransactionID, UseOwnGateWay)
                     Else
+
                         '-- Do a partial payment now, and schedule ARB payments for the balance
                         oOrder.PaidAmt = oFinanceAmounts.Deposit 'which is xOrderCalc.FinanceFirstPayment
                         oOrder.PaidInFull = False
@@ -1187,14 +1185,15 @@ Partial Class Step3_Checkout
 
                 Case "EC"
                     If radECPayNow.Checked Then
-                        '-- Do a full payment now
+
                         oOrder.PaidAmt = oAmounts.PaidAmount
                         oOrder.PaidInFull = True
-
                         oResponse = Taradel.WLOrderDataSource.SaveFullPayment(oOrder, oAmounts, oBillInfo, BankRoutingNumber.Text, BankAccountNumber.Text, BankName.Text, BankNameOnAccount.Text, Me.MerchantID, Me.TransactionID, Me.UseOwnGateWay)
+
                     End If
 
                 Case "PO"
+
                     oOrder.PaidAmt = 0
                     oOrder.PaidInFull = False
                     oResponse = Taradel.WLOrderDataSource.SavePOPayment(oOrder, oBillInfo, PONumber.Text)
@@ -1202,6 +1201,8 @@ Partial Class Step3_Checkout
             End Select
 
 
+
+            'CHECKING PAYMENT STATUS
             If oResponse.StatusCode = Taradel.OrderResponse.ResponseStatusCode.Success Then
                 Try
                     Dim oSavedOrderItem As Taradel.OrderItem = oResponse.OrderData.OrderItems.FirstOrDefault
@@ -1234,58 +1235,92 @@ Partial Class Step3_Checkout
 
 
 
-                Try
+
+                'RECORD THR STORE NUMBER in the [OrderTag] table if needed.
+                If SiteDetails.RequireStoreNumber Then
+
+                    'Get the Store Number TagGroupID
+                    Dim storeNumber As String = Trim(txtStoreNumber.Text)                                   'Requires to provide as integers from user but really is a string in database.
+                    Dim tagGroupID As Integer = 0
+                    Dim connectionString As String = System.Configuration.ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ToString()
+                    Dim getSQL As String = "SELECT TOP 1 [OrderTagGroupID] FROM [OrderTagGroup] WHERE [Name] LIKE 'Store Number'"
+                    Dim connectionObj As SqlConnection = New SqlConnection(connectionString)
+                    Dim sqlCommand As SqlCommand = New SqlCommand()
+                    Dim errorMsg As StringBuilder = New StringBuilder()
+
+                    sqlCommand.CommandType = System.Data.CommandType.Text
+                    sqlCommand.CommandText = getSQL
+                    sqlCommand.Connection = connectionObj
+
+                    Try
+
+                        connectionObj.Open()
+                        tagGroupID = sqlCommand.ExecuteScalar()
+
+                    Catch objException As Exception
+
+                        errorMsg.Append("The following errors occurred" & Environment.NewLine)
+                        errorMsg.Append("Message: " & objException.Message & Environment.NewLine)
+                        errorMsg.Append("Source: " & objException.Source & Environment.NewLine)
+                        errorMsg.Append("Stack Trace: " & objException.StackTrace & Environment.NewLine)
+                        errorMsg.Append("Target Site: " & objException.TargetSite.Name & Environment.NewLine)
+                        logger.RecordInLog("[Step3-Checkout ERROR] Error Retrieving TagGroupID: " & Environment.NewLine & errorMsg.ToString())
+                        EmailUtility.SendAdminEmail("There was an error retriveing OrderTagID in Step3-Checkout. Check the EDDM-Log.")
+
+                    Finally
+                        connectionObj.Close()
+                    End Try
 
 
-                    'RECORD THR STORE NUMBER in the [OrderTag] table if needed.
-                    'For Staples Act Mgr Site 95.  If other sites start to use this feature then make it configurable!
-                    If SiteID = 95 Then
+                    'Insert the record and record the store number.
+                    If (tagGroupID > 0) Then
+                        RecordStoreNumber(tagGroupID, oResponse.OrderId, storeNumber)
+                    End If
 
 
-                        'Get the Store Number TagGroupID
-                        Dim storeNumber As String = Trim(txtStoreNumber.Text)                                             'Requires to provide as integers from user but really is a string in database.
-                        Dim tagGroupID As Integer = 0
-                        Dim connectionString As String = System.Configuration.ConfigurationManager.ConnectionStrings("TaradelWLConnectionString").ToString()
-                        Dim getSQL As String = "SELECT TOP 1 [OrderTagGroupID] FROM [OrderTagGroup] WHERE [Name] LIKE 'Store Number'"
-                        Dim connectionObj As SqlConnection = New SqlConnection(connectionString)
-                        Dim sqlCommand As SqlCommand = New SqlCommand()
-                        Dim errorMsg As StringBuilder = New StringBuilder()
-
-                        sqlCommand.CommandType = System.Data.CommandType.Text
-                        sqlCommand.CommandText = getSQL
-                        sqlCommand.Connection = connectionObj
+                    'SEND ORDER DATA and 'Staples Store Number'.  At the moment, this is only used for Site#91 - Staples Store Site.
+                    If (SiteDetails.TransmitOrderData) Then
 
                         Try
 
-                            connectionObj.Open()
-                            tagGroupID = sqlCommand.ExecuteScalar()
+                            Dim apiURL As String = "http://" & Request.ServerVariables("http_host") & String.Format(SiteDetails.TransmitOrderAPIEndPoint, oResponse.OrderId.ToString())
+                            Dim s As HttpWebRequest
+                            Dim enc As UTF8Encoding
+                            Dim postdata As String
+                            Dim postdatabytes As Byte()
 
-                        Catch objException As Exception
+                            s = HttpWebRequest.Create(apiURL)
+                            enc = New System.Text.UTF8Encoding()
+                            postdata = String.Empty '"username=*****&password=*****&message=test+message&orig=test&number=447712345678"
+                            postdatabytes = enc.GetBytes(postdata)
+                            s.Method = "POST"
+                            s.ContentType = "application/x-www-form-urlencoded"
+                            s.ContentLength = postdatabytes.Length
 
-                            errorMsg.Append("The following errors occurred" & Environment.NewLine)
-                            errorMsg.Append("Message: " & objException.Message & Environment.NewLine)
-                            errorMsg.Append("Source: " & objException.Source & Environment.NewLine)
-                            errorMsg.Append("Stack Trace: " & objException.StackTrace & Environment.NewLine)
-                            errorMsg.Append("Target Site: " & objException.TargetSite.Name & Environment.NewLine)
-                            logger.RecordInLog("[Step3-Checkout ERROR] Error Retrieving TagGroupID: " & Environment.NewLine & errorMsg.ToString())
-                            EmailUtility.SendAdminEmail("There was an error retriveing OrderTagID in Step3-Checkout. Check the EDDM-Log.")
+                            Using stream = s.GetRequestStream()
+                                stream.Write(postdatabytes, 0, postdatabytes.Length)
+                            End Using
+                            Dim result = s.GetResponse()
+
+                        Catch ex As Exception
+
+                            Response.Write(ex.StackTrace)
+                            Response.Write(ex.ToString)
 
                         Finally
-                            connectionObj.Close()
+
                         End Try
-
-
-                        'Insert the record and record the store number.
-                        If tagGroupID > 0 Then
-                            RecordStoreNumber(tagGroupID, oResponse.OrderId, storeNumber)
-                        End If
-
 
                     End If
 
 
+                End If
 
 
+
+
+                'TRY CREATING PDF AND SENDING EMAIL.....
+                Try
 
                     'CREATE RECEIPT PDF
                     Dim receiptFilePath As String = ""
@@ -1306,7 +1341,13 @@ Partial Class Step3_Checkout
                 End Try
 
 
-                '-- Record this order info over at Hubspot
+
+
+
+
+
+                'HUBSPOT
+                '======================================================================================================================
                 Dim sPaper As String = ""
                 Try
                     Dim oPaper As XmlNode = oProd.SelectSingleNode("Attribute[@Name='Paper']")
@@ -1319,8 +1360,6 @@ Partial Class Step3_Checkout
 
 
 
-                'HUBSPOT
-                '======================================================================================================================
                 If currentMode <> "dev" Then
 
                     If (SiteDetails.EnableHubSpot) Then
@@ -3467,6 +3506,8 @@ Partial Class Step3_Checkout
             connectionObj.Open()
             sqlCommand.ExecuteNonQuery()
 
+            logger.RecordInLog("[Step3-Checkout.aspx RecordStoreNumber] lookupStoreNumberSql: " & insertSql)
+
 
         Catch objException As Exception
 
@@ -4280,6 +4321,8 @@ Partial Class Step3_Checkout
         End If
 
     End Sub
+
+
 
 
 

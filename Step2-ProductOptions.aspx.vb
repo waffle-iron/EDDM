@@ -481,18 +481,6 @@ Partial Class Step2_ProductOptions
     End Property
 
 
-    Private _TMCMap As Boolean = False
-    Public Property TMCMap As Boolean
-        Get
-            Return _TMCMap
-        End Get
-        Set(value As Boolean)
-            _TMCMap = value
-        End Set
-
-    End Property
-
-
     Private _DesignType As String = ""
     Private Property DesignType() As String
         Get
@@ -693,13 +681,22 @@ Partial Class Step2_ProductOptions
     End Property
 
 
+    Private _DropFeeRate As Integer = 0
+    Private Property DropFeeRate() As Integer
+        Get
+            Return _DropFeeRate
+        End Get
+        Set(ByVal value As Integer)
+            _DropFeeRate = value
+        End Set
+    End Property
 
 
 
 
 
 
-    'Init Methods ==================================================================================================================
+    'Methods ==================================================================================================================
     Protected Sub Page_Init(sender As Object, e As System.EventArgs) Handles Me.Init
 
         oCust = Taradel.CustomerDataSource.GetCustomer(User.Identity.Name)
@@ -734,7 +731,7 @@ Partial Class Step2_ProductOptions
     End Sub
 
 
-    ''this should set it up correctly 3/22/2016
+
     Private Function CalculateTotalSelected(oDist As Taradel.CustomerDistribution) As Integer
         USelectID = oDist.USelectMethodReference.ForeignKey()
 
@@ -745,8 +742,6 @@ Partial Class Step2_ProductOptions
                 UploadedAddressedList = True
             Case 6
                 GeneratedAddressedList = True
-            Case 7
-                TMCMap = True
         End Select
 
 
@@ -791,6 +786,7 @@ Partial Class Step2_ProductOptions
     End Function
 
 
+
     Protected Sub SetPageProperties(productID As Integer)
 
         'This method is to set page properties each time the page is loaded.
@@ -804,8 +800,6 @@ Partial Class Step2_ProductOptions
                 UploadedAddressedList = True
             Case 6
                 GeneratedAddressedList = True
-            Case 7
-                TMCMap = True
         End Select
 
         Dim productObj As Taradel.WLProduct = Taradel.WLProductDataSource.GetProduct(productID)
@@ -820,6 +814,7 @@ Partial Class Step2_ProductOptions
         TemplateSizeID = Taradel.WLUtil.GetTemplateSize(productID)
         referenceID = oDist.ReferenceId
         bMarketingUpsell = appxCMS.Util.CMSSettings.GetBoolean("Product", "MarketingUpsell")
+        DropFeeRate = 99
 
 
         'If is EDDM Distribution or an AddressedList Distribution (2 kinds), then only ONE product is needed.  Set Mark Up properties.
@@ -1039,7 +1034,7 @@ Partial Class Step2_ProductOptions
     End Function
 
 
-    'added 10/29/2015
+
     Public Function RetrieveProductTemplateSizeID(ProductID As Integer) As Integer
         Dim returnThis As Integer = 0
 
@@ -2093,10 +2088,6 @@ Partial Class Step2_ProductOptions
                 BuildAndSaveAddressedCart()
             End If
 
-            If (TMCMap) Then
-                BuildAndSaveTMCCart()
-            End If
-
 
             If (bMarketingUpsell) Then
 
@@ -2182,7 +2173,6 @@ Partial Class Step2_ProductOptions
 
         'Fees / Rates
         Dim postageFee As Double = 0                                                                'Fee for postage. (totalMailQty * postageRate)
-        Dim dropFee As Double = 0                                                                   'Fee for extra drop. Ex $99
         Dim dropPrice As Double = 0                                                                 'Fee for additional drops. Ex $99 x number of drops.
         Dim postageRate As Double = 0                                                               'Postage Rate
 
@@ -2233,7 +2223,7 @@ Partial Class Step2_ProductOptions
         'Postage Rate
         postageRate = appxCMS.Util.AppSettings.GetDecimal("USPSPostageRate")
         If postageRate = 0 Then
-            postageRate = 0.16
+            postageRate = 0.154
         End If
 
         'Convert Stuff
@@ -2413,8 +2403,6 @@ Partial Class Step2_ProductOptions
         eddmPricePerPiece = eddmQuoteObj.PricePerPiece
         weight = eddmQuoteObj.Weight
 
-        'OLD. 1/15/2016
-        'eddmPrice = eddmQuoteObj.Price  
 
         'New. 1/165/2016. DSF
         eddmPrice = AdjustedPrice(eddmPricePerPiece, extraCopies, numImpressions)
@@ -2424,7 +2412,8 @@ Partial Class Step2_ProductOptions
         bIsFlatRateShipping = eddmQuoteObj.IsFlatRateShipping
         flatRateFee = eddmQuoteObj.ShipPrice
         postageFee = (totalMailQty * postageRate)
-        dropFee = CalculateMultipleImpressionDropFee(eddmObjCalc.NumOfDrops, dropPrice)
+        dropPrice = CalculateMultipleImpressionDropFee(eddmObjCalc.NumOfDrops, DropFeeRate)
+
 
 
         'Set Design Fee Attribute. Store 0 unless Pro was selected.
@@ -2501,8 +2490,8 @@ Partial Class Step2_ProductOptions
 
 
         'Number of Drops Attribute
-        oCart = (CartUtility.AddAttribute(oCart, "EDDM", "Number of Drops", "0", eddmObjCalc.NumOfDrops.ToString(), eddmObjCalc.NumOfDrops & " drop" & IIf(eddmObjCalc.NumOfDrops = 1, "", "s") &
-                                " (" & dropFee.ToString("C") & ")", dropFee.ToString(), "False", "0"))
+        oCart = (CartUtility.AddAttribute(oCart, "EDDM", "Number of Drops", "0", eddmObjCalc.NumOfDrops.ToString(), eddmObjCalc.NumOfDrops & " drop" & IIf(eddmObjCalc.NumOfDrops = 1, "", "s") & " (" & dropPrice.ToString("C") & ")", dropPrice.ToString(), "False", "0"))
+
 
         'Drop Schedule Attribute
         oCart = (CartUtility.AddAttribute(oCart, "EDDM", "Drop Schedule", "0", "every " & iFrequency.ToString() & " weeks", iFrequency.ToString() & " weeks", "0", "False", "0"))
@@ -2789,7 +2778,7 @@ Partial Class Step2_ProductOptions
 
 
         'Add Design Node
-        oCart = (CartUtility.AddDesign(oCart, "EDDM", designType, frontFileExt, frontFileName, frontRealFileName, frontAction, hasBackDesign,
+        oCart = (CartUtility.AddDesign(oCart, "EDDM", designType, frontFileExt, frontFileName, frontRealFileName, frontAction, hasBackDesign, _
         backFileExt, backFileName, backRealFileName, backAction, artKey, requiresProof.ToString().ToUpper()))
 
 
@@ -2837,13 +2826,6 @@ Partial Class Step2_ProductOptions
     Private Sub BuildAndSaveAddressedCart()
 
 
-        'Testing. TEMP code.  Remove!
-        Dim logger As New LogWriter()
-        logger.RecordInLog("BuildAndSaveAddressedCart called")
-        'End
-
-
-
         '========================================================================================================================================
         ' For AddressedList Campaign types. USelect Types 5 & 6.
         '
@@ -2873,7 +2855,7 @@ Partial Class Step2_ProductOptions
         Dim mailAllPiecesAtOnce As String = ddlDrops.SelectedValue                                  'Comes from form.  Yes/No, True/False.
         Dim comments As String = JobComments.Text                                                   'User comments from order.
         Dim zip As String = ZipCode.Text                                                            'User Ship To Zip Code
-        Dim earliestDropDate As DateTime = Date.Parse(txtLaunchWeek.Text)                                   'User selected 'Launch Week'
+        Dim earliestDropDate As DateTime = Date.Parse(txtLaunchWeek.Text)                           'User selected 'Launch Week'
 
         'Prices
         Dim addressedPrice As Double = 0                                                            'Stores calculated total price from Quote Obj.  (total mailed x price per piece) 
@@ -2901,7 +2883,6 @@ Partial Class Step2_ProductOptions
         'Rates / Fees
         Dim postageFee As Double = 0                                                                'Fee for postage. (totalMailQty * postageRate)
         Dim dropPrice As Double = 0                                                                 'Fee for additional drops. Ex $99 x number of drops.
-        Dim dropFee As Double = 0                                                                   'Fee for extra drop. Ex $99
         Dim postageRate As Double = 0.3                                                             'Addressed Mail pcs are 0.30 each (postage).
 
         'Product attributes
@@ -3071,7 +3052,7 @@ Partial Class Step2_ProductOptions
         addressedPrice = addressedQuoteObj.Price
         taxablePrice = addressedPrice
         flatRateFee = addressedQuoteObj.ShipPrice
-        dropFee = CalculateMultipleImpressionDropFee(addressedObjCalc.NumOfDrops, dropPrice)
+        dropPrice = CalculateMultipleImpressionDropFee(addressedObjCalc.NumOfDrops, DropFeeRate)
         postageFee = (totalMailQty * postageRate)
         bIsFlatRateShipping = addressedQuoteObj.IsFlatRateShipping
 
@@ -3085,11 +3066,6 @@ Partial Class Step2_ProductOptions
         'ADD THE ADDRESSED PRODUCT NODE
         oCart = (CartUtility.AddProduct(oCart, DateTime.Now.ToString(), BaseProductID, DesignFee, UserDistributionId, flatRateFee, flatRateShipQTY, addressedGUID, bIsFlatRateShipping, comments, sJobName, ProductName, PaperHeight, PaperWidth, postageFee, addressedPrice, addressedPricePerPiece, ProductID, totalMailQty, SiteID, SKU, taxablePrice, "AddressedList", weight))
 
-
-        'Testing. TEMP
-        logger.RecordInLog("[Staples List Test] BaseProductID: " & BaseProductID)
-        logger.RecordInLog("[Staples List Test] ProductName: " & ProductName)
-        'End.  Remove!
 
 
 
@@ -3122,7 +3098,7 @@ Partial Class Step2_ProductOptions
 
         'Number of Drops Attribute
         oCart = (CartUtility.AddAttribute(oCart, "AddressedList", "Number of Drops", "0", addressedObjCalc.NumOfDrops.ToString(), addressedObjCalc.NumOfDrops & " drop" & IIf(addressedObjCalc.NumOfDrops = 1, "", "s") & _
-                                " (" & dropFee.ToString("C") & ")", dropFee.ToString(), "False", "0"))
+                                " (" & dropPrice.ToString("C") & ")", dropPrice.ToString(), "False", "0"))
 
         'Drop Schedule Attribute
         oCart = (CartUtility.AddAttribute(oCart, "AddressedList", "Drop Schedule", "0", "every " & iFrequency.ToString() & " weeks", iFrequency.ToString(), "0", "False", "0"))
@@ -4509,7 +4485,6 @@ Partial Class Step2_ProductOptions
         litDebugEDDM.Text = EDDMMap
         litDebugAddressed.Text = GeneratedAddressedList
         litDebugUploadedList.Text = UploadedAddressedList
-        litDebugTMC.Text = TMCMap
         litDisableTemplates.Text = DisableTemplates
         litDisableProDesign.Text = DisableProDesign
         litAllowMultipleImpressions.Text = AllowMultipleImpressions
@@ -4522,6 +4497,7 @@ Partial Class Step2_ProductOptions
         litDebugMinAddressedPricingQty.Text = MinAddressedPricingQty
         litDebugPostageRate.Text = PostageRate
         litValidateExtraCopiesAddress.Text = ValidateExtraCopiesAddress
+        litDropFeeRate.Text = DropFeeRate.ToString()
 
 
         'EXPERIMENTAL CODE TO GET PRODUCTS - serves no purpose

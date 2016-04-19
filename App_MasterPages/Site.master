@@ -78,8 +78,9 @@
         <script type="text/javascript" src="/assets/javascripts/jquery.blockUI.js"></script>
         <script type="text/javascript" src="/assets/javascripts/scrolltopcontrol.js"></script>
         <script type="text/javascript" src="/assets/javascripts/common.js"></script>
-        <script type="text/javascript" src="/assets/javascripts/TaradelTools.min.js?ver=1.2.0"></script>
+        <script type="text/javascript" src="/assets/javascripts/TaradelTools.min.js?ver=1.3.0"></script>
         
+
         <asp:ContentPlaceHolder ID="cpScripts" runat="server" />
 
 

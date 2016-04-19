@@ -3,7 +3,9 @@
 <%@ Register Src="~/Controls/OrderSteps.ascx" TagPrefix="appx" TagName="OrderSteps" %>
 <%@ Register Src="~/CCustom/Banner-ExpertTeams.ascx" TagPrefix="appx" TagName="BannerExpertTeams" %>
 <%@ Register Src="~/CCustom/PageHeader.ascx" TagPrefix="appx" TagName="PageHeader" %>
- 
+<%@ Register Src="~/CLibrary/SitePhoneNumber.ascx" TagPrefix="appx" TagName="SitePhoneNumber" %>
+
+
 
 
 
@@ -1095,7 +1097,7 @@
                                     <p>Have questions about how to use this?  Questions about the 
                                     results?  No worries - please feel free to ask for help!</p>
 
-                                    <p><span class="fa fa-phone"></span>&nbsp;<asp:Literal ID="litPhone" runat="server" /></p>
+                                    <p><appx:SitePhoneNumber runat="server" id="SitePhoneNumber" /></p>
                                     <p><appx:BoldChatTextLink runat="server" id="BoldChatTextLink" /></p>
                                     <p><asp:HyperLink ID="hypEmail" runat="server"></asp:HyperLink></p>
 

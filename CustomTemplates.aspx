@@ -65,3 +65,14 @@
 
 <asp:Content ID="Content6" ContentPlaceHolderID="phFoot" runat="Server">
 </asp:Content>
+
+
+
+<asp:Content ID="Content7" ContentPlaceHolderID="cpScripts" runat="Server">
+
+    <script type="text/javascript">
+        $('li.active').removeAttr('class'); 
+        $("li:contains('Design')").addClass("active")
+    </script>
+
+</asp:Content>

@@ -6,7 +6,7 @@ Partial Class forgotpass
 
         txtEmail.Attributes.Add("placeholder", "Enter email")
         txtEmail.Attributes.Add("type", "email")
-        'test comment'
+
     End Sub
 
     Protected Sub btnRecover_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRecover.Click

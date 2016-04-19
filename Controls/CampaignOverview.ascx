@@ -61,4 +61,8 @@
 
 
 
-<script src="/assets/javascripts/CampaignOverview.min.js?ver=1.0.2"></script>
+<%--<script src="/assets/javascripts/CampaignOverview.js"></script>--%>
+<script src="/assets/javascripts/CampaignOverview.min.js?ver=1.0.3"></script>
+
+
+

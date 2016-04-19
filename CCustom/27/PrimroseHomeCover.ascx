@@ -17,9 +17,9 @@
             
                         <div id="ctaContent">
 
-                            <h1>Grow your business with<br />Every Door Direct Mail<small>&reg;</small></h1>
+                            <h1>Grow your business with<br />Every Door Direct Mail<sup>&reg;</sup></h1>
             
-                            <p class="lead text-center">Build an effective direct mail campaign in 3 easy steps.</p>
+                            <p class="lead text-center">With EDDM<sup>&reg;</sup>, you can easily reach the customers who matter most by targeting specific local neighborhoods or ZIP codes. No mailing permits, mailing lists, or experience is required.</p>
                        
                             <div class="row">
 

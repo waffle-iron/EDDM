@@ -92,6 +92,12 @@ public partial class BuildList : appxCMS.PageBase
             OrderSteps.step5Icon = "fa-credit-card";
 
 
+            //SitePhoneNumber
+            SitePhoneNumber.addCallUs = "true";
+            SitePhoneNumber.useIcon = "true";
+            SitePhoneNumber.makeHyperLink = "true";
+
+
 
             //Page Header
             if (!siteDetails.UseRibbonBanners)
@@ -113,7 +119,6 @@ public partial class BuildList : appxCMS.PageBase
             txtListName.Text = "Addressed List " + DateTime.Today.ToShortDateString();
 
 
-            litPhone.Text = siteDetails.SupportPhone;
             hypEmail.Text = "<span class=" + Convert.ToChar(34) + "fa fa-envelope" + Convert.ToChar(34) + "></span>&nbsp;" + siteDetails.SupportEmail;
             hypEmail.NavigateUrl = "mailto:" + siteDetails.SupportEmail;
 

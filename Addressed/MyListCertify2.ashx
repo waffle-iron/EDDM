@@ -6,12 +6,14 @@ Imports System.IO
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Linq
+Imports System.Reflection
 
 Public Class MyListCertify2 : Implements IHttpHandler
 
     Public Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
         DeleteLog() ''comment 3:22 pm - this works 
         RetrieveListOfCASSCodes()
+        LogThis("Process hit at " & DateTime.Now.ToShortDateString() & " " & DateTime.Now.ToShortTimeString())
 
         Dim projectId As String = appxCMS.Util.Form.GetString("p")
         Dim oRe As New Regex("[^A-Z0-9a-z\-]")
@@ -73,7 +75,11 @@ Public Class MyListCertify2 : Implements IHttpHandler
                 'end case csv 'added 10/8/2015
         End Select
 
+
+
         If oWorksheet IsNot Nothing Then
+            LogThis("oWorksheet rows at line 80:" & oWorksheet.Rows.Count)
+
             Dim oColData As New List(Of String)
             If bHeaderRow Then
                 '-- Need to map our col indexes to column names
@@ -128,90 +134,85 @@ Public Class MyListCertify2 : Implements IHttpHandler
         Dim sResponse As String = appxCMS.Util.httpHelp.PostXMLURLPage("https://demographics2.eddmsite.com/AddressedMyList/ReceiveFile.ashx", oPostData, Nothing, Nothing)
 
         Dim oResponse As FileSummary = appxCMS.Util.JavaScriptSerializer.Deserialize(Of FileSummary)(sResponse)
+        LogThis("oResponse.ValidCount:" & oResponse.ValidCount)
+        '4/12/2016 the FileSummary object indicates the number of records that were invalid but does NOT indicate why they were invalid.
+
+
         If oResponse IsNot Nothing Then
             '-- Save the Certified File contents back out
             Dim sCertFile As String = oResponse.CertifiedFile
-            'LogThis("---------the response (" & projectId & ")------------------")
             'LogThis("line 134 --> the good results are saved in this directory under the name cassed-result.csv: " & sCertFile)
-            ''was working 3/29/2016
-            'LogThis("-----------------------------------")
             File.WriteAllText(Path.Combine(sBasePath, "cassed-result.csv"), sCertFile)
-            oResponse.CertifiedFile = ""
+            'find the CASS_Results column
+            Dim theFilePath As String = String.Empty
+            theFilePath = Path.Combine(sBasePath, "cassed-result.csv")
+            Dim dtCassTable As DataTable = csvToDatatable_2(theFilePath, "|")
+            'For Each dc As DataColumn In dtCassTable.Columns
+            '    LogThis("dc.ColumnName=" & dc.ColumnName)
+            'Next
 
-            Dim oSels As New List(Of TMCRecommends)
-            '-- Now, back-fill a summary into the certified file, based on the data in the response
-            Dim oCert As List(Of String) = sCertFile.Split(New Char() {ControlChars.NewLine}).ToList
-
-            Dim iHeaderZip As Integer = -1
-            Dim iHeaderCr As Integer = -1
-            Dim iHeaderCity As Integer = -1
-            Dim iHeaderState As Integer = -1
-
-            Dim sHeader As String = ""
-            If oCert.Count > 0 Then
-                sHeader = oCert(0)
-                Dim oHeader As List(Of String) = sHeader.Split(New Char() {"|"}).ToList()
-
-                For i As Integer = 0 To oHeader.Count - 1
-                    Dim sHeaderCol As String = oHeader(i)
-                    Select Case sHeaderCol.ToLower
-                        Case "cass_zip"
-                            iHeaderZip = i
-                        Case "cass_carrierroute"
-                            iHeaderCr = i
-                        Case "cass_city"
-                            iHeaderCity = i
-                        Case "cass_state"
-                            iHeaderState = i
-                    End Select
-                Next
-            End If
-
-            For iLine As Integer = 1 To oCert.Count - 1
-                Dim sLine As String = oCert(iLine).Trim
-
-                If Not String.IsNullOrEmpty(sLine) Then
-                    Dim oLine As List(Of String) = sLine.Split(New Char() {"|"}).ToList()
-                    If oLine.Count >= 11 Then
-                        Dim sZip As String = oLine(iHeaderZip)
-                        Dim sRoute As String = oLine(iHeaderCr)
-                        Dim sGeocodeRef As String = sZip & sRoute
-                        'LogThis("Check record for CASS:" & sLine)
-                        CheckForCASSPass(oLine)
-
-                        Dim oArea = oSels.FirstOrDefault(Function(a) a.GeocodeRef = sGeocodeRef)
-                        If oArea Is Nothing Then
-                            oArea = New TMCRecommends
-                            oArea.GeocodeRef = sGeocodeRef
-                            oArea.TargetPercent = 100
-                            oArea.City = oLine(iHeaderCity)
-                            oArea.State = oLine(iHeaderState)
-                            oArea.EDDMTotal = 0
-                            oArea.AddressedMatches = 0
-                            oArea.RouteType = "Addressed"
-                            oArea.RouteCount = 0
-                            oArea.Selected = True
-                            oSels.Add(oArea)
-                        Else    'should be the records that failed CASS 
-                            'nope this is not the right logic LogBadRecord("CASS Failed:" & sLine)
-                        End If
-
-                        oArea.AddressedMatches += 1
-                        oArea.RouteCount += 1
-                    End If
-                End If
+            For Each dr As DataRow In dtCassTable.Rows
+                'LogThis("checking " & String.Join("|", dr.ItemArray))
+                CheckForCASSPass(dr("CASS_Results"), String.Join("|", dr.ItemArray)) ')
             Next
 
-            Dim sSummary As String = appxCMS.Util.JavaScriptSerializer.Serialize(Of List(Of TMCRecommends))(oSels)
-            File.WriteAllText(Path.Combine(sBasePath, "list-summary.json"), sSummary)
+
+            '4/12/2016 - commented out this is for the TMC process - 
+            'For iLine As Integer = 1 To oCert.Count - 1
+            '    Dim sLine As String = oCert(iLine).Trim
+
+            '    If Not String.IsNullOrEmpty(sLine) Then
+            '        Dim oLine As List(Of String) = sLine.Split(New Char() {"|"}).ToList()
+            '        'LogThis("start " & iLine & " Processing " & sLine & " oLine.Count:" & oLine.Count)
+            '        If oLine.Count >= 11 Then
+            '            Dim sZip As String = oLine(iHeaderZip)
+            '            Dim sRoute As String = oLine(iHeaderCr)
+            '            Dim sGeocodeRef As String = sZip & sRoute
+            '            'Dim CassCertified As Boolean = CheckForCASSPass(oLine)
+
+            '            Dim oArea = oSels.FirstOrDefault(Function(a) a.GeocodeRef = sGeocodeRef)
+            '            If oArea Is Nothing Then
+            '                oArea = New TMCRecommends
+            '                oArea.GeocodeRef = sGeocodeRef
+            '                oArea.TargetPercent = 100
+            '                oArea.City = oLine(iHeaderCity)
+            '                oArea.State = oLine(iHeaderState)
+            '                oArea.EDDMTotal = 0
+            '                oArea.AddressedMatches = 0
+            '                oArea.RouteType = "Addressed"
+            '                oArea.RouteCount = 0
+            '                oArea.Selected = True
+            '                oSels.Add(oArea)
+            '            Else    'should be the records that failed CASS 
+            '                'nope this is not the right logic 
+            '                'LogBadRecord("CASS Failed:" & sLine)
+            '                'LogThis("CASS Failed:" & sLine)
+            '                'LogThis(" oArea Is Nothing ")
+            '            End If
+
+            '            oArea.AddressedMatches += 1
+            '            oAreaAddressMatches += 1
+            '            oArea.RouteCount += 1
+            '        Else
+            '            oLineCountRejects = oLineCountRejects + 1
+            '        End If
+            '    End If
+
+            '    'LogThis("end " & iLine & " : oSels:" & oSels.Count & "  oLineCountRejects:" & oLineCountRejects & "  oArea.AddressedMatches:" & oAreaAddressMatches)
+
+            'Next
+
+            'Dim sSummary As String = appxCMS.Util.JavaScriptSerializer.Serialize(Of List(Of TMCRecommends))(oSels)
+            'File.WriteAllText(Path.Combine(sBasePath, "list-summary.json"), sSummary)
 
             context.Response.ContentType = "application/json"
             context.Response.Write(appxCMS.Util.JavaScriptSerializer.Serialize(Of FileSummary)(oResponse))
+            'LogThis("oResponse:" & appxCMS.Util.JavaScriptSerializer.Serialize(Of FileSummary)(oResponse))
 
-            Dim sRejects As String = appxCMS.Util.JavaScriptSerializer.Serialize(Of List(Of RejectedAddress))(lstRejectAddresses)
-            File.WriteAllText(Path.Combine(sBasePath, "list-rejects.json"), sRejects)
-
-
+            If (lstRejectAddresses.Count > 0) Then
+                Dim sRejects As String = appxCMS.Util.JavaScriptSerializer.Serialize(Of List(Of RejectedAddress))(lstRejectAddresses)
+                File.WriteAllText(Path.Combine(sBasePath, "list-rejects.json"), sRejects)
+            End If
             ''all the bad records are in the text file - write them to json
 
 
@@ -220,42 +221,79 @@ Public Class MyListCertify2 : Implements IHttpHandler
     End Sub
 
 
-    Public Function CheckForCASSPass(oLine As List(Of String)) As Boolean
-        Dim logThisRecord As String = String.Empty
+    Public Function csvToDatatable_2(ByVal filename As String, ByVal separator As String) As DataTable
+        Dim dt As New System.Data.DataTable
+        Dim firstLine As Boolean = True
+        If IO.File.Exists(filename) Then
+            Using sr As New StreamReader(filename)
+                While Not sr.EndOfStream
+                    If firstLine Then
+                        firstLine = False
+                        Dim cols = sr.ReadLine.Split(separator)
+                        For Each col In cols
+                            dt.Columns.Add(New DataColumn(col, GetType(String)))
+                        Next
+                    Else
+                        Dim data() As String = sr.ReadLine.Split(separator)
+                        dt.Rows.Add(data.ToArray)
+                    End If
+                End While
+            End Using
+        End If
+        Return dt
+    End Function
+
+    Public Shared Function ConvertToDataTable(Of T)(ByVal list As IList(Of T)) As DataTable
+        Dim table As New DataTable()
+        Dim fields() As FieldInfo = GetType(T).GetFields()
+        For Each field As FieldInfo In fields
+            table.Columns.Add(field.Name, field.FieldType)
+        Next
+        For Each item As T In list
+            Dim row As DataRow = table.NewRow()
+            For Each field As FieldInfo In fields
+                row(field.Name) = field.GetValue(item)
+            Next
+            table.Rows.Add(row)
+        Next
+        Return table
+    End Function
+
+    Public Function CheckForCASSPass(CASSResult As String, logThisRecord As String) As Boolean
+        'LogThis("    CheckForCASSPass Start " & CASSResult)
         Dim CASSFailCode As String = String.Empty
         Dim lstOfPass As New List(Of String)
         lstOfPass.Add("AS01")
         lstOfPass.Add("AS02")
-        Dim returnThis As Boolean = False
-        Dim i As Integer = 0
+        Dim returnThis = False
+        Dim CassPass As String = "FAIL"
+        Dim CassReason As String = String.Empty
+        Dim lstOfResults As New List(Of String)
+        lstOfResults = CASSResult.Split(",").ToList()
 
-        For Each s As String In oLine
-            'LogThis("CheckForCASSPass " & i.ToString & " " & s)
-            If i < 8 And s.Length > 0 Then
-                logThisRecord = logThisRecord + s + ","
+        'there has got to be a more elegant way to do this  4/12/2016
+        'When AS01 Is accompanied by other codes, the address Is fully valid And deliverable with the following considerations:
+        'AS01 with no AE** codes
+        'AS01 And any other As** code excluding AS02, AS09, And AS18
+        'AS01 And any AC** codes
+        For Each resultPart As String In lstOfResults
+            For Each passValue As String In lstOfPass
+                If (passValue = resultPart) Then
+                    returnThis = True
+                    CassPass = "PASS"
+                End If
+            Next
+            If (resultPart.IndexOf("AE") > -1) Then
+                CassPass = "FAIL"
+                CassReason = RetrieveCASSCodeMeaningAndDetails(resultPart)
+                Exit For
             End If
-
-            If s.Length = 4 Then 'check all columns with a length of 4 to find CASS column
-                For Each cssLookup As CassLookup In lstCassLookup
-                    If cssLookup.Code = s Then  'this is the cass code
-                        If (lstOfPass.Contains(s)) Then
-                            returnThis = True
-                            Exit For
-                        Else
-                            CASSFailCode = s
-                        End If
-                    End If
-                Next
-            End If
-            i = i + 1
-
         Next
 
-        If CASSFailCode.Length > 0 Then
-            If (returnThis = False) Then
-                If (logThisRecord.IndexOf("First Name") = -1) Then
-                    LogCassFailure(logThisRecord, RetrieveCASSCodeMeaningAndDetails(CASSFailCode))
-                End If
+        If (CassPass = "FAIL") Then
+            If (logThisRecord.IndexOf("First Name") = -1) Then
+                LogThis(logThisRecord + " failed " + CASSResult + ":" + CassReason)
+                LogCassFailure(logThisRecord, CassReason)
             End If
         End If
 
@@ -290,8 +328,8 @@ Public Class MyListCertify2 : Implements IHttpHandler
 
     Public Function ConvertCSVToDataTable(sFileName As String, bHeaderRow As Boolean) As DataTable
         Dim delimiter As String = DetermineDelimiter(sFileName)
-        'LogThis("--------------------------------------------------------------------")
-        'LogThis("Made it to ConvertCSVToDataTable " & sFileName & " using delimited:" & delimiter)
+        LogThis("--------------------------------------------------------------------")
+        LogThis("Made it to ConvertCSVToDataTable " & sFileName & " using delimiter:" & delimiter)
 
         Dim TextFileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(sFileName)
         TextFileReader.TextFieldType = FileIO.FieldType.Delimited
@@ -392,6 +430,27 @@ Public Class MyListCertify2 : Implements IHttpHandler
     Public Sub LogCassFailure(sBadRecord As String, sCassReason As String)
         Dim reject As New RejectedAddress
         reject.Address = sBadRecord.Trim().Substring(0, sBadRecord.Length - 1)
+        Dim oLine As List(Of String) = sBadRecord.Split(New Char() {"|"}).ToList()
+        Dim newAddress As String = String.Empty
+        Dim emptyParts As Integer = 0
+        For Each s As String In oLine
+            If s.Length > 0 Then
+                newAddress = newAddress & s
+                newAddress = newAddress & ","
+            Else
+                emptyParts = emptyParts + 1
+                If emptyParts > 3 Then
+                    Exit For
+                End If
+            End If
+        Next
+
+        If (newAddress <> String.Empty) Then
+            If newAddress.Length > 5 Then
+                reject.Address = newAddress'.Trim().Substring(0, sBadRecord.Length - 1)
+            End If
+        End If
+
         reject.State = "N/A"
         reject.Zip = "N/A"
         reject.City = "N/A"

@@ -23,7 +23,7 @@
 
         <p><strong>Page Properties</strong></p>
 
-        <table class="table table-bordered table-striped table-condensed">
+        <table class="table table-bordered table-striped table-condensed table-test-mode">
             <thead>
                 <tr>
                     <th>Property</th>
@@ -38,7 +38,7 @@
                     <td class="width50"><asp:Literal ID="litAddressedMap" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">AddressedShipPrice</td>
                     <td class="width50"><asp:Literal ID="litAddressedShipPrice" runat="server" /></td>
                 </tr>
@@ -48,7 +48,7 @@
                     <td class="width50"><asp:Literal ID="litBaseProductID" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">DesignFee</td>
                     <td class="width50"><asp:Literal ID="litDesignFee" runat="server" /></td>
                 </tr>
@@ -58,7 +58,7 @@
                     <td class="width50"><asp:Literal ID="litDistributionID" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">DropFee</td>
                     <td class="width50"><asp:Literal ID="litDropFee" runat="server" /></td>
                 </tr>
@@ -68,7 +68,7 @@
                     <td class="width50"><asp:Literal ID="litEDDMMap" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">EDDMShipPrice</td>
                     <td class="width50"><asp:Literal ID="litEDDMShipPrice" runat="server" /></td>
                 </tr>
@@ -78,7 +78,7 @@
                     <td class="width50"><asp:Literal ID="litEnvironmentMode" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">ExtraCopies</td>
                     <td class="width50"><asp:Literal ID="litExtraCopies" runat="server" /></td>
                 </tr>
@@ -88,7 +88,7 @@
                     <td class="width50"><asp:Literal ID="litExtraPcsPricePerPiece" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">GeneratedAddressedList</td>
                     <td class="width50"><asp:Literal ID="litGeneratedAddressedList" runat="server" /></td>
                 </tr>
@@ -98,7 +98,7 @@
                     <td class="width50"><asp:Literal ID="litHasDropFee" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">IsMultiple</td>
                     <td class="width50"><asp:Literal ID="litIsMultiple" runat="server" /></td>
                 </tr>
@@ -108,9 +108,14 @@
                     <td class="width50"><asp:Literal ID="litIsProfessionalDesign" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">MultipleImpressionsNoFee</td>
                     <td class="width50"><asp:Literal ID="litMultipleImpressionsNoFee" runat="server" /></td>
+                </tr>
+
+                <tr>
+                    <td class="width50">MailPiecesPrice</td>
+                    <td class="width50"><asp:Literal ID="litMailPiecesPrice" runat="server" /></td>
                 </tr>
 
                 <tr>
@@ -118,7 +123,7 @@
                     <td class="width50"><asp:Literal ID="litNumOfDrops2" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">NumOfImpressions</td>
                     <td class="width50"><asp:Literal ID="litNumOfImpressions" runat="server" /></td>
                 </tr>
@@ -128,7 +133,7 @@
                     <td class="width50"><asp:Literal ID="litQuoteKey" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">PONumber</td>
                     <td class="width50"><asp:Literal ID="litPONumber" runat="server" /></td>
                 </tr>
@@ -138,7 +143,7 @@
                     <td class="width50"><asp:Literal ID="litPostageRate" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">PricePerPiece</td>
                     <td class="width50"><asp:Literal ID="litPricePerPiece" runat="server" /></td>
                 </tr>
@@ -148,7 +153,7 @@
                     <td class="width50"><asp:Literal ID="litProductID" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">SalesTax</td>
                     <td class="width50"><asp:Literal ID="litSalesTax" runat="server" /></td>
                 </tr>
@@ -158,17 +163,12 @@
                     <td class="width50"><asp:Literal ID="litShipToAddress" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">SiteID</td>
                     <td class="width50"><asp:Literal ID="litSiteID" runat="server" /></td>
                 </tr>
 
                 <tr>
-                    <td class="width50">TMCMap</td>
-                    <td class="width50"><asp:Literal ID="litTMCMap" runat="server" /></td>
-                </tr>
-
-                <tr class="lightGray">
                     <td class="width50">TestMode</td>
                     <td class="width50"><asp:Literal ID="litTestMode" runat="server" /></td>
                 </tr>
@@ -178,7 +178,12 @@
                     <td class="width50"><asp:Literal ID="litTotalSelected2" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
+                    <td class="width50">TotalMailed</td>
+                    <td class="width50"><asp:Literal ID="litTotalMailed" runat="server" /></td>
+                </tr>
+
+                <tr>
                     <td class="width50">UploadedAddressedList</td>
                     <td class="width50"><asp:Literal ID="litUploadedAddressedList" runat="server" /></td>
                 </tr>
@@ -188,7 +193,7 @@
                     <td class="width50"><asp:Literal ID="litUSelectID" runat="server" /></td>
                 </tr>
 
-                <tr class="lightGray">
+                <tr>
                     <td class="width50">UserName</td>
                     <td class="width50"><asp:Literal ID="litUserName" runat="server" /></td>
                 </tr>
@@ -197,7 +202,14 @@
 
         </table>
 
-        <div><asp:Literal ID="litGeneralError" runat="server" /></div>
+        <div>
+            <strong>Cart</strong><br />
+            <asp:TextBox ID="txtDebugCart" runat="server" TextMode="MultiLine" Rows="15" Columns="120" Font-Size="12px"></asp:TextBox>
+        </div>
+
+        <div>
+            <asp:Literal ID="litGeneralError" runat="server" />
+        </div>
 
     </asp:Panel>
 
